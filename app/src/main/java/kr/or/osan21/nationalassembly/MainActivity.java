@@ -1,26 +1,18 @@
 package kr.or.osan21.nationalassembly;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,16 +32,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         main_title.setTypeface(CustomFont.getCustomFont(this));
 
 
-        // RETROFIT
-        RestAdapter retrofit = new RestAdapter.Builder()
-                .setEndpoint("http://my.dude.kr/assembly")
-//                .setConverter(new JacksonConverter())
-                .build();
 
-
-
-
-        // Video
+                // Video
 //        VideoView vv = (VideoView) findViewById(R.id.main_video);
 //        vv.setVideoURI( Uri.parse("http://my.dude.kr/assembly/video_part1.mp4") );
 //        vv.start();
@@ -61,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        drawer.setDrawerListener(toggle);
 //        toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
