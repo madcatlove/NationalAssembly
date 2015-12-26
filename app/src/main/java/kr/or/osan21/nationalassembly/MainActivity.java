@@ -27,9 +27,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String LOG_TAG = "MainActivity";
 
     private TextView main_title;
-    private TextView profile_name;
-    private TextView textView;
-    private View header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        header = navigationView.findViewById(R.id.nav_header);
+
 
         //set national and local numbers in navigation header.
         //header = navigationView.findViewById(R.id.nav_header);
