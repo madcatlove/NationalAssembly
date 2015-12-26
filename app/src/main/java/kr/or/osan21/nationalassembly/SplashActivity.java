@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 public class SplashActivity extends AppCompatActivity {
@@ -29,21 +30,28 @@ public class SplashActivity extends AppCompatActivity {
 
         // 적용
         splashImg.setImageBitmap(bitmap);
-
-
-        // 3초 대기
-        Handler hd = new Handler();
-        hd.postDelayed(new Runnable() {
+        splashImg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
+            public void onClick(View v) {
                 startActivity(new Intent(getBaseContext(), MainActivity.class));
-
-                // release resource
                 bitmap = null;
-
                 finish();
             }
-        }, 3000);
+        });
+
+        // 3초 대기
+//        Handler hd = new Handler();
+//        hd.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                startActivity(new Intent(getBaseContext(), MainActivity.class));
+//
+//                // release resource
+//                bitmap = null;
+//
+//                finish();
+//            }
+//        }, 3000);
 
     }
 
