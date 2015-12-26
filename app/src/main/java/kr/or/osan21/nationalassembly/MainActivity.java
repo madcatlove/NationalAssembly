@@ -1,5 +1,8 @@
 package kr.or.osan21.nationalassembly;
 
+import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,7 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import retrofit.RestAdapter;
@@ -20,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String LOG_TAG = "MainActivity";
 
     private TextView main_title;
+    private TextView profile_name;
+    private TextView textView;
+    private View header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        setSupportActionBar(toolbar);
 
         main_title = (TextView) findViewById(R.id.main_title);
-        main_title.setTypeface(CustomFont.getCustomFont(this) );
-
+        main_title.setTypeface(CustomFont.getCustomFont(this));
 
 
         // RETROFIT
@@ -57,6 +66,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        header = navigationView.findViewById(R.id.nav_header);
+
+        //set national and local numbers in navigation header.
+        //header = navigationView.findViewById(R.id.nav_header);
+
+    }
+
+    public void call_national_number(View v) {
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:02-784-3877")));
+    }
+
+    public void call_local_number(View v) {
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:031-378-2273")));
     }
 
     @Override
@@ -97,13 +119,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.push) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.suggest) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.support) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.share) {
 
         } else if (id == R.id.nav_share) {
 
@@ -113,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 }

@@ -3,21 +3,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/push"
+            android:icon="@drawable/slider_icon_push"
+            android:title="푸시 알림받기" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/suggest"
+            android:icon="@drawable/slider_icon_suggest"
+            android:title="건의사항\u0026격려" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/support"
+            android:icon="@drawable/slider_icon_support"
+            android:title="후원하기" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/share"
+            android:icon="@drawable/slider_icon_share"
+            android:title="공유하기" />
     </group>
 
     <item android:title="Communicate">
