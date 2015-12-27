@@ -7,11 +7,13 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import kr.or.osan21.nationalassembly.CloudMessage.RegistrationIntentService;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,8 +47,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        drawer.setDrawerListener(toggle);
 //        toggle.syncState();
 
-                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        // start gcm
+        startGCMListen();
 
 
         //set national and local numbers in navigation header.
@@ -118,5 +124,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+
+    private void startGCMListen() {
+        Log.e(LOG_TAG, " START_GCM_LISTEN ");
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
     }
 }
