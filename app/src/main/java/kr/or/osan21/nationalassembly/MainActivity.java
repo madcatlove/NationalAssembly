@@ -46,13 +46,14 @@ public class MainActivity extends AppCompatActivity  {
 
         // 폰트 설정 모든 뷰그룹에 적용
         mTypeface = Typeface.createFromAsset(getAssets(), "SourceHanSansKR-Regular.otf");
-        ViewGroup root = (ViewGroup) findViewById(R.id.main_menu);
+        ViewGroup root = (ViewGroup) findViewById(R.id.drawer_layout);
         setGlobalFont(root);
 
         // 배경 이미지 설정
+        LinearLayout main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 2;
-        root.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.main_person_img02, options)));
+        main_menu_layout.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.main_person_img02, options)));
 
         // ListView가져오기 및 custom adapter 생성
         nav_list = (ListView)findViewById(R.id.nav_list);
@@ -90,8 +91,6 @@ public class MainActivity extends AppCompatActivity  {
             }
         }
     }
-
-
 
     void setGlobalFont(ViewGroup root) {
         for (int i = 0; i < root.getChildCount(); i++) {
@@ -171,6 +170,7 @@ public class MainActivity extends AppCompatActivity  {
                 // TextView에 현재 position의 문자열 추가
                 TextView text = (TextView) convertView.findViewById(R.id.slider_item_title);
                 text.setText(m_List.get(position));
+                text.setTypeface(mTypeface);
 
                 ImageView img = (ImageView)convertView.findViewById(R.id.slider_item_image);
                 if(position == 0)

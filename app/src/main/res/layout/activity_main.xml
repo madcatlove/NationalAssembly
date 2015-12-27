@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="#ffffff"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp">
 
@@ -83,7 +84,7 @@
         </RelativeLayout>
 
         <ListView
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:id="@+id/nav_list"
             android:layout_gravity="start"
@@ -95,6 +96,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
             android:background="#ffffff">
             <ImageView
                 android:id="@+id/slider_facebook"
