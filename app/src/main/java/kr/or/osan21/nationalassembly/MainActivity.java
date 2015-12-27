@@ -3,7 +3,6 @@ package kr.or.osan21.nationalassembly;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,7 +12,6 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,11 +24,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
-import kr.or.osan21.nationalassembly.CloudMessage.RegistrationIntentService;
-import kr.or.osan21.nationalassembly.Utils.CustomFont;
-import retrofit.RestAdapter;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -50,10 +48,19 @@ public class MainActivity extends AppCompatActivity  {
         setGlobalFont(root);
 
         // 배경 이미지 설정
-        LinearLayout main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 2;
-        main_menu_layout.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.main_person_img02, options)));
+        final LinearLayout main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inSampleSize = 2;
+//        main_menu_layout.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.main_person_img02, options)));
+
+        Glide.with(this).load(R.drawable.main_person_img02).asBitmap().into(new SimpleTarget<Bitmap>(1440/2, 2560/2) {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                main_menu_layout.setBackground( new BitmapDrawable(getResources(), resource) );
+            }
+        });
+
+
 
         // ListView가져오기 및 custom adapter 생성
         nav_list = (ListView)findViewById(R.id.nav_list);

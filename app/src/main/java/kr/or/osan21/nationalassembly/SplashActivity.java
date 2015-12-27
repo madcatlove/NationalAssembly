@@ -2,7 +2,6 @@ package kr.or.osan21.nationalassembly;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 import kr.or.osan21.nationalassembly.CloudMessage.RegistrationIntentService;
 
@@ -26,13 +27,15 @@ public class SplashActivity extends AppCompatActivity {
 
         ImageView splashImg = (ImageView) findViewById(R.id.splash_img);
 
-        // 비트맵 옵션
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 6;
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.splash_img, options);
+//        // 비트맵 옵션
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inSampleSize = 6;
+//        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.splash_img, options);
+
+        Glide.with(this).load(R.drawable.splash_img).into(splashImg);
 
         // 적용
-        splashImg.setImageBitmap(bitmap);
+//        splashImg.setImageBitmap(bitmap);
         splashImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
