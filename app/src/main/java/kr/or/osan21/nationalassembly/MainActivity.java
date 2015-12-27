@@ -8,12 +8,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import kr.or.osan21.nationalassembly.CloudMessage.RegistrationIntentService;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import retrofit.RestAdapter;
 
@@ -25,37 +27,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
+        // 폰트 설정 모든 뷰그룹에 적용
         mTypeface = Typeface.createFromAsset(getAssets(), "SourceHanSansKR-Regular.otf");
         ViewGroup root = (ViewGroup) findViewById(R.id.main_menu);
         setGlobalFont(root);
 
-        // RETROFIT
-        RestAdapter retrofit = new RestAdapter.Builder()
-                .setEndpoint("http://my.dude.kr/assembly")
-//                .setConverter(new JacksonConverter())
-                .build();
-
-
-        // Video
-//        VideoView vv = (VideoView) findViewById(R.id.main_video);
-//        vv.setVideoURI( Uri.parse("http://my.dude.kr/assembly/video_part1.mp4") );
-//        vv.start();
-
-
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.setDrawerListener(toggle);
-//        toggle.syncState();
-
+        // 네비게이션 메뉴
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // GCM 시작
+        startGCMListen();
     }
+
+
 
     void setGlobalFont(ViewGroup root) {
         for (int i = 0; i < root.getChildCount(); i++) {
@@ -84,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(selected == R.id.main_media)
         {
-
         }
         else if(selected == R.id.main_notice)
         {
@@ -156,5 +142,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+
+    private void startGCMListen() {
+        Log.e(LOG_TAG, " START_GCM_LISTEN ");
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
     }
 }

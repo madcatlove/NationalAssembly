@@ -10,6 +10,8 @@ import com.google.android.gms.iid.InstanceID;
 
 import java.io.IOException;
 
+import kr.or.osan21.nationalassembly.R;
+
 /**
  * Created by madcat on 12/27/15.
  */
@@ -24,6 +26,7 @@ public class RegistrationIntentService extends IntentService {
     @SuppressWarnings("LongLogTag")
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.e(LOG_TAG, " onHandleIntent : GENERATING GCM TOKEN ");
 
         // GENERATING 부분 보냄
         LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(GCMPref.GENERATING) );
@@ -34,13 +37,13 @@ public class RegistrationIntentService extends IntentService {
         String token = null;
 
         try {
-            String defaultSenderId = "";
+            String defaultSenderId = getString(R.string.gcm_defaultSenderId);
             String scope = GoogleCloudMessaging.INSTANCE_ID_SCOPE;
             token = instanceID.getToken(defaultSenderId, scope, null);
         }
         catch(IOException e) {
-            e.printStackTrace();
             Log.e(LOG_TAG, " Error!! ");
+            e.printStackTrace();
         }
 
         // broadcast 부분

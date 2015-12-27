@@ -3,9 +3,15 @@
     package="kr.or.osan21.nationalassembly">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <!-- [START gcm_permission] -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- [END gcm_permission] -->
+
+
+
+
 
     <application
         android:allowBackup="true"
@@ -27,6 +33,42 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <!-- GCM RECEIVER -->
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="kr.or.osan21.nationalassembly" />
+            </intent-filter>
+        </receiver>
+
+        <!-- GCM Listener Service -->
+        <service
+            android:name="kr.or.osan21.nationalassembly.CloudMessage.GCMListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <!-- InstanceID Listener Service -->
+        <service
+            android:name="kr.or.osan21.nationalassembly.CloudMessage.InstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+
+        <!-- Registeration Intent Service -->
+        <service
+            android:name="kr.or.osan21.nationalassembly.CloudMessage.RegistrationIntentService"
+            android:exported="false"></service>
+
+
     </application>
 
 </manifest>
