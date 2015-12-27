@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="117dp">
+
+    <TextView
+        android:id="@+id/water_smell_item_date"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:paddingTop="24dp"
+        android:paddingLeft="26dp"
+        android:textSize="15dp"
+        android:text="Profile"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/water_smell_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:paddingLeft="26dp"
+        android:textSize="15dp"
+        android:text="안민석이 걸어온 길"
+        android:textColor="#000000"
+        />
+
+</LinearLayout>
