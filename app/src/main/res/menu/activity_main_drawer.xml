@@ -10,16 +10,21 @@
             android:id="@+id/suggest"
             android:icon="@drawable/slider_icon_suggest"
             android:title="건의사항\u0026격려" />
+        <solid android:color="#ffffff" />
+
         <item
             android:id="@+id/support"
             android:icon="@drawable/slider_icon_support"
             android:title="후원하기" />
+        <solid android:color="#ffffff" />
+
         <item
             android:id="@+id/share"
             android:icon="@drawable/slider_icon_share"
             android:title="공유하기" />
-    </group>
+        <solid android:color="#ffffff" />
 
+    </group>
     <item android:title="Communicate">
         <menu>
             <item

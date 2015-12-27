@@ -13,13 +13,129 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/fl_activity_container" />
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#5ebbef">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:src="@android:drawable/sym_def_app_icon" />
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="35dp"
+                android:layout_toRightOf="@+id/imageView"
+                android:text="안민석"
+                android:textSize="20dp"
+                android:textColor="#ffffff"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:background="#5ebbef">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오산시 국회의원"
+                android:layout_alignBottom="@+id/national_number"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:textColor="#ffffff"/>
+
+            <ImageView
+                android:id="@+id/national_number"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/slider_call_btn_assembly"
+                android:layout_toLeftOf="@+id/local_number"
+                android:onClick="call_national_number"/>
+
+            <ImageView
+                android:id="@+id/local_number"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/slider_call_btn_local"
+                android:layout_alignParentRight="true"
+                android:onClick="call_local_number"/>
+        </RelativeLayout>
+
+        <ListView
+            android:layout_height="300dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/nav_list"
+            android:layout_gravity="start"
+            android:choiceMode="singleChoice"
+            android:background="#ffffff"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+            <ImageView
+                android:id="@+id/slider_facebook"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/slider_share_facebook"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentTop="true"/>
+            <ImageView
+                android:id="@+id/slider_twitter"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/slider_share_twitter"
+                android:layout_toRightOf="@+id/slider_facebook"
+                android:layout_alignTop="@+id/slider_facebook"
+                android:layout_marginRight="10dp"/>
+            <ImageView
+                android:id="@+id/slider_kakao"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/slider_share_kakao"
+                android:layout_toRightOf="@+id/slider_twitter"
+                android:layout_alignTop="@+id/slider_twitter"
+                android:layout_marginRight="10dp"/>
+            <ImageView
+                android:id="@+id/slider_band"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/slider_share_band"
+                android:layout_toRightOf="@+id/slider_kakao"
+                android:layout_alignTop="@+id/slider_kakao"
+                android:layout_marginRight="10dp"/>
+            <ImageView
+                android:id="@+id/slider_mail"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/slider_share_mail"
+                android:layout_toRightOf="@+id/slider_band"
+                android:layout_alignTop="@+id/slider_band" />
+        </RelativeLayout>
+    </LinearLayout>
 </android.support.v4.widget.DrawerLayout>
