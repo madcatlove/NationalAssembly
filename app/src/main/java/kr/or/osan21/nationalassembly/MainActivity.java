@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         else if(selected == R.id.main_activities)
         {
-
+            startActivity(new Intent(this, WatersmellActivity.class));
         }
         else if(selected == R.id.main_vision)
         {

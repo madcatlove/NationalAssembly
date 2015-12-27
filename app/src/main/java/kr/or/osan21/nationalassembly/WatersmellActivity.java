@@ -72,7 +72,7 @@ public class WatersmellActivity extends AppCompatActivity {
 
     public void gotoback(View v)
     {
-
+        finish();
     }
 
     public class CustomAdapter extends BaseAdapter {

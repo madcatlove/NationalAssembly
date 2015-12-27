@@ -21,7 +21,7 @@
             android:layout_gravity="center_vertical"
             android:background="#464646"
             android:src="@drawable/common_backbtn"
-            android:onClick="gotoBack"/>
+            android:onClick="gotoback"/>
 
         <TextView
             android:id="@+id/main_title"
