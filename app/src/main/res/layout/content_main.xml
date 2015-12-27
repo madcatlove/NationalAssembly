@@ -5,50 +5,174 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/main_menu"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="kr.or.osan21.app.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:id="@+id/main_title"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="오산을 위하여, 안민석"
-        android:background="#464646"
-        android:textColor="#FFFFFF"
-        />
+        android:layout_height="35dp">
+
+        <TextView
+            android:id="@+id/main_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="오산을 위하여, 안민석"
+            android:background="#464646"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/main_profile"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:background="#D4EFFF"
+        android:onClick="selectMenu">
 
-        <Button
+        <TextView
+            android:id="@+id/main_profile_title"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#D4EFFF"/>
+            android:layout_height="52dp"
+            android:paddingTop="24dp"
+            android:paddingLeft="26dp"
+            android:textSize="15dp"
+            android:text="Profile"
+            android:textColor="#000000"/>
 
-        <Button
+        <TextView
+            android:id="@+id/main_profile_content"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#5EBBEF"/>
+            android:layout_height="35dp"
+            android:paddingLeft="26dp"
+            android:textSize="15dp"
+            android:text="안민석이 걸어온 길"
+            android:textColor="#000000"
+            />
+    </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#D4EFFF"/>
+    <LinearLayout
+        android:id="@+id/main_activities"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#5ebbef"
+        android:onClick="selectMenu">
 
-        <Button
+        <TextView
+            android:id="@+id/main_activities_title"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#5EBBEF"/>
+            android:layout_height="52dp"
+            android:paddingTop="24dp"
+            android:paddingLeft="26dp"
+            android:textSize="15dp"
+            android:text="Activities"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/main_activities_content"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:paddingLeft="26dp"
+            android:textSize="15dp"
+            android:text="안민석의 물향기 편지"
+            android:textColor="#000000"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_vision"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#D4EFFF"
+        android:onClick="selectMenu">
+
+        <TextView
+            android:id="@+id/main_vision_title"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:paddingTop="24dp"
+            android:paddingLeft="26dp"
+            android:textSize="15dp"
+            android:text="Vision"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/main_vision_content"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:paddingLeft="26dp"
+            android:textSize="15dp"
+            android:text="五産, 오산의 미래를 열다"
+            android:textColor="#000000"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_media"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#5ebbef"
+        android:onClick="selectMenu">
+
+        <TextView
+            android:id="@+id/main_media_title"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:paddingTop="24dp"
+            android:paddingLeft="26dp"
+            android:textSize="15dp"
+            android:text="Media"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/main_media_content"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:paddingLeft="26dp"
+            android:textSize="15dp"
+            android:text="언론이 주목한 안민석"
+            android:textColor="#000000"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_notice"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#D4EFFF"
+        android:onClick="selectMenu">
+
+        <TextView
+            android:id="@+id/main_notice_title"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:paddingTop="24dp"
+            android:paddingLeft="26dp"
+            android:textSize="15dp"
+            android:text="Notice"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/main_notice_content"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:paddingLeft="26dp"
+            android:textSize="15dp"
+            android:text="언제 어디서든 함께 해요"
+            android:textColor="#000000" />
 
     </LinearLayout>
 
 </LinearLayout>
+

@@ -1,6 +1,7 @@
 package kr.or.osan21.nationalassembly;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,15 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
+import retrofit.RestAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String LOG_TAG = "MainActivity";
-
-    private TextView main_title;
+    private Typeface mTypeface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +30,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-        main_title = (TextView) findViewById(R.id.main_title);
-        main_title.setTypeface(CustomFont.getCustomFont(this));
+        mTypeface = Typeface.createFromAsset(getAssets(), "SourceHanSansKR-Regular.otf");
+        ViewGroup root = (ViewGroup) findViewById(R.id.main_menu);
+        setGlobalFont(root);
+
+        // RETROFIT
+        RestAdapter retrofit = new RestAdapter.Builder()
+                .setEndpoint("http://my.dude.kr/assembly")
+//                .setConverter(new JacksonConverter())
+                .build();
 
 
-
-                // Video
+        // Video
 //        VideoView vv = (VideoView) findViewById(R.id.main_video);
 //        vv.setVideoURI( Uri.parse("http://my.dude.kr/assembly/video_part1.mp4") );
 //        vv.start();
@@ -45,13 +53,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        drawer.setDrawerListener(toggle);
 //        toggle.syncState();
 
-                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
 
+    void setGlobalFont(ViewGroup root) {
+        for (int i = 0; i < root.getChildCount(); i++) {
+            View child = root.getChildAt(i);
+            if (child instanceof TextView)
+                ((TextView)child).setTypeface(mTypeface);
+            else if (child instanceof ViewGroup)
+                setGlobalFont((ViewGroup)child);
+        }
+    }
 
-        //set national and local numbers in navigation header.
-        //header = navigationView.findViewById(R.id.nav_header);
+    public void selectMenu(View v)
+    {
+        int selected = v.getId();
+        if(selected == R.id.main_profile)
+        {
 
+        }
+        else if(selected == R.id.main_activities)
+        {
+
+        }
+        else if(selected == R.id.main_vision)
+        {
+
+        }
+        else if(selected == R.id.main_media)
+        {
+
+        }
+        else if(selected == R.id.main_notice)
+        {
+            // notice 
+        }
     }
 
     public void call_national_number(View v) {
