@@ -66,6 +66,10 @@
             android:name=".CloudMessage.RegistrationIntentService"
             android:exported="false" />
 
+        <meta-data
+            android:name="kr.or.osan21.nationalassembly.Utils.CustomGlide"
+            android:value="GlideModule" />
+
     </application>
 
 </manifest>

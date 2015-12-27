@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity  {
     private ListView nav_list;
     private CustomAdapter custom_adapter;
 
+    private LinearLayout main_menu_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,22 +52,24 @@ public class MainActivity extends AppCompatActivity  {
         setGlobalFont(root);
 
         // 배경 이미지 설정
-        final LinearLayout main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);
-//        BitmapFactory.Options options = new BitmapFactory.Options();
-//        options.inSampleSize = 2;
-//        main_menu_layout.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.main_person_img02, options)));
-
-        Glide.with(this).load(R.drawable.main_person_img02).asBitmap().into(new SimpleTarget<Bitmap>(1440/2, 2560/2) {
-            @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                main_menu_layout.setBackground( new BitmapDrawable(getResources(), resource) );
-            }
-        });
+        main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);
+        Glide.with(this)
+                .load(R.drawable.main_person_img02)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(new SimpleTarget<Bitmap>() {
+                          @Override
+                          public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                              Log.e(LOG_TAG, " bitmapid : " + resource);
+                              BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                              main_menu_layout.setBackground(bd);
+                          }
+                });
 
 
 
         // ListView가져오기 및 custom adapter 생성
-        nav_list = (ListView)findViewById(R.id.nav_list);
+        nav_list = (ListView) findViewById(R.id.nav_list);
         custom_adapter = new CustomAdapter();
         // ListView에 어댑터 연결
         nav_list.setAdapter(custom_adapter);
@@ -84,7 +90,6 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        recycleView(findViewById(R.id.main_menu));
     }
 
     private void recycleView(View view) {
