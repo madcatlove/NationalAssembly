@@ -2,11 +2,14 @@ package kr.or.osan21.nationalassembly;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +32,7 @@ import kr.or.osan21.nationalassembly.CloudMessage.RegistrationIntentService;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import retrofit.RestAdapter;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity  {
 
     public static final String LOG_TAG = "MainActivity";
     private Typeface mTypeface;
@@ -45,6 +49,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ViewGroup root = (ViewGroup) findViewById(R.id.main_menu);
         setGlobalFont(root);
 
+        // 배경 이미지 설정
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        root.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.main_person_img02, options)));
+
+        // ListView가져오기 및 custom adapter 생성
         nav_list = (ListView)findViewById(R.id.nav_list);
         custom_adapter = new CustomAdapter();
         // ListView에 어댑터 연결
@@ -64,6 +74,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startGCMListen();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        recycleView(findViewById(R.id.main_menu));
+    }
+
+    private void recycleView(View view) {
+        if(view != null) {
+            Drawable bg = view.getBackground();
+            if(bg != null) {
+                bg.setCallback(null);
+                ((BitmapDrawable)bg).getBitmap().recycle();
+                view.setBackgroundDrawable(null);
+            }
+        }
+    }
+
 
 
     void setGlobalFont(ViewGroup root) {
@@ -76,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    //메인 메뉴 선택 시 불림
     public void selectMenu(View v)
     {
         int selected = v.getId();
@@ -224,6 +252,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+
+    /*
+    // 이전 네비게이션 뷰 메소드
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -248,8 +279,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
-    }
-
+    }*/
 
     private void startGCMListen() {
         Log.e(LOG_TAG, " START_GCM_LISTEN ");
