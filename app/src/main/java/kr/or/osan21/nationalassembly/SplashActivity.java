@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import kr.or.osan21.nationalassembly.CloudMessage.RegistrationIntentService;
+
 public class SplashActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = "SplashActivity";
     private static int SPLASH_TIME = 2000; // 대기시간 ms
     private Bitmap bitmap = null;
 
@@ -38,6 +41,9 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        // GCM 등록
+        startGCMListen();
 
         // 3초 대기
 //        Handler hd = new Handler();
@@ -75,5 +81,13 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    // GCM 시작
+    private void startGCMListen() {
+        Log.e(LOG_TAG, " START_GCM_LISTEN ");
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
     }
 }

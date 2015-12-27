@@ -11,6 +11,9 @@ import com.google.android.gms.iid.InstanceID;
 import java.io.IOException;
 
 import kr.or.osan21.nationalassembly.R;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by madcat on 12/27/15.
@@ -52,5 +55,28 @@ public class RegistrationIntentService extends IntentService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(completeRegister);
         Log.d(LOG_TAG, "-- GCM TOKEN :: " + token);
 
+        updateGCMToken(token);
+
+    }
+
+    // GCM TOKEN 서버에 업데이트
+    @SuppressWarnings("LongLogTag")
+    private void updateGCMToken(final String token) {
+
+        if( token == null) return;
+
+        final CloudMessageAPI api = new CloudMessageAPI();
+
+        api.updateGCMToken(token, new Callback<String>() {
+            @Override
+            public void success(String s, Response response) {
+                Log.d(LOG_TAG, " REGISTER GCM . SERVER RETURN => " + s);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e(LOG_TAG, " REGISTER GCM ERROR " + error.getMessage());
+            }
+        });
     }
 }

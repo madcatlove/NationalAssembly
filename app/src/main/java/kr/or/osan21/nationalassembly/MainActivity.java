@@ -71,8 +71,7 @@ public class MainActivity extends AppCompatActivity  {
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
 
-        // GCM 시작
-        startGCMListen();
+
     }
 
     @Override
@@ -281,9 +280,5 @@ public class MainActivity extends AppCompatActivity  {
         return true;
     }*/
 
-    private void startGCMListen() {
-        Log.e(LOG_TAG, " START_GCM_LISTEN ");
-        Intent intent = new Intent(this, RegistrationIntentService.class);
-        startService(intent);
-    }
+
 }
