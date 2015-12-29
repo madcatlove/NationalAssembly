@@ -3,6 +3,7 @@ package kr.or.osan21.nationalassembly;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,11 +20,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -32,14 +36,19 @@ import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
 
+import kr.or.osan21.nationalassembly.Utils.CustomFont;
+
 public class MainActivity extends AppCompatActivity  {
 
     public static final String LOG_TAG = "MainActivity";
-    private Typeface mTypeface;
+    private Typeface tf;
+    private CustomFont cf;
     private ListView nav_list;
     private CustomAdapter custom_adapter;
-
     private LinearLayout main_menu_layout;
+    private Bitmap pushOffBmp, pushOnBmp;
+    private ImageView pushOnOff;
+    private boolean checked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +56,8 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
         // 폰트 설정 모든 뷰그룹에 적용
-        mTypeface = Typeface.createFromAsset(getAssets(), "SourceHanSansKR-Regular.otf");
-        ViewGroup root = (ViewGroup) findViewById(R.id.drawer_layout);
-        setGlobalFont(root);
+        tf = cf.getCustomFont(this);
+        cf.setGlobalFont(tf,(ViewGroup) findViewById(R.id.drawer_layout));
 
         // 배경 이미지 설정
         main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);
@@ -84,6 +92,14 @@ public class MainActivity extends AppCompatActivity  {
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
 
+        //toggle button 이미지 미리 생성
+        Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_off_btn); // 비트맵 이미지를 만든다.
+        int width=160; // 가로 사이즈 지정
+        int height=80; // 세로 사이즈 지정
+        pushOffBmp=Bitmap.createScaledBitmap(bmp, width, height, true); // 이미지 사이즈 조정
+        bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_on_btn);
+        pushOnBmp=Bitmap.createScaledBitmap(bmp, width, height, true);
+
 
     }
 
@@ -103,16 +119,6 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
-    void setGlobalFont(ViewGroup root) {
-        for (int i = 0; i < root.getChildCount(); i++) {
-            View child = root.getChildAt(i);
-            if (child instanceof TextView)
-                ((TextView)child).setTypeface(mTypeface);
-            else if (child instanceof ViewGroup)
-                setGlobalFont((ViewGroup)child);
-        }
-    }
-
     //메인 메뉴 선택 시 불림
     public void selectMenu(View v)
     {
@@ -127,7 +133,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         else if(selected == R.id.main_vision)
         {
-
+            startActivity(new Intent(this, VisionActivity.class));
         }
         else if(selected == R.id.main_media)
         {
@@ -181,19 +187,30 @@ public class MainActivity extends AppCompatActivity  {
                 // TextView에 현재 position의 문자열 추가
                 TextView text = (TextView) convertView.findViewById(R.id.slider_item_title);
                 text.setText(m_List.get(position));
-                text.setTypeface(mTypeface);
+                text.setTypeface(tf);
 
                 ImageView img = (ImageView)convertView.findViewById(R.id.slider_item_image);
-                if(position == 0)
+                //pushOnOff = (ImageView)convertView.findViewById(R.id.pushOnOff);
+                if(position == 0) {
                     img.setBackgroundResource(R.drawable.slider_icon_push);
-                else if(position == 1)
+                    Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_off_btn); // 비트맵 이미지를 만든다.
+                    int width=60; // 가로 사이즈 지정
+                    int height=30; // 세로 사이즈 지정
+                    Bitmap resizedbitmap=Bitmap.createScaledBitmap(bmp, width, height, true); // 이미지 사이즈 조정
+                    //pushOnOff.setBackgroundDrawable(new BitmapDrawable(getResources(), resizedbitmap));
+                }
+                else if(position == 1) {
                     img.setBackgroundResource(R.drawable.slider_icon_suggest);
-                else if(position == 2)
+                    //pushOnOff.setBackgroundDrawable(null);
+                } else if (position == 2) {
                     img.setBackgroundResource(R.drawable.slider_icon_support);
+                    //pushOnOff.setBackgroundDrawable(null);
+                }
                 else if(position == 3) {
                     img.setBackgroundResource(R.drawable.slider_icon_share);
                     View view = (View)convertView.findViewById(R.id.slider_item_under);
                     view.setBackgroundColor(Color.WHITE);
+                    //pushOnOff.setBackgroundDrawable(null);
                 }
 
                 // 리스트 아이템을 터치 했을 때 이벤트 발생
@@ -222,6 +239,21 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
+    public void changeOnOff(View v)
+    {
+            if(checked)
+            {
+                Log.d("ChangeOn","ON!");
+                pushOnOff.setBackgroundResource(R.drawable.slider_push_on_btn);
+                checked = false;
+            }
+            else
+            {
+                Log.d("ChangeOff", "Off");
+                pushOnOff.setBackgroundResource(R.drawable.slider_push_off_btn);
+                checked = true;
+            }
+    }
 
     public void call_national_number(View v) {
         startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:02-784-3877")));

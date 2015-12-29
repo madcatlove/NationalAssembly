@@ -17,9 +17,12 @@ import android.widget.Toast;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import kr.or.osan21.nationalassembly.Utils.CustomFont;
+
 public class WatersmellActivity extends AppCompatActivity {
 
-    private Typeface mTypeface;
+    private CustomFont cf;
+    private Typeface tf;
     private ListView water_smell_list;
     private CustomAdapter custom_adapter;
     private int cnt;
@@ -29,9 +32,8 @@ public class WatersmellActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watersmell);
 
-        mTypeface = Typeface.createFromAsset(getAssets(), "SourceHanSansKR-Regular.otf");
-        ViewGroup root = (ViewGroup) findViewById(R.id.water_smell_menu);
-        setGlobalFont(root);
+        tf = cf.getCustomFont(this);
+        cf.setGlobalFont(tf, (ViewGroup) findViewById(R.id.water_smell_menu));
 
         // ListView가져오기 및 custom adapter 생성, 연결
         water_smell_list = (ListView)findViewById(R.id.water_smell_list);
@@ -58,16 +60,6 @@ public class WatersmellActivity extends AppCompatActivity {
         custom_adapter.addTitle("어보(御寶)를 찾아라!");
         custom_adapter.addTitle("안민석 의원의 나라 사랑법(경기신문)");
         custom_adapter.addTitle("오산 수영신화, 널리 널리 퍼져라");
-    }
-
-    void setGlobalFont(ViewGroup root) {
-        for (int i = 0; i < root.getChildCount(); i++) {
-            View child = root.getChildAt(i);
-            if (child instanceof TextView)
-                ((TextView)child).setTypeface(mTypeface);
-            else if (child instanceof ViewGroup)
-                setGlobalFont((ViewGroup)child);
-        }
     }
 
     public void gotoback(View v)
@@ -123,12 +115,12 @@ public class WatersmellActivity extends AppCompatActivity {
                 // TextView에 현재 position의 날짜 추가
                 TextView date = (TextView) convertView.findViewById(R.id.water_smell_item_date);
                 date.setText(date_list.get(position));
-                date.setTypeface(mTypeface);
+                date.setTypeface(tf);
 
                 // TextView에 현재 position의 제목 추가
                 TextView title = (TextView) convertView.findViewById(R.id.water_smell_item_title);
                 title.setText(title_list.get(position));
-                title.setTypeface(mTypeface);
+                title.setTypeface(tf);
 
                 // 리스트 아이템을 터치 했을 때 이벤트 발생
                 convertView.setOnClickListener(new View.OnClickListener() {

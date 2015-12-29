@@ -18,7 +18,7 @@
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,11 +28,15 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".WatersmellActivity"
             android:label="WatersmellActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity android:name=".VisionActivity"
+            android:label="VisionActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
         <!-- GCM RECEIVER -->
         <receiver

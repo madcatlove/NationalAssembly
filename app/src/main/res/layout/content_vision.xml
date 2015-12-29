@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="kr.or.osan21.nationalassembly.WatersmellActivity"
+    tools:context="kr.or.osan21.nationalassembly.VisionActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_watersmell">
+    tools:showIn="@layout/activity_vision">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,14 +29,9 @@
             android:id="@+id/myImageViewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="안민석의 물향기 편지"
+            android:text="五産, 오산의 미래를 열다"
             android:textColor="#ffffff"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
-
-    <ListView
-        android:id="@+id/water_smell_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 </LinearLayout>
