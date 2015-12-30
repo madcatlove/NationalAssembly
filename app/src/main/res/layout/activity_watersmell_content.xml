@@ -7,38 +7,8 @@
     tools:context="kr.or.osan21.nationalassembly.WatersmellContentActivity"
     android:background="#ffffff">
 
-    <TextView
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:id="@+id/ws_content_title"
+    <WebView
+        android:id="@+id/ws_webview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15pt"
-        android:text="SK 최태원 회장,\n국감장 증인으로 설 것인가?"
-        android:background="#ffffff"/>
-
-    <TextView
-        android:id="@+id/ws_content_date"
-        android:layout_marginRight="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:textSize="9pt"
-        android:text="2012-10-15"/>
-
-    <ScrollView
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
-
-        <TextView
-            android:id="@+id/ws_content_contents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="10pt"
-            android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            />
-    </ScrollView>
+        android:layout_height="match_parent" />
 </LinearLayout>

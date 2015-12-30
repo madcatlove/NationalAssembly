@@ -17,6 +17,8 @@ public class WaterSmellAPI extends API {
 
     public static interface WaterSmellService {
 
+        String MOBILE_VIEW_URI = "/watersmell/mobileview/";
+
         @GET("/watersmell/record_list")
         void getWaterSmellList(Callback<List<WaterSmell>> cb);
 
