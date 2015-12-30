@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         else if(selected == R.id.main_media)
         {
+            startActivity(new Intent(this, MediaActivity.class));
         }
         else if(selected == R.id.main_notice)
         {
