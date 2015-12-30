@@ -33,16 +33,14 @@
         android:id="@+id/vision_three_btn1"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:scaleType="fitCenter"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="13dp"/>
+        android:layout_marginTop="20dp"/>
 
     <ImageButton
         android:id="@+id/vision_three_btn2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:scaleType="fitCenter"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="13dp"/>
@@ -51,7 +49,6 @@
         android:id="@+id/vision_three_btn3"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:scaleType="fitCenter"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="13dp"/>

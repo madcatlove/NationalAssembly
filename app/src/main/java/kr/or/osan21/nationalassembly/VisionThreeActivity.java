@@ -29,8 +29,8 @@ public class VisionThreeActivity extends AppCompatActivity {
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
 
-        final int width = display.getWidth();
-        int height = 100;
+        final int width = display.getWidth()-100;
+        final int height = display.getHeight();
 
         Glide.with(this)
                 .load(R.drawable.vision_gift_icon)
@@ -47,12 +47,14 @@ public class VisionThreeActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(R.drawable.vision_three_btn1)
+                .override(width, height)
                 .fitCenter()
                 .into(btn1);
 
         Glide.with(this)
                 .load(R.drawable.vision_three_btn2)
-                .centerCrop()
+                .override(width, height)
+                .fitCenter()
                 .into(btn2);
 
         Glide.with(this)
