@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,19 +14,24 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
+import kr.or.osan21.nationalassembly.WaterSmell.WaterSmell;
+import kr.or.osan21.nationalassembly.WaterSmell.WaterSmellAPI;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class WatersmellActivity extends AppCompatActivity {
 
     private Typeface tf;
     private ListView water_smell_list;
     private CustomAdapter custom_adapter;
-    private int cnt;
+    private int cnt = 0;
+    private static final String LOG_TAG = "WatersmellActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +47,24 @@ public class WatersmellActivity extends AppCompatActivity {
         custom_adapter = new CustomAdapter();
         water_smell_list.setAdapter(custom_adapter);
 
-        cnt = 0;
-        // ListView에 아이템 추가
-        custom_adapter.addDate("2012-10-15");
-        custom_adapter.addDate("2012-12-26");
-        custom_adapter.addDate("2013-01-01");
-        custom_adapter.addDate("2013-01-15");
-        custom_adapter.addDate("2013-06-19");
-        custom_adapter.addDate("2013-07-19");
-        custom_adapter.addDate("2013-10-10");
-        custom_adapter.addDate("2013-12-03");
+        // 물향기편지 API요청
+        WaterSmellAPI api = new WaterSmellAPI();
 
-        custom_adapter.addTitle("SK 최태원 회장, 국감장 증인으로 설..");
-        custom_adapter.addTitle("기쁘다 봉주 오셨네!");
-        custom_adapter.addTitle("오산환승터미널 예산, 국회 통과!");
-        custom_adapter.addTitle("5천만 원을 5백만 원으로!");
-        custom_adapter.addTitle("강지영과 나 - 경평축구를 꿈꾸며");
-        custom_adapter.addTitle("어보(御寶)를 찾아라!");
-        custom_adapter.addTitle("안민석 의원의 나라 사랑법(경기신문)");
-        custom_adapter.addTitle("오산 수영신화, 널리 널리 퍼져라");
+        // 리스트뷰에 추가=
+        api.getWaterSmellList(new Callback<List<WaterSmell>>() {
+            @Override
+            public void success(List<WaterSmell> waterSmells, Response response) {
+                Log.d( LOG_TAG, " get list " );
+                custom_adapter.setWaterSmellItems(waterSmells);
+                custom_adapter.notifyDataSetInvalidated();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+
 
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);
@@ -75,23 +79,22 @@ public class WatersmellActivity extends AppCompatActivity {
     public class CustomAdapter extends BaseAdapter {
 
         // 문자열을 보관 할 ArrayList
-        private ArrayList<String> date_list;
-        private ArrayList<String> title_list;
+        private List<WaterSmell> waterSmellItems;
+
 
         // 생성자
         public CustomAdapter() {
-            date_list = new ArrayList<String>();
-            title_list = new ArrayList<String>();
+            waterSmellItems = new ArrayList<WaterSmell>();
         }
 
         @Override
         public int getCount() {
-            return date_list.size();
+            return waterSmellItems.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return date_list.get(position);
+            return waterSmellItems.get(position);
         }
 
         @Override
@@ -119,12 +122,12 @@ public class WatersmellActivity extends AppCompatActivity {
                 cnt++;
                 // TextView에 현재 position의 날짜 추가
                 TextView date = (TextView) convertView.findViewById(R.id.water_smell_item_date);
-                date.setText(date_list.get(position));
+                date.setText( waterSmellItems.get(position).getRegdate() );
                 date.setTypeface(tf);
 
                 // TextView에 현재 position의 제목 추가
                 TextView title = (TextView) convertView.findViewById(R.id.water_smell_item_title);
-                title.setText(title_list.get(position));
+                title.setText( waterSmellItems.get(position).getTitle() );
                 title.setTypeface(tf);
 
                 // 리스트 아이템을 터치 했을 때 이벤트 발생
@@ -133,8 +136,11 @@ public class WatersmellActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // 터치 시 해당 아이템 이름 출력
-                        Toast.makeText(context, "리스트 클릭 : " + title_list.get(pos), Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(WatersmellActivity.this, WatersmellContentActivity.class));
+                        Intent i = new Intent(getBaseContext(), WatersmellContentActivity.class );
+                        i.putExtra("w_id", waterSmellItems.get(pos).getNum() );
+
+
+                        startActivity(i);
                     }
                 });
 
@@ -143,23 +149,8 @@ public class WatersmellActivity extends AppCompatActivity {
             return convertView;
         }
 
-        // 외부에서 아이템 추가 요청 시 사용
-        public void addDate(String _msg) {
-            date_list.add(_msg);
-        }
-
-        // 외부에서 아이템 삭제 요청 시 사용
-        public void removeDate(int _position) {
-            date_list.remove(_position);
-        }
-
-        public void addTitle(String _msg){
-            title_list.add(_msg);
-        }
-
-        public void removeTitle(int _position)
-        {
-            title_list.remove(_position);
+        public void setWaterSmellItems(List<WaterSmell> items) {
+            waterSmellItems = items;
         }
     }
 }
