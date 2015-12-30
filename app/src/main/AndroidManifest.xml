@@ -43,6 +43,20 @@
             android:label="MediaActivity"
             android:screenOrientation="portrait" />
 
+
+        <activity android:name=".WatersmellContentActivity"
+            android:label="WatersmellContentActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".VisionFiveActivity"
+            android:label="VisionFiveActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".VisionThreeActivity"
+            android:label="VisionThreeActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
         <!-- GCM RECEIVER -->
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -82,8 +96,6 @@
             android:name="kr.or.osan21.nationalassembly.Utils.CustomGlide"
             android:value="GlideModule" />
 
-        <activity android:name=".WatersmellContentActivity" >
-        </activity>
     </application>
 
 </manifest>

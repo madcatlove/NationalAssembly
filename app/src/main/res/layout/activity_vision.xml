@@ -15,7 +15,6 @@
         android:layout_height="35dp"
         android:background="#464646">
 
-
         <ImageView
             android:id="@+id/myImageView"
             android:layout_width="22dp"
@@ -37,40 +36,24 @@
     </RelativeLayout>
 
     <TabHost
+        android:id="@android:id/tabhost"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tabHost"
-        android:layout_gravity="center_horizontal">
-
+        android:layout_height="match_parent">
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
+            >
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></TabWidget>
-
+                android:layout_height="60dp"
+                />
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"></LinearLayout>
-            </FrameLayout>
+                android:layout_height="match_parent"
+                />
         </LinearLayout>
     </TabHost>
 

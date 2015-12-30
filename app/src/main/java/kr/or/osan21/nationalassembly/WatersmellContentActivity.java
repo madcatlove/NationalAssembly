@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import kr.or.osan21.nationalassembly.Utils.API;
+import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import kr.or.osan21.nationalassembly.WaterSmell.WaterSmellAPI;
 
 public class WatersmellContentActivity extends AppCompatActivity {
@@ -18,11 +20,15 @@ public class WatersmellContentActivity extends AppCompatActivity {
     private static final String LOG_TAG = "WaterSmellContent";
     private WebView ws_webview;
     private ProgressDialog progressDialog;
+    private TextView bar_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watersmell_content);
+
+        bar_title = (TextView)findViewById(R.id.myImageViewText);
+        bar_title.setTypeface(CustomFont.getCustomFont(this, "hans"));
 
         // 물향기편지 id 가져옴
         Integer w_id = getIntent().getIntExtra("w_id", 1);
