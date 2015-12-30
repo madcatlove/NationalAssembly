@@ -22,6 +22,8 @@ public class VisionActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);
         }
+
+        
     }
 
     public void gotoback(View v)
