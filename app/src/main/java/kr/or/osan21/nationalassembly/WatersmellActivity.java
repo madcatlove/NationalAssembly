@@ -1,8 +1,10 @@
 package kr.or.osan21.nationalassembly;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +23,6 @@ import kr.or.osan21.nationalassembly.Utils.CustomFont;
 
 public class WatersmellActivity extends AppCompatActivity {
 
-    private CustomFont cf;
     private Typeface tf;
     private ListView water_smell_list;
     private CustomAdapter custom_adapter;
@@ -32,8 +33,8 @@ public class WatersmellActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watersmell);
 
-        tf = cf.getCustomFont(this);
-        cf.setGlobalFont(tf, (ViewGroup) findViewById(R.id.water_smell_menu));
+        tf = CustomFont.getCustomFont(this,"hans");
+        CustomFont.setGlobalFont(tf, (ViewGroup) findViewById(R.id.water_smell_menu));
 
         // ListView가져오기 및 custom adapter 생성, 연결
         water_smell_list = (ListView)findViewById(R.id.water_smell_list);
@@ -60,6 +61,10 @@ public class WatersmellActivity extends AppCompatActivity {
         custom_adapter.addTitle("어보(御寶)를 찾아라!");
         custom_adapter.addTitle("안민석 의원의 나라 사랑법(경기신문)");
         custom_adapter.addTitle("오산 수영신화, 널리 널리 퍼져라");
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
     }
 
     public void gotoback(View v)
@@ -129,6 +134,7 @@ public class WatersmellActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         // 터치 시 해당 아이템 이름 출력
                         Toast.makeText(context, "리스트 클릭 : " + title_list.get(pos), Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(WatersmellActivity.this, WatersmellContentActivity.class));
                     }
                 });
 

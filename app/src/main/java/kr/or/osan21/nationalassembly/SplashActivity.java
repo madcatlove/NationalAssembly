@@ -3,6 +3,8 @@ package kr.or.osan21.nationalassembly;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -67,7 +69,9 @@ public class SplashActivity extends AppCompatActivity {
         // GCM 등록
         startGCMListen();
 
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
     }
 
     @Override

@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity  {
 
     public static final String LOG_TAG = "MainActivity";
     private Typeface tf;
-    private CustomFont cf;
     private ListView nav_list;
     private CustomAdapter custom_adapter;
     private LinearLayout main_menu_layout;
@@ -56,8 +55,8 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
         // 폰트 설정 모든 뷰그룹에 적용
-        tf = cf.getCustomFont(this);
-        cf.setGlobalFont(tf,(ViewGroup) findViewById(R.id.drawer_layout));
+        tf = CustomFont.getCustomFont(this, "hans");
+        CustomFont.setGlobalFont(tf,(ViewGroup) findViewById(R.id.drawer_layout));
 
         // 배경 이미지 설정
         main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);

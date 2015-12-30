@@ -8,8 +8,17 @@ import android.widget.TextView;
 
 public class CustomFont {
 
-    public static Typeface getCustomFont(Context ctx) {
-        final String fontName = "SourceHanSansKR-Regular.otf";
+    public static Typeface getCustomFont(Context ctx, String name) {
+        String fontName = "SourceHanSansKR-Regular.otf";
+
+        if(name.equalsIgnoreCase("CJKM"))
+        {
+            fontName="NotoSansCJKkr-Medium.otf";
+        }
+        else if(name.equalsIgnoreCase("CJKR"))
+        {
+            fontName="NotoSansCJKkr-Regular.otf";
+        }
 
         Typeface tf = Typeface.createFromAsset(ctx.getAssets(), fontName);
         return tf;
