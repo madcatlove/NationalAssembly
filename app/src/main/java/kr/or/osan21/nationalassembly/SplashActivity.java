@@ -49,8 +49,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(R.drawable.splash_img)
-                .override(width, height)
-                .fitCenter()
+//                .override(width, height)
                 .centerCrop()
                 .into(splashImg);
 
