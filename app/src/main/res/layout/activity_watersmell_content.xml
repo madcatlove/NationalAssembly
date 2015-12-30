@@ -7,6 +7,31 @@
     tools:context="kr.or.osan21.nationalassembly.WatersmellContentActivity"
     android:background="#ffffff">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#464646">
+
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/common_backbtn"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="0dp"
+            android:onClick="gotoback"/> //이미지뷰 생성
+
+        <TextView
+            android:id="@+id/myImageViewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="안민석의 물향기 편지"
+            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
     <WebView
         android:id="@+id/ws_webview"
         android:layout_width="match_parent"
