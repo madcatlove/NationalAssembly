@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".SupportMessageWriteActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/support_message_write_username_label"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:text="작성자"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="15dp" />
+    <EditText
+        android:id="@+id/support_message_write_username"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="15dp"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:hint="이름을 알려주시게"
+        android:textCursorDrawable="@null"/>
+</LinearLayout>
+    <View
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_height="0.5dp"
+        android:background="#c4c4c4"
+        android:layout_width="match_parent"
+        android:layout_below="@id/support_message_write_username"
+        android:layout_marginBottom="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/support_message_write_title_label"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:text="제목"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="15dp" />
+    <EditText
+        android:id="@+id/support_message_write_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="15dp"
+        android:hint="제목을 입력하시게"
+        android:background="@null"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="15dp"
+        android:textCursorDrawable="@null"/>
+    </LinearLayout>
+    <View
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_height="0.5dp"
+        android:background="#c4c4c4"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:id="@+id/support_message_write_content"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/support_message_write_border"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textSize="12dp"
+        android:gravity="top"
+        android:hint="내용을 입력하세요."
+        android:layout_marginBottom="10dp"
+        android:textCursorDrawable="@null"/>
+    <Button
+        android:id="@+id/support_message_write_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:text="제출"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/support_message_write_border"/>
+</LinearLayout>

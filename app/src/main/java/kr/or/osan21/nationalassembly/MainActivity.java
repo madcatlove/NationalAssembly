@@ -20,14 +20,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -219,7 +215,20 @@ public class MainActivity extends AppCompatActivity  {
                     @Override
                     public void onClick(View v) {
                         // 터치 시 해당 아이템 이름 출력
-                        Toast.makeText(context, "리스트 클릭 : " + m_List.get(pos), Toast.LENGTH_SHORT).show();
+                        if(m_List.get(pos).equalsIgnoreCase("푸시 알림받기")) {
+                            Log.d(LOG_TAG, "푸시푸시베이비");
+                        }
+                        else if(m_List.get(pos).equalsIgnoreCase("건의사항 & 격려")) {
+                            Log.d(LOG_TAG, "건의");
+                            startActivity(new Intent(getApplicationContext(), SupportMessageActivity.class));
+                        }
+                        else if(m_List.get(pos).equalsIgnoreCase("후원하기")) {
+                            Log.d(LOG_TAG, "후원하기");
+                        }
+                        else if(m_List.get(pos).equalsIgnoreCase("공유하기")) {
+                            Log.d(LOG_TAG, "공유하기");
+                        }
+                        //Toast.makeText(context, "리스트 클릭 : " + m_List.get(pos), Toast.LENGTH_SHORT).show();
                     }
                 });
 

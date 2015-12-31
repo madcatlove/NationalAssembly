@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/support_message_cardview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/support_message_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#5ebbef"
+                android:text="타이틀"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/support_message_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="작성자"
+                android:textSize="12dp" />
+
+            <ImageView
+                android:id="@+id/support_message_replyIcon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/main_person_img01" />
+
+            <TextView
+                android:id="@+id/support_message_reply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="작성날짜"
+                android:textSize="8dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/support_message_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/media_title"
+            android:textSize="10dp"
+            android:text="내용테스트.내용테스트.내용테스트.내용테스트.내용테스트.내용테스트.내용테스트.내용테스트."/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
+
+
+    <!--
+     private Integer num;
+        private String title;
+        private String content;
+        private String username;
+        private String regdate;
+    -->

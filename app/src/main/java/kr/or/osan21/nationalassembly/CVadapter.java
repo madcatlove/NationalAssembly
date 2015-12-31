@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Jeonghoon on 2015-12-29.
  */
 public class CVadapter extends RecyclerView.Adapter<CVadapter.ViewHolder> {
-    private static ArrayList<MediaClass> data;
+    private ArrayList<MediaClass> data;
 
     public CVadapter(ArrayList<MediaClass> medias) {
         data = medias;
