@@ -20,7 +20,7 @@
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
             android:layout_marginLeft="0dp"
-            android:onClick="gotoback"/> //이미지뷰 생성
+            android:onClick="gotoback"/>
 
         <TextView
             android:id="@+id/myImageViewText"
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical"
-        android:text="제목이오"
+        android:text=""
         android:textSize="15pt"
         android:background="#ffffff"/>
 
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="이름이오"
+            android:text=""
             android:gravity="right|center_vertical"
             android:textSize="10dp"/>
     </RelativeLayout>
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:text="내용이다"
+            android:text=""
             android:textSize="10pt"
             />
 
