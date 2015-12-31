@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,12 +40,12 @@ public class NoticeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notice);
 
         //모든 text에 글꼴 적용
-        tf = CustomFont.getCustomFont(this,"hans");
+        tf = CustomFont.getCustomFont(this, "hans");
         tf2 = CustomFont.getCustomFont(this, "CJKM");
         CustomFont.setGlobalFont(tf, (ViewGroup) findViewById(R.id.notice_layout));
 
         // 리스트뷰 가져오기 및 커스텀 어답터 할당
-        notice_list = (ListView)findViewById(R.id.notice_list);
+        notice_list = (ListView) findViewById(R.id.notice_list);
         notice_list.setDivider(null);
         customAdapter = new CustomAdapter();
         notice_list.setAdapter(customAdapter);
@@ -59,8 +60,12 @@ public class NoticeActivity extends AppCompatActivity {
             @Override
             public void success(List<Notice> notices, Response response) {
                 Log.d(LOG_TAG, " get list ");
+                for (Notice n : notices) {
+                    Log.d(LOG_TAG, "" + n.getTitle());
+                }
                 customAdapter.setNoticeItems(notices);
                 customAdapter.notifyDataSetInvalidated();
+
             }
 
             @Override
@@ -74,8 +79,7 @@ public class NoticeActivity extends AppCompatActivity {
         }
     }
 
-    public void gotoback(View v)
-    {
+    public void gotoback(View v) {
         finish();
     }
 
@@ -110,41 +114,43 @@ public class NoticeActivity extends AppCompatActivity {
             final int pos = position;
             final Context context = parent.getContext();
 
+            NoticeViewHolder holder;
             // 리스트가 길어지면서 현재 화면에 보이지 않는 아이템은 converView가 null인 상태로 들어 옴
-            if ( convertView == null ) {
+            if (convertView == null) {
                 // view가 null일 경우 커스텀 레이아웃을 얻어 옴
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.notice_item_layout, parent, false);
 
-                if(cnt%2 == 0)
-                    convertView.setBackgroundColor(0xffd4efff);
-                else
-                    convertView.setBackgroundColor(0xff5ebbef);
+                holder = new NoticeViewHolder();
+                holder.title = (TextView) convertView.findViewById(R.id.notice_item_title);
+                holder.date = (TextView) convertView.findViewById(R.id.notice_item_date);
 
-                cnt++;
-                // TextView에 현재 position의 날짜 추가
-                TextView date = (TextView) convertView.findViewById(R.id.notice_item_date);
-                date.setText(noticeItems.get(position).getRegdate());
-                date.setTypeface(tf);
+                convertView.setTag(holder);
 
-                // TextView에 현재 position의 제목 추가
-                TextView title = (TextView) convertView.findViewById(R.id.notice_item_title);
-                title.setText(noticeItems.get(position).getTitle());
-                title.setTypeface(tf2);
-
-                // 리스트 아이템을 터치 했을 때 이벤트 발생
-                convertView.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(getBaseContext(), NoticeContentActivity.class );
-                        i.putExtra("n_id", noticeItems.get(pos).getNum() );
-
-                        startActivity(i);
-                    }
-                });
-
+            } else {
+                holder = (NoticeViewHolder) convertView.getTag();
             }
+
+            if (position % 2 == 0)
+                convertView.setBackgroundColor(0xffd4efff);
+            else
+                convertView.setBackgroundColor(0xff5ebbef);
+
+            holder.date.setTypeface(tf);
+            holder.title.setTypeface(tf2);
+            holder.date.setText(noticeItems.get(position).getRegdate());
+            holder.title.setText(noticeItems.get(position).getTitle());
+
+            // 리스트 아이템을 터치 했을 때 이벤트 발생
+            convertView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getBaseContext(), NoticeContentActivity.class);
+                    i.putExtra("n_id", noticeItems.get(pos).getNum());
+                    startActivity(i);
+                }
+            });
 
             return convertView;
         }
@@ -152,5 +158,10 @@ public class NoticeActivity extends AppCompatActivity {
         public void setNoticeItems(List<Notice> items) {
             noticeItems = items;
         }
+    }
+
+    class NoticeViewHolder {
+        TextView title;
+        TextView date;
     }
 }

@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -95,7 +96,9 @@ public class MainActivity extends AppCompatActivity  {
         // shared preference
         sharedPreferences = getSharedPreferences(CONST_PUSH_MESSAGE.PUSH_SHARED_PREF_STR, MODE_PRIVATE);
 
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
     }
 
     @Override
@@ -227,17 +230,14 @@ public class MainActivity extends AppCompatActivity  {
                     @Override
                     public void onClick(View v) {
                         // 터치 시 해당 아이템 이름 출력
-                        if(m_List.get(pos).equalsIgnoreCase("푸시 알림받기")) {
+                        if (m_List.get(pos).equalsIgnoreCase("푸시 알림받기")) {
                             Log.d(LOG_TAG, "푸시푸시베이비");
-                        }
-                        else if(m_List.get(pos).equalsIgnoreCase("건의사항 & 격려")) {
+                        } else if (m_List.get(pos).equalsIgnoreCase("건의사항 & 격려")) {
                             Log.d(LOG_TAG, "건의");
                             startActivity(new Intent(getApplicationContext(), SupportMessageActivity.class));
-                        }
-                        else if(m_List.get(pos).equalsIgnoreCase("후원하기")) {
+                        } else if (m_List.get(pos).equalsIgnoreCase("후원하기")) {
                             Log.d(LOG_TAG, "후원하기");
-                        }
-                        else if(m_List.get(pos).equalsIgnoreCase("공유하기")) {
+                        } else if (m_List.get(pos).equalsIgnoreCase("공유하기")) {
                             Log.d(LOG_TAG, "공유하기");
                         }
                         //Toast.makeText(context, "리스트 클릭 : " + m_List.get(pos), Toast.LENGTH_SHORT).show();

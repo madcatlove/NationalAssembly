@@ -2,6 +2,7 @@ package kr.or.osan21.nationalassembly;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -27,10 +28,9 @@ import retrofit.client.Response;
 
 public class WatersmellActivity extends AppCompatActivity {
 
-    private Typeface tf;
+    private Typeface tf, tf2;
     private ListView water_smell_list;
     private CustomAdapter custom_adapter;
-    private int cnt = 0;
     private static final String LOG_TAG = "WatersmellActivity";
 
     @Override
@@ -39,6 +39,7 @@ public class WatersmellActivity extends AppCompatActivity {
         setContentView(R.layout.activity_watersmell);
 
         tf = CustomFont.getCustomFont(this,"hans");
+        tf2 = CustomFont.getCustomFont(this, "CJKM");
         CustomFont.setGlobalFont(tf, (ViewGroup) findViewById(R.id.water_smell_menu));
 
         // ListView가져오기 및 custom adapter 생성, 연결
@@ -108,43 +109,46 @@ public class WatersmellActivity extends AppCompatActivity {
             final int pos = position;
             final Context context = parent.getContext();
 
+            WaterSmellViewHolder holder;
             // 리스트가 길어지면서 현재 화면에 보이지 않는 아이템은 converView가 null인 상태로 들어 옴
             if ( convertView == null ) {
                 // view가 null일 경우 커스텀 레이아웃을 얻어 옴
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.watersmell_item_layout, parent, false);
 
-                if(cnt%2 == 0)
-                    convertView.setBackgroundColor(0xffd4efff);
-                else
-                    convertView.setBackgroundColor(0xff5ebbef);
+                holder = new WaterSmellViewHolder();
+                holder.date = (TextView) convertView.findViewById(R.id.water_smell_item_date);
+                holder.title = (TextView) convertView.findViewById(R.id.water_smell_item_title);
 
-                cnt++;
-                // TextView에 현재 position의 날짜 추가
-                TextView date = (TextView) convertView.findViewById(R.id.water_smell_item_date);
-                date.setText( waterSmellItems.get(position).getRegdate() );
-                date.setTypeface(tf);
-
-                // TextView에 현재 position의 제목 추가
-                TextView title = (TextView) convertView.findViewById(R.id.water_smell_item_title);
-                title.setText( waterSmellItems.get(position).getTitle() );
-                title.setTypeface(tf);
-
-                // 리스트 아이템을 터치 했을 때 이벤트 발생
-                convertView.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // 터치 시 해당 아이템 이름 출력
-                        Intent i = new Intent(getBaseContext(), WatersmellContentActivity.class );
-                        i.putExtra("w_id", waterSmellItems.get(pos).getNum() );
-
-
-                        startActivity(i);
-                    }
-                });
-
+                convertView.setTag(holder);
             }
+            else
+            {
+                holder = (WaterSmellViewHolder)convertView.getTag();
+            }
+
+            if (position % 2 == 0)
+                convertView.setBackgroundColor(0xffd4efff);
+            else
+                convertView.setBackgroundColor(0xff5ebbef);
+
+            holder.date.setTypeface(tf);
+            holder.title.setTypeface(tf2);
+            holder.date.setText(waterSmellItems.get(position).getRegdate());
+            holder.title.setText(waterSmellItems.get(position).getTitle());
+
+            // 리스트 아이템을 터치 했을 때 이벤트 발생
+            convertView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // 터치 시 해당 아이템 이름 출력
+                    Intent i = new Intent(getBaseContext(), WatersmellContentActivity.class );
+                    i.putExtra("w_id", waterSmellItems.get(pos).getNum() );
+
+                    startActivity(i);
+                }
+            });
 
             return convertView;
         }
@@ -152,5 +156,10 @@ public class WatersmellActivity extends AppCompatActivity {
         public void setWaterSmellItems(List<WaterSmell> items) {
             waterSmellItems = items;
         }
+    }
+
+    class WaterSmellViewHolder {
+        TextView title;
+        TextView date;
     }
 }
