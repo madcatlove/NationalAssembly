@@ -38,6 +38,7 @@ public class VisionThreeActivity extends AppCompatActivity {
                 .fitCenter()
                 .into(icon);
 
+        
         Glide.with(this)
                 .load(R.drawable.vision_three_title)
                 .override(width, height)
