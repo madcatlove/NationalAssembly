@@ -31,7 +31,7 @@ public class VisionFiveActivity extends AppCompatActivity {
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
 
-        final int width = display.getWidth()-150;
+        final int width = display.getWidth();
         final int height = display.getHeight();
 
         Glide.with(this)

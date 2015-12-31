@@ -36,26 +36,30 @@
         <activity
             android:name=".VisionActivity"
             android:label="VisionActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MediaActivity"
             android:label="MediaActivity"
             android:screenOrientation="portrait" />
-
-
-        <activity android:name=".WatersmellContentActivity"
+        <activity
+            android:name=".WatersmellContentActivity"
             android:label="WatersmellContentActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".VisionFiveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisionFiveActivity"
             android:label="VisionFiveActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".VisionThreeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisionThreeActivity"
             android:label="VisionThreeActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NoticeActivity"
+            android:label="NoticeActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".NoticeContentActivity"
+            android:label="NoticeContentActivity"
+            android:screenOrientation="portrait"/>
 
         <!-- GCM RECEIVER -->
         <receiver
