@@ -138,7 +138,7 @@ public class NoticeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(getBaseContext(), NoticeContentActivity.class );
-                        i.putExtra("w_id", noticeItems.get(pos).getNum() );
+                        i.putExtra("n_id", noticeItems.get(pos).getNum() );
 
                         startActivity(i);
                     }
