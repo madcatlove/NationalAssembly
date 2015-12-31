@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -33,6 +34,16 @@ public class GCMListenerService extends GcmListenerService {
     }
 
     private void noti(String title, String content) {
+
+        SharedPreferences sharedPreferences = getSharedPreferences(CONST_PUSH_MESSAGE.PUSH_SHARED_PREF_STR, MODE_PRIVATE);
+
+        // 푸시 허용상태가 아니라면 무시
+        final String PUSH_STATUS = sharedPreferences.getString(CONST_PUSH_MESSAGE.PUSH_STATUS_KEY, CONST_PUSH_MESSAGE.PUSH_ON);
+        if( PUSH_STATUS.equals(CONST_PUSH_MESSAGE.PUSH_OFF) ) {
+            Log.d(LOG_TAG, ">> GCM Received BUT (push off) ignore notification");
+            return;
+        }
+
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, SplashActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);

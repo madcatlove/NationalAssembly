@@ -2,8 +2,8 @@ package kr.or.osan21.nationalassembly;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,14 +20,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -36,6 +33,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
 
+import kr.or.osan21.nationalassembly.CloudMessage.CONST_PUSH_MESSAGE;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 
 public class MainActivity extends AppCompatActivity  {
@@ -45,9 +43,12 @@ public class MainActivity extends AppCompatActivity  {
     private ListView nav_list;
     private CustomAdapter custom_adapter;
     private LinearLayout main_menu_layout;
-    private Bitmap pushOffBmp, pushOnBmp;
-    private ImageView pushOnOff;
     private boolean checked = false;
+
+
+    private SharedPreferences sharedPreferences;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,13 +92,9 @@ public class MainActivity extends AppCompatActivity  {
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
 
-        //toggle button 이미지 미리 생성
-        Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_off_btn); // 비트맵 이미지를 만든다.
-        int width=160; // 가로 사이즈 지정
-        int height=80; // 세로 사이즈 지정
-        pushOffBmp=Bitmap.createScaledBitmap(bmp, width, height, true); // 이미지 사이즈 조정
-        bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_on_btn);
-        pushOnBmp=Bitmap.createScaledBitmap(bmp, width, height, true);
+
+        // shared preference
+        sharedPreferences = getSharedPreferences(CONST_PUSH_MESSAGE.PUSH_SHARED_PREF_STR, MODE_PRIVATE);
 
 
     }
@@ -190,27 +187,39 @@ public class MainActivity extends AppCompatActivity  {
                 text.setTypeface(tf);
 
                 ImageView img = (ImageView)convertView.findViewById(R.id.slider_item_image);
-                //pushOnOff = (ImageView)convertView.findViewById(R.id.pushOnOff);
+
+
+                // 푸쉬 이미지뷰를 다 가린다
+                ImageView pushBtn = (ImageView)convertView.findViewById(R.id.pushOnOff);
+                pushBtn.setVisibility(View.INVISIBLE); //공간만 차지하도록 숨김
+
                 if(position == 0) {
                     img.setBackgroundResource(R.drawable.slider_icon_push);
-                    Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_off_btn); // 비트맵 이미지를 만든다.
-                    int width=60; // 가로 사이즈 지정
-                    int height=30; // 세로 사이즈 지정
-                    Bitmap resizedbitmap=Bitmap.createScaledBitmap(bmp, width, height, true); // 이미지 사이즈 조정
-                    //pushOnOff.setBackgroundDrawable(new BitmapDrawable(getResources(), resizedbitmap));
+
+                    pushBtn.setVisibility(View.VISIBLE);
+
+                    /* PUSH_STATUS */
+                    final boolean push_status = isPushStatusOn();
+                    Log.d(LOG_TAG, " PUSH_STATUS :: " + push_status);
+                    if( push_status ) {
+                        pushBtn.setImageResource(R.drawable.slider_push_on_btn);
+                    }
+                    else {
+                        pushBtn.setImageResource(R.drawable.slider_push_off_btn);
+                    }
                 }
                 else if(position == 1) {
                     img.setBackgroundResource(R.drawable.slider_icon_suggest);
-                    //pushOnOff.setBackgroundDrawable(null);
+
                 } else if (position == 2) {
                     img.setBackgroundResource(R.drawable.slider_icon_support);
-                    //pushOnOff.setBackgroundDrawable(null);
+
                 }
                 else if(position == 3) {
                     img.setBackgroundResource(R.drawable.slider_icon_share);
                     View view = (View)convertView.findViewById(R.id.slider_item_under);
                     view.setBackgroundColor(Color.WHITE);
-                    //pushOnOff.setBackgroundDrawable(null);
+
                 }
 
                 // 리스트 아이템을 터치 했을 때 이벤트 발생
@@ -239,20 +248,43 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
-    public void changeOnOff(View v)
-    {
-            if(checked)
-            {
-                Log.d("ChangeOn","ON!");
-                pushOnOff.setBackgroundResource(R.drawable.slider_push_on_btn);
+    public void changeOnOff(View v) {
+
+        ImageView iv = (ImageView) v;
+
+            if(checked) {
+                Log.d(LOG_TAG, "PushON");
+                iv.setImageResource(R.drawable.slider_push_on_btn);
                 checked = false;
+                setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_ON);
             }
-            else
-            {
-                Log.d("ChangeOff", "Off");
-                pushOnOff.setBackgroundResource(R.drawable.slider_push_off_btn);
+            else {
+                Log.d(LOG_TAG, "PushOff");
+                iv.setImageResource(R.drawable.slider_push_off_btn);
                 checked = true;
+                setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_OFF);
             }
+
+        v.invalidate();
+
+    }
+
+
+    /* 쉐어드프리퍼런스에 푸시 허용 상태 저장 */
+    private void setPushStatusInShrdPreference(String v) {
+        SharedPreferences.Editor ed = sharedPreferences.edit();
+        ed.putString(CONST_PUSH_MESSAGE.PUSH_STATUS_KEY, v);
+        ed.commit();
+    }
+
+    /* 푸시가 켜져있는 상태인지? */
+    /* 쉐어드프리퍼런스 없음 ==> 켜짐상태로 간주 */
+    private boolean isPushStatusOn() {
+        if( sharedPreferences == null ) return true;
+
+        final String opt = sharedPreferences.getString(CONST_PUSH_MESSAGE.PUSH_STATUS_KEY, CONST_PUSH_MESSAGE.PUSH_ON);
+
+        return opt.equals(CONST_PUSH_MESSAGE.PUSH_ON);
     }
 
     public void call_national_number(View v) {
