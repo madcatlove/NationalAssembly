@@ -11,14 +11,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#5ebbef"
     tools:context=".SupportMessageActivity">
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"/>
     <Button
         android:id="@+id/support_message_write"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="작성"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/support_message_recycle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
 </LinearLayout>

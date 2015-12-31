@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/notice_layout"
     android:orientation="vertical"
-    tools:context="kr.or.osan21.nationalassembly.WatersmellContentActivity"
-    android:background="#ffffff">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="kr.or.osan21.nationalassembly.NoticeActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,14 +28,14 @@
             android:id="@+id/myImageViewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="안민석의 물향기 편지"
+            android:text="언제 어디서든 함께 해요"
             android:textColor="#ffffff"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
-    <WebView
-        android:id="@+id/ws_webview"
+    <ListView
+        android:id="@+id/notice_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"></ListView>
 </LinearLayout>
