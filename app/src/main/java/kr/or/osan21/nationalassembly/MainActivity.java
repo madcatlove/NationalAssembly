@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         else if(selected == R.id.main_notice)
         {
-            // notice 
+            startActivity(new Intent(this, NoticeActivity.class) );
         }
     }
 
