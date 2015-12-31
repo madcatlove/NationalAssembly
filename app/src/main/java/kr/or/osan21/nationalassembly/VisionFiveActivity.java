@@ -47,34 +47,32 @@ public class VisionFiveActivity extends AppCompatActivity {
                 .into(title);
 
 
+        /* 버튼 부분 */
+
         Glide.with(this)
                 .load(R.drawable.vision_five_btn1)
-                .override(width, height)
                 .fitCenter()
                 .into(btn1);
 
+
         Glide.with(this)
                 .load(R.drawable.vision_five_btn2)
-                .override(width, height)
                 .fitCenter()
                 .into(btn2);
 
         Glide.with(this)
                 .load(R.drawable.vision_five_btn3)
-                .override(width, height)
                 .fitCenter()
                 .into(btn3);
 
 
         Glide.with(this)
                 .load(R.drawable.vision_five_btn4)
-                .override(width, height)
                 .fitCenter()
                 .into(btn4);
 
         Glide.with(this)
                 .load(R.drawable.vision_five_btn5)
-                .override(width, height)
                 .fitCenter()
                 .into(btn5);
 
