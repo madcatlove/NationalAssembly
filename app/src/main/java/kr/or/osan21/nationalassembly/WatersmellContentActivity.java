@@ -54,6 +54,15 @@ public class WatersmellContentActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // 웹뷰 리소스 소멸
+        if(ws_webview != null) {
+            ws_webview.destroy();
+        }
+    }
 
     private class CustomWebViewClient extends WebViewClient {
 
