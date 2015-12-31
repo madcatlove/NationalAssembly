@@ -19,6 +19,10 @@ public class CustomFont {
         {
             fontName="NotoSansCJKkr-Regular.otf";
         }
+        else if(name.equalsIgnoreCase("CJKB"))
+        {
+            fontName="NotoSansCJKkr-Bold.otf";
+        }
 
         Typeface tf = Typeface.createFromAsset(ctx.getAssets(), fontName);
         return tf;
