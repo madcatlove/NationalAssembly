@@ -119,8 +119,8 @@ public class SupportMessageActivity extends AppCompatActivity {
                 TextView username = (TextView) convertView.findViewById(R.id.support_message_username);
                 username.setText(messageItems.get(position).getUsername());
 
-                //TextView replyCnt = (TextView) convertView.findViewById(R.id.support_message_reply);
-                //replyCnt.setText(messageItems.get(position).getReply_count());
+                TextView replyCnt = (TextView) convertView.findViewById(R.id.support_message_reply);
+                replyCnt.setText("" + messageItems.get(position).getReply_count());
 
                 TextView content = (TextView) convertView.findViewById(R.id.support_message_content);
                 content.setText(messageItems.get(position).getContent());

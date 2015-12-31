@@ -14,10 +14,11 @@ public class SupportMessage {
     private String content;
     private String username;
     private String regdate;
+    private Integer reply_count;
 
     //optional
     private List<SupportMessageReply> reply;
-    private Integer reply_count;
+
 
 
 
