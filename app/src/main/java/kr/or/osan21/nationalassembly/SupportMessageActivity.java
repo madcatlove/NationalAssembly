@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,9 +104,10 @@ public class SupportMessageActivity extends AppCompatActivity {
 
         // 출력 될 아이템 관리
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             final int pos = position;
             final Context context = parent.getContext();
+            SupportViewHolder holder;
 
             // 리스트가 길어지면서 현재 화면에 보이지 않는 아이템은 converView가 null인 상태로 들어 옴
             if (convertView == null) {
@@ -113,28 +115,37 @@ public class SupportMessageActivity extends AppCompatActivity {
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.message_item_layout, parent, false);
 
-                TextView title = (TextView) convertView.findViewById(R.id.support_message_title);
-                title.setText(messageItems.get(position).getTitle());
-
-                TextView username = (TextView) convertView.findViewById(R.id.support_message_username);
-                username.setText(messageItems.get(position).getUsername());
-
-                TextView replyCnt = (TextView) convertView.findViewById(R.id.support_message_reply);
-                replyCnt.setText("" + messageItems.get(position).getReply_count());
-
-                TextView content = (TextView) convertView.findViewById(R.id.support_message_content);
-                content.setText(messageItems.get(position).getContent());
-
-                // 리스트 아이템을 터치 했을 때 이벤트 발생
-                convertView.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(getBaseContext(), SupportMessageContentActivity.class).putExtra("m_id", messageItems.get(pos).getNum()));
-                    }
-                });
+                holder = new SupportViewHolder();
+                holder.title = (TextView) convertView.findViewById(R.id.support_message_title);
+                holder.username = (TextView) convertView.findViewById(R.id.support_message_username);
+                holder.reply_count = (TextView) convertView.findViewById(R.id.support_message_reply);
+                holder.content = (TextView) convertView.findViewById(R.id.support_message_content);
+                convertView.setTag(holder);
             }
+            else {
+                holder = (SupportViewHolder)convertView.getTag();
+            }
+
+            holder.title.setText(messageItems.get(position).getTitle());
+            holder.username.setText(messageItems.get(position).getUsername());
+            holder.reply_count.setText("" + messageItems.get(position).getReply_count());
+            holder.content.setText(messageItems.get(position).getContent());
+
+            // 리스트 아이템을 터치 했을 때 이벤트 발생
+            convertView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getBaseContext(), SupportMessageContentActivity.class).putExtra("m_id", messageItems.get(pos).getNum()));
+                }
+            });
             return convertView;
+        }
+        class SupportViewHolder {
+            TextView title;
+            TextView username;
+            TextView content;
+            TextView reply_count;
         }
 
     }
