@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity  {
         int selected = v.getId();
         if(selected == R.id.main_profile)
         {
-
+            startActivity(new Intent(this, ProfileActivity.class));
         }
         else if(selected == R.id.main_activities)
         {
