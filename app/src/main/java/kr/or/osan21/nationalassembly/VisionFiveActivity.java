@@ -42,7 +42,6 @@ public class VisionFiveActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(R.drawable.vision_five_title)
-                .override(width, height)
                 .fitCenter()
                 .into(title);
 
