@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:clickable="false"
     tools:openDrawer="start">
 
     <include
@@ -106,7 +107,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="20dp"
-                android:layout_alignParentTop="true"/>
+                android:layout_alignParentTop="true"
+                android:onClick="shareFacebook"/>
             <ImageView
                 android:id="@+id/slider_twitter"
                 android:layout_width="30dp"
@@ -114,7 +116,8 @@
                 android:src="@drawable/slider_share_twitter"
                 android:layout_toRightOf="@+id/slider_facebook"
                 android:layout_alignTop="@+id/slider_facebook"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:onClick="shareTwitter"/>
             <ImageView
                 android:id="@+id/slider_kakao"
                 android:layout_width="30dp"
@@ -122,7 +125,8 @@
                 android:src="@drawable/slider_share_kakao"
                 android:layout_toRightOf="@+id/slider_twitter"
                 android:layout_alignTop="@+id/slider_twitter"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:onClick="shareKakao"/>
             <ImageView
                 android:id="@+id/slider_band"
                 android:layout_width="30dp"
@@ -130,14 +134,16 @@
                 android:src="@drawable/slider_share_band"
                 android:layout_toRightOf="@+id/slider_kakao"
                 android:layout_alignTop="@+id/slider_kakao"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:onClick="shareBand"/>
             <ImageView
                 android:id="@+id/slider_mail"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/slider_share_mail"
                 android:layout_toRightOf="@+id/slider_band"
-                android:layout_alignTop="@+id/slider_band" />
+                android:layout_alignTop="@+id/slider_band"
+                android:onClick="shareSMS"/>
         </RelativeLayout>
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

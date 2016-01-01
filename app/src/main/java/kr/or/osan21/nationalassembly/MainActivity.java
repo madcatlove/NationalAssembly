@@ -3,7 +3,10 @@ package kr.or.osan21.nationalassembly;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -30,8 +33,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.kakao.KakaoLink;
+import com.kakao.KakaoParameterException;
+import com.kakao.KakaoTalkLinkMessageBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import kr.or.osan21.nationalassembly.CloudMessage.CONST_PUSH_MESSAGE;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
@@ -44,9 +51,18 @@ public class MainActivity extends AppCompatActivity  {
     private CustomAdapter custom_adapter;
     private LinearLayout main_menu_layout;
     private boolean checked = false;
+    private Bitmap onBmp, offBmp;
 
 
     private SharedPreferences sharedPreferences;
+
+    //kakao share
+    private KakaoLink kakaoLink;
+    private KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder;
+
+    private DrawerLayout mainDrawer;
+    private boolean isSlideMenuOpen = false;
+
 
 
 
@@ -57,7 +73,34 @@ public class MainActivity extends AppCompatActivity  {
 
         // 폰트 설정 모든 뷰그룹에 적용
         tf = CustomFont.getCustomFont(this, "hans");
-        CustomFont.setGlobalFont(tf,(ViewGroup) findViewById(R.id.drawer_layout));
+        CustomFont.setGlobalFont(tf, (ViewGroup) findViewById(R.id.drawer_layout));
+
+        // drawerlayout
+        mainDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mainDrawer.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                Log.d(LOG_TAG, "onDrawerSlide");
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                Log.d(LOG_TAG, "DrawerOpened");
+                isSlideMenuOpen = true;
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                Log.d(LOG_TAG, "DrawerClosed");
+                isSlideMenuOpen = false;
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                Log.d(LOG_TAG, "DrawerStateChanged");
+            }
+        });
+
 
         // 배경 이미지 설정
         main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);
@@ -92,9 +135,23 @@ public class MainActivity extends AppCompatActivity  {
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
 
+        Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_on_btn); // 비트맵 이미지를 만든다.
+        int width=(int)(getWindowManager().getDefaultDisplay().getWidth()*0.15); // 가로 사이즈 지정
+        int height=(int)(width*0.6); // 세로 사이즈 지정
+        onBmp=Bitmap.createScaledBitmap(bmp, width, height, true); // 이미지 사이즈 조정
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_off_btn);
+        offBmp = Bitmap.createScaledBitmap(bmp, width, height, true);
 
         // shared preference
         sharedPreferences = getSharedPreferences(CONST_PUSH_MESSAGE.PUSH_SHARED_PREF_STR, MODE_PRIVATE);
+
+        // kakaolink initialization
+        try {
+            kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
+            kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
+        } catch (KakaoParameterException e) {
+            e.printStackTrace();
+        }
 
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);
@@ -120,10 +177,15 @@ public class MainActivity extends AppCompatActivity  {
     //메인 메뉴 선택 시 불림
     public void selectMenu(View v)
     {
+        // slide menu가 올라와있으면.
+        if( isSlideMenuOpen ) {
+            return;
+        }
+
         int selected = v.getId();
         if(selected == R.id.main_profile)
         {
-
+            startActivity(new Intent(this, ProfileActivity.class));
         }
         else if(selected == R.id.main_activities)
         {
@@ -193,21 +255,21 @@ public class MainActivity extends AppCompatActivity  {
 
                 // 푸쉬 이미지뷰를 다 가린다
                 ImageView pushBtn = (ImageView)convertView.findViewById(R.id.pushOnOff);
+                pushBtn.setImageBitmap(offBmp);
                 pushBtn.setVisibility(View.INVISIBLE); //공간만 차지하도록 숨김
 
                 if(position == 0) {
                     img.setBackgroundResource(R.drawable.slider_icon_push);
-
                     pushBtn.setVisibility(View.VISIBLE);
 
                     /* PUSH_STATUS */
                     final boolean push_status = isPushStatusOn();
                     Log.d(LOG_TAG, " PUSH_STATUS :: " + push_status);
                     if( push_status ) {
-                        pushBtn.setImageResource(R.drawable.slider_push_on_btn);
+                        pushBtn.setImageBitmap(onBmp);
                     }
                     else {
-                        pushBtn.setImageResource(R.drawable.slider_push_off_btn);
+                        pushBtn.setImageBitmap(offBmp);
                     }
                 }
                 else if(position == 1) {
@@ -264,23 +326,105 @@ public class MainActivity extends AppCompatActivity  {
 
         ImageView iv = (ImageView) v;
 
-            if(checked) {
-                Log.d(LOG_TAG, "PushON");
-                iv.setImageResource(R.drawable.slider_push_on_btn);
-                checked = false;
-                setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_ON);
-            }
-            else {
-                Log.d(LOG_TAG, "PushOff");
-                iv.setImageResource(R.drawable.slider_push_off_btn);
-                checked = true;
-                setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_OFF);
-            }
+        if (checked) {
+            Log.d(LOG_TAG, "PushON");
+            iv.setImageBitmap(onBmp); // 이미지뷰에 조정한 이미지 넣기
+            //
+            //iv.setImageResource(R.drawable.slider_push_on_btn);
+            checked = false;
+            setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_ON);
+        } else {
+            Log.d(LOG_TAG, "PushOff");
+            iv.setImageBitmap(offBmp);
+            //iv.setImageResource(R.drawable.slider_push_off_btn);
+            checked = true;
+            setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_OFF);
+        }
 
         v.invalidate();
-
     }
 
+    public void shareKakao(View v)
+    {
+        try {
+            kakaoTalkLinkMessageBuilder.addText("국회의원 안민석");
+            kakaoTalkLinkMessageBuilder.addImage("https://www.google.co.kr/images/srpr/logo11w.png", 200, 200);
+           /* kakaoTalkLinkMessageBuilder.addAppLink("앱 바로가기",
+                    new AppActionBuilder()
+                            .addActionInfo(AppActionInfoBuilder
+                                    .createAndroidActionInfoBuilder()
+                                    .setExecuteParam("execparamkey1=1111")
+                                    .setMarketParam("referrer=kakaotalklink")
+                                    .build())
+                            .build());*/
+            kakaoTalkLinkMessageBuilder.addAppLink("앱으로 이동");
+            final String msg = kakaoTalkLinkMessageBuilder.build();
+            kakaoLink.sendMessage(msg, this);
+        }
+        catch(KakaoParameterException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void shareBand(View v)
+    {
+        try {
+            PackageManager manager = this.getPackageManager();
+            Intent i = manager.getLaunchIntentForPackage("com.nhn.android.band");
+        } catch (Exception e) {
+            // 밴드앱 설치되지 않은 경우 구글 플레이 설치페이지로 이동
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.band"));
+            startActivity(intent);
+            return;
+        }
+
+        String serviceDomain = "www.bloter.net"; //  연동 서비스 도메인
+        String encodedText = "%ED%85%8C%EC%8A%A4%ED%8A%B8+%EB%B3%B8%EB%AC%B8"; // 글 본문 (utf-8 urlencoded)
+        Uri uri = Uri.parse("bandapp://create/post?text=" + encodedText + "&route=" + serviceDomain);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
+    public void shareSMS(View v)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        // 앱 url
+        String url = "market://details?id=kr.or.osan21.nationalassembly";
+        intent.putExtra("sms_body", "국회의원 안민석 앱 바로가기 : \n" + url);
+        intent.setType("vnd.android-dir/mms-sms");
+        startActivity(intent);
+    }
+
+    public void shareFacebook(View v)
+    {
+        String mySharedLink = "http://bspfp.pe.kr";
+        String mySubject = "국회의원 안민석";
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, mySubject);
+        intent.putExtra(Intent.EXTRA_TEXT, mySharedLink);
+
+        boolean fbAppFound = false;
+        List<ResolveInfo> resolveInfoList = getPackageManager().queryIntentActivities(intent, 0);
+        for (ResolveInfo info : resolveInfoList) {
+            // 페이스북 패키지명이 com.facebook.katana
+            // 페이스북 메신저 앱은 com.facebook.orca
+            if (info.activityInfo.packageName.toLowerCase().startsWith("com.facebook.katana")) {
+                intent.setPackage(info.activityInfo.packageName);
+                fbAppFound = true;
+                break;
+            }
+        }
+
+        if(!fbAppFound)
+        {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.facebook.katana"));
+        }
+
+        startActivity(intent);
+    }
 
     /* 쉐어드프리퍼런스에 푸시 허용 상태 저장 */
     private void setPushStatusInShrdPreference(String v) {

@@ -5,4 +5,38 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+
+    <!-- 프로필/학력 -->
+    <string name="profile_academic">
+        &#8226; 성호초, 오산중, 수성고, 서울대 졸
+        \n&#8226; 미국 일리노이 주립대 이학 석사
+        \n&#8226; 미국 북콜로라도 주립대 교육학 박사
+    </string>
+
+    <!-- 프로필/안민석 의원이 걸어온 길 -->
+    <string name="profile_footprint">
+        &#8226; 공군중위 전역 (40개월 복무)
+        \n&#8226; 공군사관학교 교수, 중앙대 교수
+        \n&#8226; 오산 화성 환경운동연합 운영위워장
+        \n&#8226; 6.15 공동선언실천 남측위원회 공동대표
+        \n&#8226; 국회 교육과학기술위원회 간사
+        \n&#8226; 유네스코 한국위원회 위원
+        \n&#8226; 유니세프 \'국회친구들\' 대표 간사
+        \n&#8226; 반값등록금 특별위원회 민주당 간사
+        \n&#8226; 민주당 교육특별위원회 위원장
+        \n&#8226; 민주당 원내부대표
+    </string>
+
+    <!-- 프로필/안민석 의원이 걸어가는 길 -->
+    <string name="profile_future">
+        &#8226; 국회 예산결산특별위원회 간사
+        \n&#8226; 국회 교육문화체육관광위원회 위원
+        \n&#8226; 국회 혁신교육포럼 대표
+        \n&#8226; 국회 안전교육포럼 대표
+        \n&#8226; 새정치민주연합 교육연수원장
+        \n&#8226; 문화재찾기 한민족네트워크 공동대표
+        \n&#8226; 한국 백혈병소아암협회 명예회장
+        \n&#8226; 오산 물향기오케스트라 고문
+    </string>
 </resources>
