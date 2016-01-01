@@ -384,6 +384,16 @@ public class MainActivity extends AppCompatActivity  {
         startActivity(intent);
     }
 
+    public void shareSMS(View v)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        // 앱 url
+        String url = "market://details?id=kr.or.osan21.nationalassembly";
+        intent.putExtra("sms_body", "국회의원 안민석 앱 바로가기 : \n" + url);
+        intent.setType("vnd.android-dir/mms-sms");
+        startActivity(intent);
+    }
+
     /* 쉐어드프리퍼런스에 푸시 허용 상태 저장 */
     private void setPushStatusInShrdPreference(String v) {
         SharedPreferences.Editor ed = sharedPreferences.edit();
