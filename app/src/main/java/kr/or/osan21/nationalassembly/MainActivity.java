@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -37,6 +38,7 @@ import com.kakao.KakaoParameterException;
 import com.kakao.KakaoTalkLinkMessageBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import kr.or.osan21.nationalassembly.CloudMessage.CONST_PUSH_MESSAGE;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
@@ -391,6 +393,36 @@ public class MainActivity extends AppCompatActivity  {
         String url = "market://details?id=kr.or.osan21.nationalassembly";
         intent.putExtra("sms_body", "국회의원 안민석 앱 바로가기 : \n" + url);
         intent.setType("vnd.android-dir/mms-sms");
+        startActivity(intent);
+    }
+
+    public void shareFacebook(View v)
+    {
+        String mySharedLink = "http://bspfp.pe.kr";
+        String mySubject = "국회의원 안민석";
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, mySubject);
+        intent.putExtra(Intent.EXTRA_TEXT, mySharedLink);
+
+        boolean fbAppFound = false;
+        List<ResolveInfo> resolveInfoList = getPackageManager().queryIntentActivities(intent, 0);
+        for (ResolveInfo info : resolveInfoList) {
+            // 페이스북 패키지명이 com.facebook.katana
+            // 페이스북 메신저 앱은 com.facebook.orca
+            if (info.activityInfo.packageName.toLowerCase().startsWith("com.facebook.katana")) {
+                intent.setPackage(info.activityInfo.packageName);
+                fbAppFound = true;
+                break;
+            }
+        }
+
+        if(!fbAppFound)
+        {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.facebook.katana"));
+        }
+
         startActivity(intent);
     }
 
