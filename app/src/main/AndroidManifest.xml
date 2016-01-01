@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.or.osan21.nationalassembly" >
+    package="kr.or.osan21.nationalassembly">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,11 +14,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar" >
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <data android:scheme="@string/kakao_scheme"
@@ -79,7 +79,7 @@
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -90,7 +90,7 @@
         <!-- GCM Listener Service -->
         <service
             android:name=".CloudMessage.GCMListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
@@ -99,7 +99,7 @@
         <!-- InstanceID Listener Service -->
         <service
             android:name=".CloudMessage.InstanceIDListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
@@ -114,9 +114,12 @@
             android:name="kr.or.osan21.nationalassembly.Utils.CustomGlide"
             android:value="GlideModule" />
 
-        <activity android:name=".SupportMessageContentActivity" >
-        </activity>
 
+        <activity android:name=".SupportMessageContentActivity"></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
