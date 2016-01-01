@@ -1,8 +1,10 @@
 package kr.or.osan21.nationalassembly;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
@@ -28,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -424,6 +427,36 @@ public class MainActivity extends AppCompatActivity  {
         }
 
         startActivity(intent);
+    }
+
+    public void shareTwitter(View v)
+    {
+        String mySharedLink = "http://";
+        String mySubject = "국회의원 안민석";
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, mySubject);
+        intent.putExtra(Intent.EXTRA_TEXT, mySubject+"\n"+mySharedLink);
+
+        List<ResolveInfo> activityList = getPackageManager().queryIntentActivities(intent, 0);
+        boolean bTwitter = false;
+        for (final ResolveInfo app : activityList) {
+            if (app.activityInfo.packageName.toLowerCase().startsWith("com.twitter.android")) {
+                bTwitter = true;
+                final ActivityInfo activity = app.activityInfo;
+                final ComponentName name = new ComponentName(activity.applicationInfo.packageName, activity.name);
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                intent.setComponent(name);
+                startActivity(intent);
+                break;
+            }
+        }
+        if(!bTwitter){
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.twitter.android"));
+            startActivity(intent);
+        }
     }
 
     /* 쉐어드프리퍼런스에 푸시 허용 상태 저장 */
