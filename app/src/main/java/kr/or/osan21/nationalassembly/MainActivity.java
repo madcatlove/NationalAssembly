@@ -3,6 +3,7 @@ package kr.or.osan21.nationalassembly;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -327,6 +328,25 @@ public class MainActivity extends AppCompatActivity  {
         {
             e.printStackTrace();
         }
+    }
+
+    public void shareBand(View v)
+    {
+        try {
+            PackageManager manager = this.getPackageManager();
+            Intent i = manager.getLaunchIntentForPackage("com.nhn.android.band");
+        } catch (Exception e) {
+            // 밴드앱 설치되지 않은 경우 구글 플레이 설치페이지로 이동
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.band"));
+            startActivity(intent);
+            return;
+        }
+
+        String serviceDomain = "www.bloter.net"; //  연동 서비스 도메인
+        String encodedText = "%ED%85%8C%EC%8A%A4%ED%8A%B8+%EB%B3%B8%EB%AC%B8"; // 글 본문 (utf-8 urlencoded)
+        Uri uri = Uri.parse("bandapp://create/post?text=" + encodedText + "&route=" + serviceDomain);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 
     /* 쉐어드프리퍼런스에 푸시 허용 상태 저장 */
