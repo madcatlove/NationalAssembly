@@ -12,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,7 @@ public class SupportMessageActivity extends AppCompatActivity {
     private SupportMessageAPI supportMessageAPI;
     private ListView support_message_list;
     private CustomAdapter adapter;
-    private Button write;
+    private ImageButton write;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ public class SupportMessageActivity extends AppCompatActivity {
         });
 
         //건의사항 및 격려 작성하러 가기
-        write = (Button) findViewById(R.id.support_message_write);
+        write = (ImageButton) findViewById(R.id.support_message_write);
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +119,7 @@ public class SupportMessageActivity extends AppCompatActivity {
                 convertView = inflater.inflate(R.layout.message_item_layout, parent, false);
 
                 holder = new SupportViewHolder();
+
                 holder.title = (TextView) convertView.findViewById(R.id.support_message_title);
                 holder.username = (TextView) convertView.findViewById(R.id.support_message_username);
                 holder.reply_count = (TextView) convertView.findViewById(R.id.support_message_reply);
@@ -126,8 +130,25 @@ public class SupportMessageActivity extends AppCompatActivity {
                 holder = (SupportViewHolder)convertView.getTag();
             }
 
-            holder.title.setText(messageItems.get(position).getTitle());
-            holder.username.setText(messageItems.get(position).getUsername());
+            //리스트에서 타이틀 보여줄 때 15자리로 제한.
+            String str_temp = "";
+            if(messageItems.get(position).getTitle().length() > 12) {
+                str_temp = messageItems.get(position).getTitle();
+                str_temp = str_temp.substring(0, 13);
+                str_temp += "..";
+                holder.title.setText(str_temp);
+            } else {
+                holder.title.setText(messageItems.get(position).getTitle());
+            }
+            if(messageItems.get(position).getUsername().length() > 12) {
+                str_temp = messageItems.get(position).getUsername();
+                str_temp = str_temp.substring(0, 13);
+                str_temp += "..";
+                Log.d(LOG_TAG, "User name : " + str_temp);
+                holder.username.setText(str_temp);
+            } else {
+                holder.username.setText(messageItems.get(position).getUsername());
+            }
             holder.reply_count.setText("" + messageItems.get(position).getReply_count());
             holder.content.setText(messageItems.get(position).getContent());
 
