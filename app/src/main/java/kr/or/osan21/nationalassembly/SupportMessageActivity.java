@@ -76,8 +76,6 @@ public class SupportMessageActivity extends AppCompatActivity {
     }
 
     public class CustomAdapter extends BaseAdapter {
-
-
         // 문자열을 보관 할 ArrayList
         private List<SupportMessage> messageItems;
 
