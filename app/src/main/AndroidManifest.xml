@@ -21,14 +21,21 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <data android:scheme="@string/kakao_scheme"
+                    android:host="@string/kakaolink_host" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/kakao_scheme"
+                    android:host="@string/kakaolink_host" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".WatersmellActivity"
             android:label="WatersmellActivity"
@@ -109,6 +116,11 @@
 
         <activity android:name=".SupportMessageContentActivity" >
         </activity>
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
     </application>
 
 </manifest>

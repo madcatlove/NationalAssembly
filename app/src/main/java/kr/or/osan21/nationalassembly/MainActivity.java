@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -30,6 +31,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.kakao.AppActionBuilder;
+import com.kakao.AppActionInfoBuilder;
+import com.kakao.KakaoLink;
+import com.kakao.KakaoParameterException;
+import com.kakao.KakaoTalkLinkMessageBuilder;
 
 import java.util.ArrayList;
 
@@ -44,10 +50,14 @@ public class MainActivity extends AppCompatActivity  {
     private CustomAdapter custom_adapter;
     private LinearLayout main_menu_layout;
     private boolean checked = false;
+    private Bitmap onBmp, offBmp;
 
 
     private SharedPreferences sharedPreferences;
 
+    //kakao share
+    private KakaoLink kakaoLink;
+    private KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder;
 
 
     @Override
@@ -92,9 +102,23 @@ public class MainActivity extends AppCompatActivity  {
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
 
+        Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_on_btn); // 비트맵 이미지를 만든다.
+        int width=(int)(getWindowManager().getDefaultDisplay().getWidth()*0.15); // 가로 사이즈 지정
+        int height=(int)(width*0.6); // 세로 사이즈 지정
+        onBmp=Bitmap.createScaledBitmap(bmp, width, height, true); // 이미지 사이즈 조정
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_off_btn);
+        offBmp = Bitmap.createScaledBitmap(bmp, width, height, true);
 
         // shared preference
         sharedPreferences = getSharedPreferences(CONST_PUSH_MESSAGE.PUSH_SHARED_PREF_STR, MODE_PRIVATE);
+
+        // kakaolink initialization
+        try {
+            kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
+            kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
+        } catch (KakaoParameterException e) {
+            e.printStackTrace();
+        }
 
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);
@@ -193,21 +217,21 @@ public class MainActivity extends AppCompatActivity  {
 
                 // 푸쉬 이미지뷰를 다 가린다
                 ImageView pushBtn = (ImageView)convertView.findViewById(R.id.pushOnOff);
+                pushBtn.setImageBitmap(offBmp);
                 pushBtn.setVisibility(View.INVISIBLE); //공간만 차지하도록 숨김
 
                 if(position == 0) {
                     img.setBackgroundResource(R.drawable.slider_icon_push);
-
                     pushBtn.setVisibility(View.VISIBLE);
 
                     /* PUSH_STATUS */
                     final boolean push_status = isPushStatusOn();
                     Log.d(LOG_TAG, " PUSH_STATUS :: " + push_status);
                     if( push_status ) {
-                        pushBtn.setImageResource(R.drawable.slider_push_on_btn);
+                        pushBtn.setImageBitmap(onBmp);
                     }
                     else {
-                        pushBtn.setImageResource(R.drawable.slider_push_off_btn);
+                        pushBtn.setImageBitmap(offBmp);
                     }
                 }
                 else if(position == 1) {
@@ -264,23 +288,46 @@ public class MainActivity extends AppCompatActivity  {
 
         ImageView iv = (ImageView) v;
 
-            if(checked) {
-                Log.d(LOG_TAG, "PushON");
-                iv.setImageResource(R.drawable.slider_push_on_btn);
-                checked = false;
-                setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_ON);
-            }
-            else {
-                Log.d(LOG_TAG, "PushOff");
-                iv.setImageResource(R.drawable.slider_push_off_btn);
-                checked = true;
-                setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_OFF);
-            }
+        if (checked) {
+            Log.d(LOG_TAG, "PushON");
+            iv.setImageBitmap(onBmp); // 이미지뷰에 조정한 이미지 넣기
+            //
+            //iv.setImageResource(R.drawable.slider_push_on_btn);
+            checked = false;
+            setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_ON);
+        } else {
+            Log.d(LOG_TAG, "PushOff");
+            iv.setImageBitmap(offBmp);
+            //iv.setImageResource(R.drawable.slider_push_off_btn);
+            checked = true;
+            setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_OFF);
+        }
 
         v.invalidate();
-
     }
 
+    public void shareKakao(View v)
+    {
+        try {
+            kakaoTalkLinkMessageBuilder.addText("국회의원 안민석");
+            kakaoTalkLinkMessageBuilder.addImage("https://www.google.co.kr/images/srpr/logo11w.png", 200, 200);
+           /* kakaoTalkLinkMessageBuilder.addAppLink("앱 바로가기",
+                    new AppActionBuilder()
+                            .addActionInfo(AppActionInfoBuilder
+                                    .createAndroidActionInfoBuilder()
+                                    .setExecuteParam("execparamkey1=1111")
+                                    .setMarketParam("referrer=kakaotalklink")
+                                    .build())
+                            .build());*/
+            kakaoTalkLinkMessageBuilder.addAppLink("앱으로 이동");
+            final String msg = kakaoTalkLinkMessageBuilder.build();
+            kakaoLink.sendMessage(msg, this);
+        }
+        catch(KakaoParameterException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     /* 쉐어드프리퍼런스에 푸시 허용 상태 저장 */
     private void setPushStatusInShrdPreference(String v) {
