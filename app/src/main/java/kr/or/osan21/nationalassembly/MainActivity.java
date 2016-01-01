@@ -32,8 +32,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.kakao.AppActionBuilder;
-import com.kakao.AppActionInfoBuilder;
 import com.kakao.KakaoLink;
 import com.kakao.KakaoParameterException;
 import com.kakao.KakaoTalkLinkMessageBuilder;
@@ -60,6 +58,11 @@ public class MainActivity extends AppCompatActivity  {
     private KakaoLink kakaoLink;
     private KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder;
 
+    private DrawerLayout mainDrawer;
+    private boolean isSlideMenuOpen = false;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,34 @@ public class MainActivity extends AppCompatActivity  {
 
         // 폰트 설정 모든 뷰그룹에 적용
         tf = CustomFont.getCustomFont(this, "hans");
-        CustomFont.setGlobalFont(tf,(ViewGroup) findViewById(R.id.drawer_layout));
+        CustomFont.setGlobalFont(tf, (ViewGroup) findViewById(R.id.drawer_layout));
+
+        // drawerlayout
+        mainDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mainDrawer.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                Log.d(LOG_TAG, "onDrawerSlide");
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                Log.d(LOG_TAG, "DrawerOpened");
+                isSlideMenuOpen = true;
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                Log.d(LOG_TAG, "DrawerClosed");
+                isSlideMenuOpen = false;
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                Log.d(LOG_TAG, "DrawerStateChanged");
+            }
+        });
+
 
         // 배경 이미지 설정
         main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);
@@ -145,6 +175,11 @@ public class MainActivity extends AppCompatActivity  {
     //메인 메뉴 선택 시 불림
     public void selectMenu(View v)
     {
+        // slide menu가 올라와있으면.
+        if( isSlideMenuOpen ) {
+            return;
+        }
+
         int selected = v.getId();
         if(selected == R.id.main_profile)
         {
