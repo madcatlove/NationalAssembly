@@ -25,6 +25,7 @@
             android:onClick="gotoback"/>
 
         <TextView
+            android:id="@+id/profile_barTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="안민석이 걸어온 길"

@@ -50,6 +50,9 @@ public class MediaActivity extends AppCompatActivity {
 
     private void init() {
 
+        rv = (RecyclerView)findViewById(R.id.media_recycle);
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(new LinearLayoutManager(this));
 
         MediaAPI api = new MediaAPI();
 
@@ -57,8 +60,6 @@ public class MediaActivity extends AppCompatActivity {
             @Override
             public void success(List<Media> medias, Response response) {
                 Log.d(LOG_TAG, " get media list ");
-                rv = (RecyclerView) findViewById(R.id.media_recycle);
-
                 RVadapter = new CVadapter(medias);
                 rv.setAdapter(RVadapter);
             }
@@ -69,17 +70,6 @@ public class MediaActivity extends AppCompatActivity {
             }
         });
 
-
-        //rv = (RecyclerView)findViewById(R.id.media_recycle);
-
-        //RVadapter = new CVadapter(medias);
-        //rv.setAdapter(RVadapter);
-        rv = (RecyclerView)findViewById(R.id.media_recycle);
-
-        RVadapter = new CVadapter(medias);
-        rv.setAdapter(RVadapter);
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void gotoback(View v)

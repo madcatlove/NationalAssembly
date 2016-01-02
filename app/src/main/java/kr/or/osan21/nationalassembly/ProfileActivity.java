@@ -108,6 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void setTypeface() {
         int[] titleTextView = {
+                R.id.profile_barTextView,
                 R.id.profile_title_academic, R.id.profile_title_past, R.id.profile_title_future
         };
 

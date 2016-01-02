@@ -26,13 +26,7 @@ public class CVadapter extends RecyclerView.Adapter<CVadapter.ViewHolder> {
     private List<Media> data;
 
     public CVadapter(List<Media> medias) {
-        data = new ArrayList<Media>();
-        Media a = new Media();
-        a.setContent("국회 교육문화체육관광위원회 소속 새정치민주연합 안민석(오산)의원은 정부와 피감기관들의 잘못된 정책에 대해서는 절대 봐주거나 대충 넘어가는 법이 없다. 철저한 사전 국감 준비로 인해 피감기관 관계자들보다도 더 전문가답다는 평가를 받다보니 야당 의원 가운데서도 가장 두려워하는 의원으로 꼽힌다");
-        a.setTitle("[국감인물] 안민석 교육문화체육관광위 새정치민주연합 의원");
-        data.add(a);
-        data.add(a);
-        //data = medias;
+        data = medias;
     }
 
     @Override
