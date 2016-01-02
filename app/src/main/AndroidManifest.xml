@@ -130,22 +130,30 @@
             android:value="@string/kakao_app_key" />
 
  
-        <activity android:name=".VisionThreeOneActivity" >
-        </activity>
-        <activity android:name=".VisionThreeTwoActivity" >
-        </activity>
-        <activity android:name=".VisionThreeThreeActivity" >
-        </activity>
-        <activity android:name=".VisionFiveOneActivity" >
-        </activity>
-        <activity android:name=".VisionFiveTwoActivity" >
-        </activity>
-        <activity android:name=".VisionFiveThreeActivity" >
-        </activity>
-        <activity android:name=".VisionFiveFourActivity" >
-        </activity>
-        <activity android:name=".VisionFiveFiveActivity" >
-        </activity>
+        <activity android:name=".VisionThreeOneActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".VisionThreeTwoActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".VisionThreeThreeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".VisionFiveOneActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".VisionFiveTwoActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".VisionFiveThreeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".VisionFiveFourActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".VisionFiveFiveActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
