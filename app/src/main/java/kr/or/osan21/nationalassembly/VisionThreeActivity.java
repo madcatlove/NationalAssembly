@@ -1,6 +1,7 @@
 package kr.or.osan21.nationalassembly;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -62,11 +63,18 @@ public class VisionThreeActivity extends AppCompatActivity {
                 .fitCenter()
                 .into(btn3);
 
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
+
+    }
+
+    public void btnClicked(View v)
+    {
+        int selected = v.getId();
+        if(selected == R.id.vision_three_btn1)
+            startActivity(new Intent(this, VisionThreeOneActivity.class));
+        else if(selected == R.id.vision_three_btn2)
+            startActivity(new Intent(this, VisionThreeTwoActivity.class));
+       // else if(selected == R.id.vision_three_btn3)
+        //    startActivity(new Intent(this, VisionThreeThreeActivity.class));
     }
 }
+

@@ -36,6 +36,7 @@
         android:background="#00ffffff"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:onClick="btnClicked"
         android:layout_marginTop="20dp"/>
 
     <ImageButton
@@ -45,6 +46,7 @@
         android:background="#00ffffff"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:onClick="btnClicked"
         android:layout_marginTop="13dp"/>
 
     <ImageButton
@@ -53,6 +55,7 @@
         android:layout_height="60dp"
         android:background="#00ffffff"
         android:layout_marginLeft="15dp"
+        android:onClick="btnClicked"
         android:layout_marginRight="15dp"
         android:layout_marginTop="13dp"/>
 

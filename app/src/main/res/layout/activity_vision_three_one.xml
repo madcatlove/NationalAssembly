@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="kr.or.osan21.nationalassembly.VisionThreeOneActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#464646">
+
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:onClick="gotoback"
+            android:scaleType="centerInside"
+            android:src="@drawable/common_backbtn" />
+
+        <TextView
+            android:id="@+id/myImageViewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="五産, 오산의 미래를 열다"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/vision_three_one_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:text="오산 시민회관 재건축,\n복합문화체육센터로"
+        android:textSize="15pt" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/vision_three_one_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="오산시민회관이 복합문화체육센터로 재탄생하게 되었습니다. 1983년 문을 연 오산시민회관은 시설 노후로 인한 잦은 보수공사로 예산낭비가 계속되어 왔고, 시설규모의 한계로 대뮤고 행사 및 경기 유치에 어려움을 겪어 왔습니다. 특히, 협소한 주차공간으로 인해 시민회관을 이용하는 많은 시민들이 큰 불편을 겪어야 했습니다.\n\n이에 안민석 국회의원은 오산시민회관 재건축을 위한 예산 확보에 주력하였고, 오산시와 함께 400억(국비 200억)규모의 복합문화체육센터 건립을 위한 설계비 30억원을 16년도 예산으로 확보했습니다.\n\n
+복합문화체육센터가 완공되면 오산시민들은 보다 넓고 쾌적한 환경에서 다양한 문화체육활동을 즐길 수 있게 될 전망입니다.
+안민석 국회의원 “오랜 숙원사업이었던 오산시민회관 재건축 문제가 해결되어 정말 다행입니다, 더욱 많은 오산 시민분들이 혜택을 받을 수 있도록 건립과정을 꼼꼼히 챙기겠습니다!”"
+            android:textSize="9pt" />
+    </ScrollView>
+</LinearLayout>

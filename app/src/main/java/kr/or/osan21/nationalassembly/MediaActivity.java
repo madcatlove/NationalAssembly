@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class MediaActivity extends AppCompatActivity {
     private List<Media> medias;
     private RecyclerView.Adapter RVadapter;
     private Typeface tf;
-    private TextView bar_title, media_title, media_content;
+    private TextView bar_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,10 @@ public class MediaActivity extends AppCompatActivity {
         rv.setAdapter(RVadapter);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
+    public void gotoback(View v)
+    {
+        finish();
+    }
 }
