@@ -156,11 +156,10 @@ public class MediaActivity extends AppCompatActivity {
             */
             // 리스트 아이템을 터치 했을 때 이벤트 발생
             convertView.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), medias.get(position).getTitle().toString(), Toast.LENGTH_SHORT).show();
-                    //startActivityForResult(new Intent(getBaseContext(), SupportMessageContentActivity.class).putExtra("m_id", messageItems.get(pos).getNum()), 1);
+                    //Toast.makeText(getApplicationContext(), medias.get(position).getTitle().toString(), Toast.LENGTH_SHORT).show();
+                    startActivityForResult(new Intent(getBaseContext(), MediaContentActivity.class).putExtra("m_id", medias.get(pos).getNum()), 1);
                 }
             });
             return convertView;
