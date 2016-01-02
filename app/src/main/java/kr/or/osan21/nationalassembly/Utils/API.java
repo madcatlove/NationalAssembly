@@ -9,6 +9,7 @@ public class API  {
 
     public static final String API_URL = "http://assembly.my.n-pure.net/index.php/";
     public static final String STATIC_URL = "http://ec2-52-192-93-201.ap-northeast-1.compute.amazonaws.com/static/";
+    public static final String UPLOAD_URL = "http://assembly.my.n-pure.net/upload/";
 
     protected RestAdapter mRestAdapter;
 

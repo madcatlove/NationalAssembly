@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +14,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import kr.or.osan21.nationalassembly.Media.Media;
 import kr.or.osan21.nationalassembly.Media.MediaAPI;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
@@ -59,7 +59,11 @@ public class MediaActivity extends AppCompatActivity {
         api.getMediaList(new Callback<List<Media>>() {
             @Override
             public void success(List<Media> medias, Response response) {
-                Log.d(LOG_TAG, "미디어 가져오기 성공!!");
+
+                for(Media m : medias) {
+                    Log.d(LOG_TAG, "" + m);
+                }
+
                 adapter.setMedias(medias);
                 adapter.notifyDataSetInvalidated();
             }

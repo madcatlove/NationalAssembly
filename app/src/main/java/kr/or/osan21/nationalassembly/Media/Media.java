@@ -9,6 +9,7 @@ public class Media {
     private String title;
     private String content;
     private String regdate;
+    private String media_image; // 미디어 대표 이미지
 
     public Integer getNum() {
         return num;
@@ -42,6 +43,14 @@ public class Media {
         this.regdate = regdate;
     }
 
+    public String getMedia_image() {
+        return media_image;
+    }
+
+    public void setMedia_image(String media_image) {
+        this.media_image = media_image;
+    }
+
     @Override
     public String toString() {
         return "Media{" +
@@ -49,6 +58,7 @@ public class Media {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", regdate='" + regdate + '\'' +
+                ", media_image='" + media_image + '\'' +
                 '}';
     }
 }
