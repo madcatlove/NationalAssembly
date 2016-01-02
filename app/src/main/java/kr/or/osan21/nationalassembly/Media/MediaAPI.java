@@ -16,6 +16,8 @@ public class MediaAPI extends API {
     private MediaService mMediaService;
 
     public static interface MediaService {
+        String MOBILE_VIEW_URI = "/media/mobileview/";
+
         @GET("/media/record_list")
         void getMediaList(Callback<List<Media>> cb);
 

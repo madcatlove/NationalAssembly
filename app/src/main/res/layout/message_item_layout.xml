@@ -19,6 +19,7 @@
             android:background="#ffffff">
 
             <TextView
+                android:id="@+id/support_message_title_label"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
@@ -64,6 +65,7 @@
             android:background="#ffffff">
 
             <TextView
+                android:id="@+id/support_message_username_label"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
@@ -91,6 +93,7 @@
         <TextView
             android:id="@+id/support_message_content"
             android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
             android:layout_height="135dp"
             android:background="#ffffff"
             android:maxLines="6"

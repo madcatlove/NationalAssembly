@@ -3,6 +3,7 @@ package kr.or.osan21.nationalassembly;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessage;
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessageAPI;
+import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -33,6 +35,7 @@ public class SupportMessageActivity extends AppCompatActivity {
     private ListView support_message_list;
     private CustomAdapter adapter;
     private Button write;
+    private Typeface hans, cjkB, cjkR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +66,16 @@ public class SupportMessageActivity extends AppCompatActivity {
             }
         });
 
+        hans = CustomFont.getCustomFont(this, "hans");
+        //상단 bar에 글씨체 적용
+        TextView bar = (TextView)findViewById(R.id.support_bar);
+        bar.setTypeface(hans);
+
+        cjkB = CustomFont.getCustomFont(this, "CJKB");
+
         //건의사항 및 격려 작성하러 가기
         write = (Button) findViewById(R.id.support_message_write);
+        write.setTypeface(cjkB);
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +151,9 @@ public class SupportMessageActivity extends AppCompatActivity {
                 holder.username = (TextView) convertView.findViewById(R.id.support_message_username);
                 holder.reply_count = (TextView) convertView.findViewById(R.id.support_message_reply);
                 holder.content = (TextView) convertView.findViewById(R.id.support_message_content);
+                holder.title_label = (TextView)convertView.findViewById(R.id.support_message_title_label);
+                holder.username_label = (TextView)convertView.findViewById(R.id.support_message_username_label);
+
                 convertView.setTag(holder);
             }
             else {
@@ -169,6 +183,12 @@ public class SupportMessageActivity extends AppCompatActivity {
             holder.reply_count.setText("" + messageItems.get(position).getReply_count());
             holder.content.setText(messageItems.get(position).getContent());
 
+            holder.title.setTypeface(hans);
+            holder.username.setTypeface(hans);
+            holder.content.setTypeface(hans);
+            holder.title_label.setTypeface(cjkB);
+            holder.username_label.setTypeface(cjkB);
+
             // 리스트 아이템을 터치 했을 때 이벤트 발생
             convertView.setOnClickListener(new View.OnClickListener() {
 
@@ -184,6 +204,8 @@ public class SupportMessageActivity extends AppCompatActivity {
             TextView username;
             TextView content;
             TextView reply_count;
+            TextView title_label;
+            TextView username_label;
         }
     }
     public void gotoback(View v) {

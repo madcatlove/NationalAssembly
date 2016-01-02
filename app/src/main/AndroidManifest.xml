@@ -31,15 +31,14 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-                
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".WatersmellActivity"
             android:label="WatersmellActivity"
@@ -129,29 +128,31 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
- 
-        <activity android:name=".VisionThreeOneActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".VisionThreeTwoActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".VisionThreeThreeActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".VisionFiveOneActivity"
+        <activity
+            android:name=".VisionThreeOneActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".VisionFiveTwoActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".VisionFiveThreeActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".VisionFiveFourActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".VisionFiveFiveActivity"
+        <activity
+            android:name=".VisionThreeTwoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisionThreeThreeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisionFiveOneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisionFiveTwoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisionFiveThreeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisionFiveFourActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisionFiveFiveActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MediaContentActivity"
             android:screenOrientation="portrait"/>
 
     </application>

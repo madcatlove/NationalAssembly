@@ -24,7 +24,7 @@
             android:src="@drawable/common_backbtn" />
 
         <TextView
-            android:id="@+id/myImageViewText"
+            android:id="@+id/support_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -50,10 +50,10 @@
             android:layout_marginRight="120dp"
             android:background="@drawable/support_message_write_border"
             android:drawableRight="@drawable/support_message_content_reply_icon"
-            android:gravity="center"
+            android:gravity="center_vertical|center_horizontal"
             android:text="글쓰기"
             android:textColor="#000000"
-            android:textSize="18dp" />
+            android:textSize="13dp" />
     </LinearLayout>
 
     <ListView

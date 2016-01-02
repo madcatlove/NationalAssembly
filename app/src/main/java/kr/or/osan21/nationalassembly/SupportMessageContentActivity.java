@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -94,6 +96,10 @@ public class SupportMessageContentActivity extends AppCompatActivity {
                 failureDialog(" 데이터를 가져올 수 없습니다. ").show();
             }
         });
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
     }
 
     //데이터 가져오기 실패했을 경우 다이얼로그
