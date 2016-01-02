@@ -112,17 +112,17 @@ public class ProfileActivity extends AppCompatActivity {
         };
 
         int[] contentTextView = {
-                R.id.profile_content_academic, R.id.profile_title_past, R.id.profile_title_future
+                R.id.profile_content_academic, R.id.profile_content_past, R.id.profile_content_future
         };
 
         for(int i = 0; i < titleTextView.length; i++) {
             TextView v = (TextView) findViewById(titleTextView[i]);
-            v.setTypeface(CustomFont.getCustomFont( this, "")); // SourceSans
+            v.setTypeface(CustomFont.getCustomFont( this, "hans")); // SourceSans
         }
 
         for(int i = 0; i < contentTextView.length; i++) {
             TextView v = (TextView) findViewById(contentTextView[i]);
-            v.setTypeface(CustomFont.getCustomFont( this, "") ); // SourceSans
+            v.setTypeface(CustomFont.getCustomFont( this, "hans") ); // SourceSans
         }
 
     }

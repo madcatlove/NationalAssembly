@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical"
-    tools:context="kr.or.osan21.nationalassembly.NoticeContentActivity"
-    android:background="#ffffff">
+    tools:context="kr.or.osan21.nationalassembly.NoticeContentActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,89 +16,92 @@
             android:id="@+id/myImageView"
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:src="@drawable/common_backbtn"
             android:layout_centerVertical="true"
-            android:scaleType="centerInside"
             android:layout_marginLeft="0dp"
-            android:onClick="gotoback"/>
+            android:onClick="gotoback"
+            android:scaleType="centerInside"
+            android:src="@drawable/common_backbtn" />
 
         <TextView
             android:id="@+id/myImageViewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="언제 어디서든 함께 해요"
-            android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:text="언제 어디서든 함께 해요"
+            android:textColor="#ffffff" />
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/sub_title"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:id="@+id/sub_title"
-        android:text="공지사항"
-        android:textSize="12dp"
-        android:textColor="#ffffff"
+        android:background="#000000"
         android:gravity="center_horizontal|center_vertical"
-        android:background="#000000"/>
+        android:text="공지사항"
+        android:textColor="#ffffff"
+        android:textSize="12dp" />
 
-<!--    <ScrollView
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
--->
+    <!--    <ScrollView
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    -->
     <TextView
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:id="@+id/notice_content_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#ffffff"
         android:gravity="center_horizontal|center_vertical"
         android:text=""
-        android:textSize="15pt"
-        android:background="#ffffff"/>
+        android:textSize="15pt" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#22464646"/>
+        android:layout_marginTop="1dp"
+        android:background="#22464646" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/notice_content_username"
-            android:layout_marginRight="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
             android:layout_marginTop="2dp"
-            android:text=""
             android:gravity="right|center_vertical"
-            android:textSize="10dp"/>
+            android:text=""
+            android:textSize="10dp" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#22464646"/>
+        android:layout_marginTop="1dp"
+        android:background="#22464646" />
 
-        <TextView
-            android:id="@+id/notice_content_contents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:text=""
-            android:textSize="10pt"
-            />
-
-   <!-- </ScrollView>
--->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/notice_content_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text=""
+        android:textSize="10pt" />
+    </ScrollView>
+    <!-- </ScrollView>
+ -->
 </LinearLayout>
