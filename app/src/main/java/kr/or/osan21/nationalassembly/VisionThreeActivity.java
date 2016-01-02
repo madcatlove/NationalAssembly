@@ -73,8 +73,8 @@ public class VisionThreeActivity extends AppCompatActivity {
             startActivity(new Intent(this, VisionThreeOneActivity.class));
         else if(selected == R.id.vision_three_btn2)
             startActivity(new Intent(this, VisionThreeTwoActivity.class));
-       // else if(selected == R.id.vision_three_btn3)
-        //    startActivity(new Intent(this, VisionThreeThreeActivity.class));
+        else if(selected == R.id.vision_three_btn3)
+            startActivity(new Intent(this, VisionThreeThreeActivity.class));
     }
 }
 

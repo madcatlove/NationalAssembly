@@ -1,9 +1,11 @@
 package kr.or.osan21.nationalassembly;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -75,5 +77,20 @@ public class VisionFiveActivity extends AppCompatActivity {
                 .fitCenter()
                 .into(btn5);
 
+    }
+
+    public void btnClicked(View v)
+    {
+        int selected = v.getId();
+        if(selected == R.id.vision_five_btn1)
+            startActivity(new Intent(this, VisionFiveOneActivity.class));
+        else if(selected == R.id.vision_five_btn2)
+            startActivity(new Intent(this, VisionFiveTwoActivity.class));
+        else if(selected == R.id.vision_five_btn3)
+            startActivity(new Intent(this, VisionFiveThreeActivity.class));
+        else if(selected == R.id.vision_five_btn4)
+            startActivity(new Intent(this, VisionFiveFourActivity.class));
+        else if(selected == R.id.vision_five_btn5)
+            startActivity(new Intent(this, VisionFiveFiveActivity.class));
     }
 }

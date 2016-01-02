@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="kr.or.osan21.nationalassembly.VisionThreeThreeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#464646">
+
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:onClick="gotoback"
+            android:scaleType="centerInside"
+            android:src="@drawable/common_backbtn" />
+
+        <TextView
+            android:id="@+id/myImageViewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="五産, 오산의 미래를 열다"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/vision_three_three_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:text="동탄(KTX역) ~ 세교\n복선 전철 예비타당성 확정"
+        android:textSize="15pt" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/vision_three_three_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="‘오산 세교지구~동탄 KTX역 구간’ 국가철도망 구축사업이 예비타당성조사 심의위원회를 통과하여, 기재획재정부의 16년 예비타당성 조사사업에 최종 확정되었습니다.\n\n
+'오산세교 ~ 동탄 신도시간 복선 전철'은 동탄 KTX역을 출발, 동탄 산업단지를 거쳐 오산대역, 세교 2지구 까지 총 8.6㎞에 이르는 노선으로서 세교역 등 2개소의 역사 신설 계획으로 이루어져 있으며, 사업이 최종 확정되면 총 사업비는 약 6,300억 여원이 소요될 예정입니다.
+이처럼 워낙 엄청난 금액이 소요되는 사업이다 보니 그동안 예비타당성 조사 대상이 되는 것만도 매우 어려운 일이었습니다.\n\n그런데, 올해 예결위 간사를 맡은 덕분에 최경환 기획재정부 장관님과 면담의 기회를 갖게 되면서 동탄~오산 간 전철 사업에 대한 필요성관 간절함을 전했고, 감사하게도 이러한 노력들이 성과로 이어졌습니다.
+기획재정부의 예비타당성 조사사업으로 확정되었다는 것은 '오산세교 ~ 동탄 신도시간 복선 전철' 사업의 첫 발을 내딛게 된 것이며, 예비타당성 조사에서 좋은 결과가 도출 될 경우, 오산 시민들은 지하철을 통해 더욱 편리하고 안락한 생활을 누릴 수 있게 됩니다.
+\n\n안민석 국회의원 “동탄과 오산을 잇는 지하철이 개통될 경우, 다양한 생활편의시설로의 접근성이 확대되어 삶의 질이 향상될 것이며, 외부인들이 오산을 더욱 쉽게 찾을 수 있게 되어 지역 경제 활성화에도 큰 도움이 될 것입니다.”"
+            android:textSize="9pt" />
+    </ScrollView>
+</LinearLayout>

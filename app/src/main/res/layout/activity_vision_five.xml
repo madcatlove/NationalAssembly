@@ -36,12 +36,14 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="#00ffffff"
+        android:onClick="btnClicked"
         android:layout_marginTop="20dp"/>
 
     <ImageButton
         android:id="@+id/vision_five_btn2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:onClick="btnClicked"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="#00ffffff"
@@ -52,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#00ffffff"
+        android:onClick="btnClicked"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="13dp"/>
@@ -60,6 +63,7 @@
         android:id="@+id/vision_five_btn4"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:onClick="btnClicked"
         android:background="#00ffffff"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -69,6 +73,7 @@
         android:id="@+id/vision_five_btn5"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:onClick="btnClicked"
         android:background="#00ffffff"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="kr.or.osan21.nationalassembly.VisionThreeTwoActivity">
+    tools:context="kr.or.osan21.nationalassembly.VisionFiveOneActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,13 +32,13 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/vision_three_two_title"
+        android:id="@+id/vision_five_one_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:text="경기 남부 광역 교통역 중심,\n오산역 환승센터"
+        android:text="독산성 복원으로 유네스코\n세계문화유산 확대"
         android:textSize="15pt" />
 
     <ScrollView
@@ -49,12 +49,12 @@
         android:layout_marginTop="16dp">
 
         <TextView
-            android:id="@+id/vision_three_two_content"
+            android:id="@+id/vision_five_one_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="그동안 사업비 부족으로 공사 진행에 어려움을 겪어 왔던 오산역 환승센터가 안민석의원의 국비 예산 23억 추가 확보(총사업비 537억 확정)로 탄력을 받게 되었습니다.\n\n오산역 일대는 협소한 환승 공간과 노후화된 시설로 시민들이 환승에 많은 불편을 겪어 왔으며, 상존하는 교통사고 위험으로 시민 안전까지 위협받아 왔습니다. 오산시는 이러한 애로사항을 해결하기 위해 오산역 일대에 버스와 택시는 물론 기차까지 한 번에 이용할 수 있는 편의시설인 오산역 환승센터 수립 계획을 세웠습니다.\n\n이후 지난해 첫 삽을 뜨고 착공에 들어갔지만 사업비 부족으로 난관에 봉착한 상태여서 국비 확보 소식은 가뭄에 단비 같은 희소식이 되었습니다.
-안민석 국회의원 “오산의 흉물로 방치되어 오던 오산역 환승센터 문제를 해결하게 되어 정말 기쁘다. 향후 오산역 환승센터는 평택, 동탄, 용인 등 인근 지역을 잇는 광역 환승거점으로 재탄생하여 경기도의 새로운 중심으로 급부상 하게 될 것입니다.”"
+            android:text="권율장군, 사도세자와 정조대왕의 얼이 담긴 독산성과 세마대지가 원형대로 복원됩니다. 독산성과 세마대지는 우리나라 역사에서 지울 수 없는 중요한 의미를 갖고 있습니다.\n\n임진왜란 당시 권율 장군은 이곳에 주둔한 뒤, 이른바 세마전법이라는 기묘한 전술을 구사하여 왜병들의 공격을 통쾌하게 막아냈고, 왜군들은 이후 권율 장군의 행주대첩을 통해서 침략의 결정적 의지가 무너졌습니다.\n\n또한, 조선시대 가장 사랑받는 왕 중의 한 분인 정조대왕과 그의 아버지인 사도세자가 자주 찾던 장소이기도 합니다.
+이처럼 중요한 역사적 의의를 지니는 곳인 만큼 이번 사업은 단순한 복원에서 그치지 않고, 수원화성- 화성 용주사 - 융·건능 - 오산 독산성 - 궐리사를 잇는 거대 역사 문화관광벨트를 조성하여 세계문화유산 확대 지정도 함께 추진하는 것이 계획입니다.
+\n\n총 사업비 262억원 규모로 추진되는 이번 사업이 완료될 경우, 권율장군과 정조를 흠모하는 많은 국민들이 찾는 필수 관광코스이자 살아있는 역사교육체험의 장이 될 것입니다."
             android:textSize="9pt" />
     </ScrollView>
 </LinearLayout>
-
