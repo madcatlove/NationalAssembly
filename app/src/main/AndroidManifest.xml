@@ -126,9 +126,22 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
+ 
         <activity android:name=".VisionThreeOneActivity" >
         </activity>
         <activity android:name=".VisionThreeTwoActivity" >
+        </activity>
+        <activity android:name=".VisionThreeThreeActivity" >
+        </activity>
+        <activity android:name=".VisionFiveOneActivity" >
+        </activity>
+        <activity android:name=".VisionFiveTwoActivity" >
+        </activity>
+        <activity android:name=".VisionFiveThreeActivity" >
+        </activity>
+        <activity android:name=".VisionFiveFourActivity" >
+        </activity>
+        <activity android:name=".VisionFiveFiveActivity" >
         </activity>
     </application>
 
