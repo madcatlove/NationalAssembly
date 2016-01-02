@@ -22,8 +22,11 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="@string/kakao_scheme"
-                    android:host="@string/kakaolink_host" />
+
+                <data
+                    android:host="@string/kakaolink_host"
+                    android:scheme="@string/kakao_scheme" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -32,9 +35,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".WatersmellActivity"
             android:label="WatersmellActivity"
@@ -113,13 +114,13 @@
             android:name="kr.or.osan21.nationalassembly.Utils.CustomGlide"
             android:value="GlideModule" />
 
-        <activity android:name=".SupportMessageContentActivity"></activity>
-        <activity android:name=".SupportMessageReplyActivity"></activity>
-
+        <activity android:name=".SupportMessageContentActivity" />
+        <activity android:name=".SupportMessageReplyActivity" />
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />

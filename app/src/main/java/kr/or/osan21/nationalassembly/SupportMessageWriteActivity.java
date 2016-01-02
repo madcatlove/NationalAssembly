@@ -85,6 +85,7 @@ public class SupportMessageWriteActivity extends AppCompatActivity {
                     public void success(Response response, Response response2) {
                         final String result = response.getBody().toString();
                         Log.d(LOG_TAG, "result ==> " + result);
+                        setResult(RESULT_OK);
                         finish();
                     }
 
@@ -112,5 +113,8 @@ public class SupportMessageWriteActivity extends AppCompatActivity {
                 .create();
 
         return ad;
+    }
+    public void gotoback(View v) {
+        finish();
     }
 }

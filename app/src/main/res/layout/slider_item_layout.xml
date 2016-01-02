@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/slider_push_off_btn"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="60dp"
             android:scaleType="centerInside"
             android:layout_gravity="right"
             android:onClick="changeOnOff"/>
@@ -34,8 +34,9 @@
     <View
         android:id="@+id/slider_item_under"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
         android:layout_height="0.5dp"
         android:background="#5ebbef"
         android:layout_gravity="center"
-        android:layout_width="240dp" />
+        android:layout_width="wrap_content" />
 </LinearLayout>

@@ -31,7 +31,7 @@ public class VisionActivity extends TabActivity {
         }
 
         setupTabHost();
-
+        tabHost.getTabWidget().setDividerDrawable(null);
         setupTab("OsanThree");
         setupTab("OsanFive");
         tabHost.setCurrentTab(0);

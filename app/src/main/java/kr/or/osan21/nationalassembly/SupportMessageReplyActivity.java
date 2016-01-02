@@ -58,8 +58,10 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
             public void success(SupportMessage supportMessage, Response response) {
                 replies = new ArrayList<SupportMessageReply>();
                 replies.addAll(supportMessage.getReply());
+
                 adapter.setReplyItems(replies);
                 adapter.notifyDataSetInvalidated();
+                setResult(RESULT_OK);
             }
 
             @Override
@@ -89,6 +91,13 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
                         //새로 등록된 댓글, 작성자
                         String new_content_str = new_content.getText().toString();
                         String new_username_str = new_username.getText().toString();
+                        //아무것도 입력되지 않았는데 확인버튼 눌렀을 때 다이얼로그 띄우기
+                        if (new_username_str.trim().length() == 0) {
+                            makeAlertDialog(" 작성자를 입력하지 않았습니다. ").show();
+
+                        } else if (new_content_str.trim().length() == 0) {
+                            makeAlertDialog(" 내용을 입력하지 않았습니다. ").show();
+                        }
 
                         Log.d(LOG_TAG, "새로운 댓글 --> " + new_username_str + " / " + new_content_str);
                         reply = new SupportMessageReply();
@@ -97,7 +106,22 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
                         api.writeMessageReply(num, reply, new Callback<Response>() {
                             @Override
                             public void success(Response response, Response response2) {
+                                setResult(RESULT_OK);
+                            }
 
+                            @Override
+                            public void failure(RetrofitError error) {
+
+                            }
+                        });
+                        api.getMessage(num, new Callback<SupportMessage>() {
+                            @Override
+                            public void success(SupportMessage supportMessage, Response response) {
+                                replies = new ArrayList<SupportMessageReply>();
+                                replies.addAll(supportMessage.getReply());
+                                adapter.setReplyItems(replies);
+                                adapter.notifyDataSetInvalidated();
+                                setResult(RESULT_OK);
                             }
 
                             @Override
@@ -184,5 +208,23 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
         TextView username;
         TextView content;
         TextView date;
+    }
+
+    private AlertDialog makeAlertDialog(final String message) {
+        AlertDialog ad = new AlertDialog.Builder( SupportMessageReplyActivity.this )
+                .setMessage(message)
+                .setTitle("에러가 발생하였습니다.")
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+
+        return ad;
+    }
+    public void gotoback(View v) {
+        finish();
     }
 }

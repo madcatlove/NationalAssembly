@@ -32,7 +32,7 @@ public class SupportMessageActivity extends AppCompatActivity {
     private SupportMessageAPI supportMessageAPI;
     private ListView support_message_list;
     private CustomAdapter adapter;
-    private ImageButton write;
+    private Button write;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +64,33 @@ public class SupportMessageActivity extends AppCompatActivity {
         });
 
         //건의사항 및 격려 작성하러 가기
-        write = (ImageButton) findViewById(R.id.support_message_write);
+        write = (Button) findViewById(R.id.support_message_write);
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getBaseContext(), SupportMessageWriteActivity.class));
+                startActivityForResult(new Intent(getBaseContext(), SupportMessageWriteActivity.class), 1);
             }
+
         });
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            supportMessageAPI.getMessageList(new Callback<List<SupportMessage>>() {
+                @Override
+                public void success(List<SupportMessage> supportMessages, Response response) {
+                    adapter.setMessageItems(supportMessages);
+                    adapter.notifyDataSetInvalidated();
+                }
 
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+        }
     }
 
     public class CustomAdapter extends BaseAdapter {
@@ -128,6 +146,7 @@ public class SupportMessageActivity extends AppCompatActivity {
                 holder = (SupportViewHolder)convertView.getTag();
             }
 
+
             //리스트에서 타이틀 보여줄 때 15자리로 제한.
             String str_temp = "";
             if(messageItems.get(position).getTitle().length() > 12) {
@@ -155,7 +174,7 @@ public class SupportMessageActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getBaseContext(), SupportMessageContentActivity.class).putExtra("m_id", messageItems.get(pos).getNum()));
+                    startActivityForResult(new Intent(getBaseContext(), SupportMessageContentActivity.class).putExtra("m_id", messageItems.get(pos).getNum()), 1);
                 }
             });
             return convertView;
@@ -166,7 +185,9 @@ public class SupportMessageActivity extends AppCompatActivity {
             TextView content;
             TextView reply_count;
         }
-
+    }
+    public void gotoback(View v) {
+        finish();
     }
 }
 

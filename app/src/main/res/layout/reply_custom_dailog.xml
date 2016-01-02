@@ -8,22 +8,47 @@
     android:id="@+id/dialog_username_label"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
     android:text="작성자"/>
     <EditText
         android:id="@+id/dialog_username"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textCursorDrawable="@null"
+        android:background="@null"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:singleLine="true"
-        android:maxLength="30"/>
+        android:maxLength="20"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#5ebbef"/>
     <TextView
         android:id="@+id/dialog_content_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="내용"/>
     <EditText
         android:id="@+id/dialog_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textCursorDrawable="@null"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@null"
         android:singleLine="true"
-        android:maxLength="50"/>
+        android:maxLength="30"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="15dp"
+        android:background="#5ebbef"/>
 </LinearLayout>

@@ -5,26 +5,41 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="20dp">
-    <TextView
-        android:id="@+id/reply_item_username"
-        android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:singleLine="true"
-        android:maxLength="30"
-        android:text="테스터" />
-    <TextView
-        android:id="@+id/reply_item_date"
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="작성자: "
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/reply_item_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:text="test"
+            android:textSize="15dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/reply_item_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textSize="10dp"
+            android:text="123123123123" />
+        </RelativeLayout>
     </LinearLayout>
+
     <TextView
         android:id="@+id/reply_item_content"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:singleLine="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:maxLength="30"
-        android:text="컨텐츠다"/>
+        android:text="test"
+        android:textSize="15dp" />
 </LinearLayout>

@@ -5,16 +5,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="kr.or.osan21.nationalassembly.SupportMessageContentActivity">
-<TextView
-    android:id="@+id/support_message_content_regDate"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:textSize="15dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#464646">
+
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:onClick="gotoback"
+            android:scaleType="centerInside"
+            android:src="@drawable/common_backbtn" />
+
+        <TextView
+            android:id="@+id/message_bar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="메시지 본문"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
@@ -22,7 +39,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:text="제목: "
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -30,17 +47,19 @@
         <TextView
             android:id="@+id/support_message_content_title"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textSize="15dp" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="18dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -51,22 +70,51 @@
         <TextView
             android:id="@+id/support_message_content_username"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textSize="15dp" />
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/support_message_content_regDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:text="123123"
+        android:textSize="15dp" />
+<View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="5dp"
+    android:background="#000000"/>
     <TextView
         android:id="@+id/support_message_content_content"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:scrollbars="vertical" />
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
     <Button
         android:id="@+id/support_message_content_gotoreply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="댓글"/>
+        android:background="@drawable/support_message_write_border"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:text="댓글" />
+</RelativeLayout>
 </LinearLayout>

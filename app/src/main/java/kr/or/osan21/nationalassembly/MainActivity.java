@@ -18,11 +18,15 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,8 +56,8 @@ public class MainActivity extends AppCompatActivity  {
     private LinearLayout main_menu_layout;
     private boolean checked = false;
     private Bitmap onBmp, offBmp;
-
-
+    private TextView job;
+    private final String url = "http://www.osan21.or.kr/%EC%95%88%EB%AF%BC%EC%84%9D%EC%9D%84-%ED%9B%84%EC%9B%90%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94";
     private SharedPreferences sharedPreferences;
 
     //kakao share
@@ -74,6 +78,10 @@ public class MainActivity extends AppCompatActivity  {
         // 폰트 설정 모든 뷰그룹에 적용
         tf = CustomFont.getCustomFont(this, "hans");
         CustomFont.setGlobalFont(tf, (ViewGroup) findViewById(R.id.drawer_layout));
+
+        //오산시 국회의원 글씨체 따로 적용.
+        job = (TextView)findViewById(R.id.job);
+        job.setTypeface(CustomFont.getCustomFont(this, "CJKB"));
 
         // drawerlayout
         mainDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -137,7 +145,7 @@ public class MainActivity extends AppCompatActivity  {
 
         Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_on_btn); // 비트맵 이미지를 만든다.
         int width=(int)(getWindowManager().getDefaultDisplay().getWidth()*0.15); // 가로 사이즈 지정
-        int height=(int)(width*0.6); // 세로 사이즈 지정
+        int height=(int)(width*0.7); // 세로 사이즈 지정
         onBmp=Bitmap.createScaledBitmap(bmp, width, height, true); // 이미지 사이즈 조정
         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_off_btn);
         offBmp = Bitmap.createScaledBitmap(bmp, width, height, true);
@@ -288,7 +296,6 @@ public class MainActivity extends AppCompatActivity  {
 
                 // 리스트 아이템을 터치 했을 때 이벤트 발생
                 convertView.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View v) {
                         // 터치 시 해당 아이템 이름 출력
@@ -299,6 +306,8 @@ public class MainActivity extends AppCompatActivity  {
                             startActivity(new Intent(getApplicationContext(), SupportMessageActivity.class));
                         } else if (m_List.get(pos).equalsIgnoreCase("후원하기")) {
                             Log.d(LOG_TAG, "후원하기");
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+
                         } else if (m_List.get(pos).equalsIgnoreCase("공유하기")) {
                             Log.d(LOG_TAG, "공유하기");
                         }
@@ -461,6 +470,14 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
+    /*
+    *
+        if(goSupport.canGoBack()) {
+            goSupport.goBack();
+        }
+        else {
+            super.onBackPressed();
+        }*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -511,6 +528,4 @@ public class MainActivity extends AppCompatActivity  {
 
         return true;
     }*/
-
-
 }

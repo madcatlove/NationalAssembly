@@ -3,28 +3,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical"
     android:paddingBottom="15dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:paddingTop="15dp"
-    android:background="#D3D6DB"
     tools:context=".SupportMessageActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#464646">
+
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:onClick="gotoback"
+            android:scaleType="centerInside"
+            android:src="@drawable/common_backbtn" />
+
+        <TextView
+            android:id="@+id/myImageViewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="건의사항 및 격려메시지를 남겨주세요"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-    <ImageButton
-        android:id="@+id/support_message_write"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffffff"
-        android:src="@drawable/support_message_reply_icon"
-        android:layout_marginBottom="15dp" />
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp">
+
+        <Button
+            android:id="@+id/support_message_write"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginRight="120dp"
+            android:background="@drawable/support_message_write_border"
+            android:drawableRight="@drawable/support_message_content_reply_icon"
+            android:gravity="center"
+            android:text="글쓰기"
+            android:textColor="#000000"
+            android:textSize="18dp" />
     </LinearLayout>
+
     <ListView
         android:id="@+id/support_message_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"/>
+        android:background="#ffffff"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" />
 </LinearLayout>

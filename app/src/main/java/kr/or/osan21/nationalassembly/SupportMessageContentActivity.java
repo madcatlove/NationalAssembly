@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +40,10 @@ public class SupportMessageContentActivity extends AppCompatActivity {
     private TextView regDate;
     private Button goToReply;
 
-
     private Intent intent;
     private Integer num;
 
-
     private SupportMessage message;
-    private List<SupportMessageReply> reply;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +54,7 @@ public class SupportMessageContentActivity extends AppCompatActivity {
         content = (TextView) findViewById(R.id.support_message_content_content);
         regDate = (TextView) findViewById(R.id.support_message_content_regDate);
         goToReply = (Button) findViewById(R.id.support_message_content_gotoreply);
+        content.setMovementMethod(new ScrollingMovementMethod());
 
         supportMessageAPI = new SupportMessageAPI();
         intent = getIntent();
@@ -111,5 +110,36 @@ public class SupportMessageContentActivity extends AppCompatActivity {
                 .create();
 
         return ad;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            supportMessageAPI.getMessage(num, new Callback<SupportMessage>() {
+                @Override
+                public void success(SupportMessage supportMessage, Response response) {
+                    message = new SupportMessage();
+                    message.setTitle(supportMessage.getTitle());
+                    message.setUsername(supportMessage.getUsername());
+                    message.setContent(supportMessage.getContent());
+                    message.setRegdate(supportMessage.getRegdate());
+
+                    title.setText(message.getTitle());
+                    username.setText(message.getUsername());
+                    content.setText(message.getContent());
+                    regDate.setText(message.getRegdate());
+                    setResult(RESULT_OK);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+        }
+    }
+    public void gotoback(View v) {
+        finish();
     }
 }
