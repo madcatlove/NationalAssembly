@@ -35,7 +35,7 @@ public class SupportMessageActivity extends AppCompatActivity {
     private ListView support_message_list;
     private CustomAdapter adapter;
     private Button write;
-    private Typeface hans, cjkB, cjkR;
+    private Typeface hans, cjkB, cjkR, cjkM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +71,14 @@ public class SupportMessageActivity extends AppCompatActivity {
         TextView bar = (TextView)findViewById(R.id.support_bar);
         bar.setTypeface(hans);
 
+        cjkM = CustomFont.getCustomFont(this, "CJKM");
         cjkB = CustomFont.getCustomFont(this, "CJKB");
+        cjkR = CustomFont.getCustomFont(this, "CJKR");
 
         //건의사항 및 격려 작성하러 가기
         write = (Button) findViewById(R.id.support_message_write);
-        write.setTypeface(cjkB);
+        write.setTypeface(cjkR);
+
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,11 +186,12 @@ public class SupportMessageActivity extends AppCompatActivity {
             holder.reply_count.setText("" + messageItems.get(position).getReply_count());
             holder.content.setText(messageItems.get(position).getContent());
 
-            holder.title.setTypeface(hans);
-            holder.username.setTypeface(hans);
-            holder.content.setTypeface(hans);
-            holder.title_label.setTypeface(cjkB);
-            holder.username_label.setTypeface(cjkB);
+            holder.title.setTypeface(cjkR);
+            holder.username.setTypeface(cjkR);
+            holder.content.setTypeface(cjkR);
+            holder.title_label.setTypeface(cjkR);
+            holder.username_label.setTypeface(cjkR);
+            holder.reply_count.setTypeface(cjkR);
 
             // 리스트 아이템을 터치 했을 때 이벤트 발생
             convertView.setOnClickListener(new View.OnClickListener() {
