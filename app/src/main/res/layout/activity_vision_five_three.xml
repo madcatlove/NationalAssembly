@@ -46,15 +46,25 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/vision_five_three_content"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="오산에 새로운 관광명소로 떠오를 ‘오산 미니어처 테마파크’가 조성될 전망입니다. 미니어처 공원은 국내에도 이미 부천과 제주도에 조성되어 있지만 규모나 예술성 측면에서 대표적인 관광명소가 되기에는 부족하다는 평을 받고 있습니다.\n\n
-이에 안민석 의원은 미국, 독일 원더랜드, 네덜란드 마두로담 등을 직접 관람하며 오산에 적합한 미니어처 테마파크의 규모와 방식을 전문가들과 함께 연구해 왔으며, 올해 테마파크 조성을 위한 예산까지 확보한 상태입니다. 테마파크는 서울대 병원 부지 또는 평화공원 내 부지를 활용하는 방안이 검토되고 있습니다.
-\n\n안 의원은 이미 국내에서 보유한 미니어처 기술은 세계적인 수준인 만큼 그 내용과 구성을 얼마나 독창적이고 흥미롭게 만드느냐를 성공에 관건으로 보고 아시아를 대표하는 최고의 관광지 조성을 위해 최선을 다하겠다는 포부를 밝혔습니다."
-            android:textSize="9pt" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/vision_five_three_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/vision_five_three_content"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

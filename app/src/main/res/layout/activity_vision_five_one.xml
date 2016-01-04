@@ -46,15 +46,25 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/vision_five_one_content"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="권율장군, 사도세자와 정조대왕의 얼이 담긴 독산성과 세마대지가 원형대로 복원됩니다. 독산성과 세마대지는 우리나라 역사에서 지울 수 없는 중요한 의미를 갖고 있습니다.\n\n임진왜란 당시 권율 장군은 이곳에 주둔한 뒤, 이른바 세마전법이라는 기묘한 전술을 구사하여 왜병들의 공격을 통쾌하게 막아냈고, 왜군들은 이후 권율 장군의 행주대첩을 통해서 침략의 결정적 의지가 무너졌습니다.\n\n또한, 조선시대 가장 사랑받는 왕 중의 한 분인 정조대왕과 그의 아버지인 사도세자가 자주 찾던 장소이기도 합니다.
-이처럼 중요한 역사적 의의를 지니는 곳인 만큼 이번 사업은 단순한 복원에서 그치지 않고, 수원화성- 화성 용주사 - 융·건능 - 오산 독산성 - 궐리사를 잇는 거대 역사 문화관광벨트를 조성하여 세계문화유산 확대 지정도 함께 추진하는 것이 계획입니다.
-\n\n총 사업비 262억원 규모로 추진되는 이번 사업이 완료될 경우, 권율장군과 정조를 흠모하는 많은 국민들이 찾는 필수 관광코스이자 살아있는 역사교육체험의 장이 될 것입니다."
-            android:textSize="9pt" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/vision_five_one_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/vision_five_one_content"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

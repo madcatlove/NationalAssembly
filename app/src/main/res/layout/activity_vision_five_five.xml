@@ -46,15 +46,25 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/vision_five_five_content"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="오색시장이 새로운 도전을 시작합니다. 오색시장 상인회가 주도적으로 나서 ‘테마가 있는 문화관광형 오색시장’을 만드는데 팔을 걷어 붙였고, 안민석 의원은 18억원의 예산 확보로 상인들과 함께 오색시장 살리기에 동참하고 있습니다.\n\n상인들은 가격경쟁력은 물론이고 친절한 서비스와 재래시장 본연의 후한 인심으로 고객들을 사로잡겠다는 포부를 다지고 있으며, 쇼핑 외에도 다양한 눈요기가 있는 오산의 대표적인 관광 명소로 만들어 나가겠다는 계획입니다.\n\n
-특히, 지금은 슬럼화 되어 있는 오매장터 주변에 마을재생사업 예산 51억원을 투입하여 부산의 감천문화마을처럼 대표적인 예술관광마을로 재탄생 될 경우, 오색시장은 전국 각지에서 관광객이 몰려드는 대박 장터가 될 것으로 기대되고 있습니다.\n\n
-향후 평화공원, 독산성, 미니어처 테마파크, 오산천 일대가 하나의 관광벨트를 형성하여 수 많은 관광객들이 오산을 찾게 되면 오색시장은 또 하나의 관광명소임과 동시에 다양한 상품 판매로 지역경제의 견인차 역할을 하게 될 것입니다."
-            android:textSize="9pt" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/vision_five_five_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/vision_five_five_content"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
     </ScrollView>
 </LinearLayout>
