@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
-    tools:context="kr.or.osan21.nationalassembly.VisionThreeThreeActivity">
+    tools:context="kr.or.osan21.nationalassembly.VisionContentActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,7 +13,6 @@
         android:background="#464646">
 
         <ImageView
-            android:id="@+id/myImageView"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_centerVertical="true"
@@ -23,7 +22,7 @@
             android:src="@drawable/common_backbtn" />
 
         <TextView
-            android:id="@+id/myImageViewText"
+            android:id="@+id/vision_content_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -33,14 +32,13 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/vision_three_three_title"
+        android:id="@+id/vision_content_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:text="동탄(KTX역) ~ 세교\n복선 전철 예비타당성 확정"
-        android:textSize="15pt" />
+        android:textSize="25dp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,12 +54,12 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/vision_three_three_img"
+                android:id="@+id/vision_content_img"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <ImageView
-                android:id="@+id/vision_three_three_content"
+                android:id="@+id/vision_content_text"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

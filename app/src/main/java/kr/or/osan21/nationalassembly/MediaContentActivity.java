@@ -2,6 +2,8 @@ package kr.or.osan21.nationalassembly;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,7 +39,9 @@ public class MediaContentActivity extends AppCompatActivity {
         media_webview.setWebViewClient(new CustomWebViewClient());
         media_webview.loadUrl(API.API_URL + MediaAPI.MediaService.MOBILE_VIEW_URI + m_id);
 
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
     }
 
     public void gotoback(View v)

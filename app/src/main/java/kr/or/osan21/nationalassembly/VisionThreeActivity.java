@@ -70,11 +70,11 @@ public class VisionThreeActivity extends AppCompatActivity {
     {
         int selected = v.getId();
         if(selected == R.id.vision_three_btn1)
-            startActivity(new Intent(this, VisionThreeOneActivity.class));
+            startActivityForResult(new Intent(this, VisionContentActivity.class).putExtra("v_id", 31), 1);
         else if(selected == R.id.vision_three_btn2)
-            startActivity(new Intent(this, VisionThreeTwoActivity.class));
+            startActivityForResult(new Intent(this, VisionContentActivity.class).putExtra("v_id", 32), 1);
         else if(selected == R.id.vision_three_btn3)
-            startActivity(new Intent(this, VisionThreeThreeActivity.class));
+            startActivityForResult(new Intent(this, VisionContentActivity.class).putExtra("v_id", 33), 1);
     }
 }
 

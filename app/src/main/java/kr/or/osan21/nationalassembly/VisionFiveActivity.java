@@ -22,13 +22,13 @@ public class VisionFiveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vision_five);
 
-        icon = (ImageView)findViewById(R.id.five_gift_icon);
-        title = (ImageView)findViewById(R.id.vision_five_title);
-        btn1 = (ImageButton)findViewById(R.id.vision_five_btn1);
-        btn2 = (ImageButton)findViewById(R.id.vision_five_btn2);
-        btn3 = (ImageButton)findViewById(R.id.vision_five_btn3);
-        btn4 = (ImageButton)findViewById(R.id.vision_five_btn4);
-        btn5 = (ImageButton)findViewById(R.id.vision_five_btn5);
+        icon = (ImageView) findViewById(R.id.five_gift_icon);
+        title = (ImageView) findViewById(R.id.vision_five_title);
+        btn1 = (ImageButton) findViewById(R.id.vision_five_btn1);
+        btn2 = (ImageButton) findViewById(R.id.vision_five_btn2);
+        btn3 = (ImageButton) findViewById(R.id.vision_five_btn3);
+        btn4 = (ImageButton) findViewById(R.id.vision_five_btn4);
+        btn5 = (ImageButton) findViewById(R.id.vision_five_btn5);
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -79,18 +79,17 @@ public class VisionFiveActivity extends AppCompatActivity {
 
     }
 
-    public void btnClicked(View v)
-    {
+    public void btnClicked(View v) {
         int selected = v.getId();
-        if(selected == R.id.vision_five_btn1)
-            startActivity(new Intent(this, VisionFiveOneActivity.class));
-        else if(selected == R.id.vision_five_btn2)
-            startActivity(new Intent(this, VisionFiveTwoActivity.class));
-        else if(selected == R.id.vision_five_btn3)
-            startActivity(new Intent(this, VisionFiveThreeActivity.class));
-        else if(selected == R.id.vision_five_btn4)
-            startActivity(new Intent(this, VisionFiveFourActivity.class));
-        else if(selected == R.id.vision_five_btn5)
-            startActivity(new Intent(this, VisionFiveFiveActivity.class));
+        if (selected == R.id.vision_five_btn1)
+            startActivityForResult(new Intent(this, VisionContentActivity.class).putExtra("v_id", 51), 1);
+        else if (selected == R.id.vision_five_btn2)
+            startActivityForResult(new Intent(this, VisionContentActivity.class).putExtra("v_id", 52), 1);
+        else if (selected == R.id.vision_five_btn3)
+            startActivityForResult(new Intent(this, VisionContentActivity.class).putExtra("v_id", 53), 1);
+        else if (selected == R.id.vision_five_btn4)
+            startActivityForResult(new Intent(this, VisionContentActivity.class).putExtra("v_id", 54), 1);
+        else if (selected == R.id.vision_five_btn5)
+            startActivityForResult(new Intent(this, VisionContentActivity.class).putExtra("v_id", 55), 1);
     }
 }
