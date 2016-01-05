@@ -30,7 +30,7 @@ public class MediaActivity extends AppCompatActivity {
     private ListView media_list;
     private CustomAdapter adapter;
     private MediaAPI api;
-    private Typeface tf;
+    private Typeface tf, tf2;
     private TextView bar_title;
 
     @Override
@@ -39,6 +39,7 @@ public class MediaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_media);
 
         tf = CustomFont.getCustomFont(this, "hans");
+        tf2 = CustomFont.getCustomFont(this, "CJKB");
 
         //init();
 
@@ -133,6 +134,8 @@ public class MediaActivity extends AppCompatActivity {
                 holder = (MediaViewHolder)convertView.getTag();
             }
 
+            holder.title.setTypeface(tf2);
+            holder.content.setTypeface(tf);
             holder.title.setText(medias.get(position).getTitle());
             holder.content.setText(medias.get(position).getContent());
             //리스트에서 타이틀 보여줄 때 15자리로 제한.
