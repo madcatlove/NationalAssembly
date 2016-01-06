@@ -1,27 +1,23 @@
 package kr.or.osan21.nationalassembly;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
 
 import kr.or.osan21.nationalassembly.Utils.API;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
@@ -38,6 +34,12 @@ public class ProfileActivity extends AppCompatActivity {
     private ScrollView scv;
     private boolean videoReady = false;
 
+    private YouTubePlayerFragment videoFragment;
+    private YouTubePlayer videoPlayer = null;
+    private YouTubePlayer.PlayerStateChangeListener playerStateChangeListener;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,37 @@ public class ProfileActivity extends AppCompatActivity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
+
+        //-------------------------------------------------------------------------
+        // 비디오 설정 시작
+        //-------------------------------------------------------------------------
         // 프로필 비디오 설정
+
+        playerStateChangeListener = new YoutubePlayerStateChange();
+        videoFragment = (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youtube_fragment);
+        videoFragment.initialize(API.YOUTUBE_DEV_KEY, new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                Log.d(LOG_TAG, "YoutubePlayerReady!!");
+
+                final String YOUTUBE_VIDEO_ID = "acrpXUhVOmQ";
+
+                // video setup
+                youTubePlayer.setShowFullscreenButton(true);
+                youTubePlayer.loadVideo(YOUTUBE_VIDEO_ID);
+                youTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
+
+
+                videoPlayer = youTubePlayer;
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
+
+        /*
         profile_video = (VideoView) findViewById(R.id.profile_video);
         mediaController = new MediaController(this);
         mediaController.setAnchorView(profile_video);
@@ -89,6 +121,11 @@ public class ProfileActivity extends AppCompatActivity {
         int nVideoHeight = (int) (((double)originalVideoHeight / originalVideoWidth) * nVideoWidth);
 
         profile_video.setLayoutParams(new LinearLayout.LayoutParams(nVideoWidth, nVideoHeight));
+        */
+
+        //-------------------------------------------------------------------------
+        // 비디오 설정 끝
+        //-------------------------------------------------------------------------
 
         // 폰트 설정
         setTypeface();
@@ -137,4 +174,51 @@ public class ProfileActivity extends AppCompatActivity {
         finish();
     }
 
+
+    @Override
+    protected void onDestroy() {
+        Log.d(LOG_TAG, " call onDestroy()");
+        super.onDestroy();
+
+        if( videoPlayer != null) {
+            videoPlayer.release();
+            videoPlayer = null;
+        }
+
+    }
+
+
+
+    private class YoutubePlayerStateChange implements YouTubePlayer.PlayerStateChangeListener {
+        @Override
+        public void onLoading() {
+            Log.i(LOG_TAG, " youtube video loading... ");
+        }
+
+        @Override
+        public void onLoaded(String s) {
+            Log.i(LOG_TAG, " youtube video loaded... ");
+        }
+
+        @Override
+        public void onAdStarted() {
+            Log.i(LOG_TAG, " youtube video ad started... ");
+
+        }
+
+        @Override
+        public void onVideoStarted() {
+            Log.i(LOG_TAG, " youtube video started... ");
+        }
+
+        @Override
+        public void onVideoEnded() {
+            Log.i(LOG_TAG, " youtube video ended... ");
+        }
+
+        @Override
+        public void onError(YouTubePlayer.ErrorReason errorReason) {
+            Log.e(LOG_TAG, " Error ! ");
+        }
+    }
 }
