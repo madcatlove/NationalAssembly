@@ -148,8 +148,7 @@ public class MediaActivity extends AppCompatActivity {
             if(medias.get(position).getMedia_image() != null) {
                 Glide.with(MediaActivity.this)
                         .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
-                        .override(100, 100)
-                        .fitCenter()
+                        .override((int)getResources().getDimension(R.dimen.glide_width), (int)getResources().getDimension(R.dimen.glide_height))
                         .into(holder.image);
                 //holder.image.setImageURI(Uri.parse(medias.get(position).getMedia_image()));
                 Log.d(LOG_TAG, medias.get(position).getTitle() + "에 미디어 넣었음 / " + medias.get(position).getMedia_image());
