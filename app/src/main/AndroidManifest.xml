@@ -77,6 +77,19 @@
         <activity
             android:name=".SupportMessageActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".MediaContentActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".VisionContentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SupportMessageContentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SupportMessageReplyActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:screenOrientation="portrait" />
 
         <!-- GCM RECEIVER -->
         <receiver
@@ -117,43 +130,9 @@
             android:name="kr.or.osan21.nationalassembly.Utils.CustomGlide"
             android:value="GlideModule" />
 
-        <activity android:name=".SupportMessageContentActivity" />
-        <activity android:name=".SupportMessageReplyActivity" />
-        <activity
-            android:name=".ProfileActivity"
-            android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar" />
-
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-
-        <activity
-            android:name=".VisionThreeOneActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".VisionThreeTwoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".VisionThreeThreeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".VisionFiveOneActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".VisionFiveTwoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".VisionFiveThreeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".VisionFiveFourActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".VisionFiveFiveActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".MediaContentActivity"
-            android:screenOrientation="portrait"/>
 
     </application>
 
