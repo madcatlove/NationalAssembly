@@ -153,12 +153,25 @@ public class MediaActivity extends AppCompatActivity {
             if(medias.get(position).getMedia_image() != null) {
 
 
+                // 방법1 ) 카드뷰 크기 유동적, 이미지 세로크기 유동적 가로크기는 고정
                 Glide.with(MediaActivity.this)
                         .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
                         .asBitmap()
                         .into(new SImageTarget(holder.image));
 
 
+                // 방법2 ) 카드뷰 크기는 동일, 이미지 가로, 세로 크기 동일 (이미지 잘리는 현상)
+                /*Glide.with(MediaActivity.this)
+                        .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
+                        .centerCrop()
+                        .into(holder.image);
+                */
+                // 방법3 ) 카드뷰 크기는 동일, 이미지가 크기 가로,세로 모두 유동적
+                /*Glide.with(MediaActivity.this)
+                        .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
+                        .fitCenter()
+                        .into(holder.image);
+                */
             }
 
             if(medias.get(position).getMedia_image() != null) {
