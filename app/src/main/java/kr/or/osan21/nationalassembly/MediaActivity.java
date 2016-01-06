@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,14 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import kr.or.osan21.nationalassembly.Media.Media;
 import kr.or.osan21.nationalassembly.Media.MediaAPI;
+import kr.or.osan21.nationalassembly.Utils.API;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -44,7 +49,6 @@ public class MediaActivity extends AppCompatActivity {
 
         bar_title = (TextView)findViewById(R.id.myImageViewText);
         bar_title.setTypeface(tf);
-
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);
         }
@@ -126,15 +130,38 @@ public class MediaActivity extends AppCompatActivity {
 
                 holder.title = (TextView) convertView.findViewById(R.id.media_title);
                 holder.content = (TextView) convertView.findViewById(R.id.media_content);
+                holder.image = (ImageView)convertView.findViewById(R.id.media_image);
 
                 convertView.setTag(holder);
             }
             else {
                 holder = (MediaViewHolder)convertView.getTag();
             }
-
             holder.title.setText(medias.get(position).getTitle());
             holder.content.setText(medias.get(position).getContent());
+            if(medias.get(position).getMedia_image() != null) {
+                Glide.with(MediaActivity.this)
+                        .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
+                        .override(100, 100)
+                        .fitCenter()
+                        .into(holder.image);
+                //holder.image.setImageURI(Uri.parse(medias.get(position).getMedia_image()));
+                Log.d(LOG_TAG, medias.get(position).getTitle() + "에 미디어 넣었음 / " + medias.get(position).getMedia_image());
+            }
+
+            if(medias.get(position).getMedia_image() != null) {
+                holder.content.setVisibility(View.GONE);
+                holder.image.setVisibility(View.VISIBLE);
+                Log.d(LOG_TAG, " content 사라짐");
+                //Uri.parse(medias.get(position).getMedia_image())
+            }
+            else {
+                holder.image.setVisibility(View.GONE);
+                holder.content.setVisibility(View.VISIBLE);
+                Log.d(LOG_TAG, " image 사라짐");
+            }
+
+            //@TODO: Title이랑 content길이 세어서 리스트에 알맞게 ...붙여서 보여주기
             //리스트에서 타이틀 보여줄 때 15자리로 제한.
             /*
             String str_temp = "";
@@ -173,5 +200,6 @@ public class MediaActivity extends AppCompatActivity {
     class MediaViewHolder {
         TextView title;
         TextView content;
+        ImageView image;
     }
 }

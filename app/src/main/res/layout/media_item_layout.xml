@@ -36,12 +36,17 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="15dp"
             android:background="#c4c4c4"/>
+        <ImageView
+            android:id="@+id/media_image"
+            android:layout_width="match_parent"
+            android:layout_height="135dp" />
         <TextView
             android:id="@+id/media_content"
             android:layout_width="match_parent"
             android:layout_height="135dp"
             android:background="#ffffff"
             android:maxLines="6"/>
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"
