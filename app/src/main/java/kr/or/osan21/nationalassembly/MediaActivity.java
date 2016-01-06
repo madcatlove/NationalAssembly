@@ -2,9 +2,9 @@ package kr.or.osan21.nationalassembly;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,10 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,7 @@ import kr.or.osan21.nationalassembly.Media.Media;
 import kr.or.osan21.nationalassembly.Media.MediaAPI;
 import kr.or.osan21.nationalassembly.Utils.API;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
+import kr.or.osan21.nationalassembly.Utils.MediaImageView;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -145,13 +149,16 @@ public class MediaActivity extends AppCompatActivity {
 
             holder.title.setText(medias.get(position).getTitle());
             holder.content.setText(medias.get(position).getContent());
+
             if(medias.get(position).getMedia_image() != null) {
+
+
                 Glide.with(MediaActivity.this)
                         .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
-                        .override((int)getResources().getDimension(R.dimen.glide_width), (int)getResources().getDimension(R.dimen.glide_height))
-                        .into(holder.image);
-                //holder.image.setImageURI(Uri.parse(medias.get(position).getMedia_image()));
-                Log.d(LOG_TAG, medias.get(position).getTitle() + "에 미디어 넣었음 / " + medias.get(position).getMedia_image());
+                        .asBitmap()
+                        .into(new SImageTarget(holder.image));
+
+
             }
 
             if(medias.get(position).getMedia_image() != null) {
@@ -207,4 +214,44 @@ public class MediaActivity extends AppCompatActivity {
         TextView content;
         ImageView image;
     }
+
+    class SImageTarget extends SimpleTarget<Bitmap> {
+
+        MediaImageView imageView = null;
+
+        public SImageTarget(ImageView v) {
+            if(v instanceof MediaImageView) {
+                imageView = (MediaImageView) v;
+            }
+        }
+
+        @Override
+        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+            int width = imageView.getViewWidth();
+            int height = imageView.getViewHeight();
+            int drawableWidth = resource.getWidth();
+            int drawableHeight = resource.getHeight();
+
+            Log.i(LOG_TAG, String.format("ImageView:%d,%d  BitmapDrawable:%d,%d", width, height, drawableWidth, drawableHeight));
+
+            double imageRatio = (double) width / height;
+            double drawableRatio = (double) drawableWidth / drawableHeight;
+
+            // 새로운 너비(이미지뷰 너비와동일), 높이(비율계산)
+            int nWidth = width;
+            int nHeight = (int) ((drawableHeight * nWidth ) / (double) drawableWidth);
+
+            Log.d(LOG_TAG, "nWidth : " + nWidth + " nHeight " + nHeight);
+
+            Bitmap sBitmap = Bitmap.createScaledBitmap(resource, nWidth, nHeight, false);
+
+            imageView.setMaxWidth(nWidth);
+            imageView.setMaxHeight(nHeight);
+            imageView.setLayoutParams( new LinearLayout.LayoutParams(nWidth, nHeight) );
+
+            imageView.setImageBitmap(sBitmap);
+
+        }
+    }
+
 }
