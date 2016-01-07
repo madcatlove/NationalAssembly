@@ -8,14 +8,18 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
@@ -34,16 +38,13 @@ public class SupportMessageActivity extends AppCompatActivity {
     private SupportMessageAPI supportMessageAPI;
     private ListView support_message_list;
     private CustomAdapter adapter;
-    private Button write;
+    private ImageButton write;
     private Typeface hans, cjkB, cjkR, cjkM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support_message);
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(Color.BLACK);
-        }
 
         support_message_list = (ListView) findViewById(R.id.support_message_list);
         support_message_list.setDivider(null);
@@ -76,8 +77,18 @@ public class SupportMessageActivity extends AppCompatActivity {
         cjkR = CustomFont.getCustomFont(this, "CJKR");
 
         //건의사항 및 격려 작성하러 가기
-        write = (Button) findViewById(R.id.support_message_write);
-        write.setTypeface(cjkR);
+        write = (ImageButton) findViewById(R.id.support_message_write);
+
+        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+
+        final int width = display.getWidth()/3;
+        final int height = display.getHeight()/8;
+
+        Glide.with(this)
+                .load(R.drawable.support_write_btn_img)
+                .override(width, height)
+                .into(write);
 
         write.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +97,11 @@ public class SupportMessageActivity extends AppCompatActivity {
             }
 
         });
+
+        //상태바 색상 적용
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
     }
 
     @Override
@@ -153,9 +169,6 @@ public class SupportMessageActivity extends AppCompatActivity {
                 holder.title = (TextView) convertView.findViewById(R.id.support_message_title);
                 holder.username = (TextView) convertView.findViewById(R.id.support_message_username);
                 holder.reply_count = (TextView) convertView.findViewById(R.id.support_message_reply);
-                holder.content = (TextView) convertView.findViewById(R.id.support_message_content);
-                holder.title_label = (TextView)convertView.findViewById(R.id.support_message_title_label);
-                holder.username_label = (TextView)convertView.findViewById(R.id.support_message_username_label);
 
                 convertView.setTag(holder);
             }
@@ -179,18 +192,14 @@ public class SupportMessageActivity extends AppCompatActivity {
                 str_temp = str_temp.substring(0, 13);
                 str_temp += "..";
                 Log.d(LOG_TAG, "User name : " + str_temp);
-                holder.username.setText(str_temp);
+                holder.username.setText("게시자 : " + str_temp);
             } else {
-                holder.username.setText(messageItems.get(position).getUsername());
+                holder.username.setText("게시자 : " + messageItems.get(position).getUsername());
             }
             holder.reply_count.setText("" + messageItems.get(position).getReply_count());
-            holder.content.setText(messageItems.get(position).getContent());
 
-            holder.title.setTypeface(cjkR);
+            holder.title.setTypeface(cjkB);
             holder.username.setTypeface(cjkR);
-            holder.content.setTypeface(cjkR);
-            holder.title_label.setTypeface(cjkR);
-            holder.username_label.setTypeface(cjkR);
             holder.reply_count.setTypeface(cjkR);
 
             // 리스트 아이템을 터치 했을 때 이벤트 발생
@@ -206,10 +215,7 @@ public class SupportMessageActivity extends AppCompatActivity {
         class SupportViewHolder {
             TextView title;
             TextView username;
-            TextView content;
             TextView reply_count;
-            TextView title_label;
-            TextView username_label;
         }
     }
     public void gotoback(View v) {
