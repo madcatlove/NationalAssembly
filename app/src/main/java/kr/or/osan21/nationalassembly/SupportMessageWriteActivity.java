@@ -3,6 +3,7 @@ package kr.or.osan21.nationalassembly;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,26 +17,41 @@ import java.util.Date;
 
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessage;
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessageAPI;
+import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class SupportMessageWriteActivity extends AppCompatActivity {
     private static String LOG_TAG = "SupportMessageWriteActivity";
-    private TextView title;
-    private TextView username;
-    private TextView content;
+    private TextView title, title_label;
+    private TextView username, username_label;
+    private TextView content, bar;
     private Button submit;
     private SupportMessageAPI supportMessageAPI;
+    private Typeface cjkM, cjkR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_supportmessagewrite);
+        setContentView(R.layout.activity_support_message_write);
+
         title = (TextView)findViewById(R.id.support_message_write_title);
         username = (TextView)findViewById(R.id.support_message_write_username);
         content = (TextView)findViewById(R.id.support_message_write_content);
         submit = (Button)findViewById(R.id.support_message_write_submit);
+        title_label = (TextView)findViewById(R.id.support_message_write_title_label);
+        username_label = (TextView)findViewById(R.id.support_message_write_username_label);
+        bar = (TextView)findViewById(R.id.support_message_write_bar);
+
+        //글씨체 적용
+        cjkM = CustomFont.getCustomFont(this, "cjkM");
+        cjkR = CustomFont.getCustomFont(this, "cjkR");
+
+        title_label.setTypeface(cjkM);
+        username_label.setTypeface(cjkM);
+        submit.setTypeface(cjkM);
+        bar.setTypeface(CustomFont.getCustomFont(this,"hans"));
 
         // api call
         supportMessageAPI = new SupportMessageAPI();

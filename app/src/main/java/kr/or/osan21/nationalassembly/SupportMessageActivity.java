@@ -82,8 +82,8 @@ public class SupportMessageActivity extends AppCompatActivity {
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
 
-        final int width = display.getWidth()/3;
-        final int height = display.getHeight()/8;
+        final int width = (int)(display.getWidth()/(3.5));
+        final int height = (int)(display.getHeight()/(8.5));
 
         Glide.with(this)
                 .load(R.drawable.support_write_btn_img)
@@ -198,7 +198,7 @@ public class SupportMessageActivity extends AppCompatActivity {
             }
             holder.reply_count.setText("" + messageItems.get(position).getReply_count());
 
-            holder.title.setTypeface(cjkB);
+            holder.title.setTypeface(cjkB); // 좀더 얇게 하려면 cjkM으로 해도 될듯함
             holder.username.setTypeface(cjkR);
             holder.reply_count.setTypeface(cjkR);
 
