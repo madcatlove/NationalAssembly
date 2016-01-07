@@ -37,14 +37,14 @@
             android:layout_marginBottom="15dp"
             android:background="#c4c4c4"/>
 
-        <!-- 방법 1을 위한 xml
+        <!-- 방법 1을 위한 xml -->
         <kr.or.osan21.nationalassembly.Utils.MediaImageView
             android:id="@+id/media_image"
             android:layout_width="match_parent"
             android:layout_height="135dp"
             android:adjustViewBounds="true"
             />
-        -->
+
 
         <!-- 방법 2,3을 위한 xml
         <ImageView
