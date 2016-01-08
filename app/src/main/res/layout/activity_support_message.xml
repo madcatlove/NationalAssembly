@@ -33,11 +33,20 @@
             android:textColor="#ffffff" />
     </RelativeLayout>
 
-    <ImageButton
-        android:background="#5ebbef"
-        android:id="@+id/support_message_write"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp">
+
+        <ImageButton
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:id="@+id/support_message_write"
+            android:background="#5ebbef"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/support_message_list"

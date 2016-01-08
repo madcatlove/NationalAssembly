@@ -82,12 +82,12 @@ public class SupportMessageActivity extends AppCompatActivity {
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
 
-        final int width = (int)(display.getWidth()/(3.5));
-        final int height = (int)(display.getHeight()/(8.5));
+        final int width = display.getWidth()/5;
+        final int height = display.getHeight()/10;
 
         Glide.with(this)
                 .load(R.drawable.support_write_btn_img)
-                .override(width, height)
+                .fitCenter()
                 .into(write);
 
         write.setOnClickListener(new View.OnClickListener() {
