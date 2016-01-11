@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,21 +19,19 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -88,6 +85,7 @@ public class MainActivity extends AppCompatActivity  {
 
         // drawerlayout
         mainDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         mainDrawer.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -174,15 +172,10 @@ public class MainActivity extends AppCompatActivity  {
         super.onDestroy();
     }
 
-    private void recycleView(View view) {
-        if(view != null) {
-            Drawable bg = view.getBackground();
-            if(bg != null) {
-                bg.setCallback(null);
-                ((BitmapDrawable)bg).getBitmap().recycle();
-                view.setBackgroundDrawable(null);
-            }
-        }
+    // 슬라이드 메뉴 버튼 클릭시
+    public void showSliding(View v)
+    {
+        mainDrawer.openDrawer(GravityCompat.START);
     }
 
     //메인 메뉴 선택 시 불림

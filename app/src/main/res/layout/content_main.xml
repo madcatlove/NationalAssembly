@@ -10,19 +10,31 @@
     tools:context="kr.or.osan21.app.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_height="35dp"
+        android:background="#464646">
+
+        <ImageView
+            android:id="@+id/slider_toggle"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/slider_menu_btn"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="0dp"
+            android:onClick="showSliding"/>
 
         <TextView
             android:id="@+id/main_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="오산을 위하여, 안민석"
-            android:background="#464646"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
+            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/main_profile"
