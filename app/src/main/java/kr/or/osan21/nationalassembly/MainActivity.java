@@ -9,9 +9,18 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -67,6 +76,7 @@ public class MainActivity extends AppCompatActivity  {
     private DrawerLayout mainDrawer;
     private boolean isSlideMenuOpen = false;
 
+    private ImageView profile_img_view;
 
 
 
@@ -126,6 +136,14 @@ public class MainActivity extends AppCompatActivity  {
                           }
                 });
 
+        //슬라이딩메뉴 프로필 이미지 적용
+        profile_img_view = (ImageView)findViewById(R.id.slider_profile_img);
+        Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_profile_img); // 비트맵 이미지를 만든다.
+        int width=(int)(getWindowManager().getDefaultDisplay().getWidth()*0.22); // 가로 사이즈 지정
+        int height=width; // 세로 사이즈 지정
+        bmp = Bitmap.createScaledBitmap(bmp, width, height, true); // 이미지 사이즈 조정
+        profile_img_view.setImageDrawable(new RoundedAvatarDrawable(bmp));
+        profile_img_view.invalidate();
 
 
         // ListView가져오기 및 custom adapter 생성
@@ -144,9 +162,9 @@ public class MainActivity extends AppCompatActivity  {
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
 
-        Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_on_btn); // 비트맵 이미지를 만든다.
-        int width=(int)(getWindowManager().getDefaultDisplay().getWidth()*0.15); // 가로 사이즈 지정
-        int height=(int)(width*0.7); // 세로 사이즈 지정
+        bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_on_btn); // 비트맵 이미지를 만든다.
+        width=(int)(getWindowManager().getDefaultDisplay().getWidth()*0.15); // 가로 사이즈 지정
+        height=(int)(width*0.7); // 세로 사이즈 지정
         onBmp=Bitmap.createScaledBitmap(bmp, width, height, true); // 이미지 사이즈 조정
         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_off_btn);
         offBmp = Bitmap.createScaledBitmap(bmp, width, height, true);
@@ -526,6 +544,91 @@ public class MainActivity extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
+    //둥근이미지
+    public class RoundedAvatarDrawable extends Drawable {
+        private final Bitmap mBitmap;
+        private final Paint mPaint;
+        private final RectF mRectF;
+        private final int mBitmapWidth;
+        private final int mBitmapHeight;
+
+        public RoundedAvatarDrawable(Bitmap bitmap) {
+            mBitmap = bitmap;
+            mRectF = new RectF();
+            mPaint = new Paint();
+            mPaint.setAntiAlias(true);
+            mPaint.setDither(true);
+            final BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            mPaint.setShader(shader);
+
+            this.onBoundsChange(new Rect(100,100,300,300));
+
+            mBitmapWidth = mBitmap.getWidth();
+            mBitmapHeight = mBitmap.getHeight();
+        }
+
+        @Override
+        public void draw(Canvas canvas) {
+            canvas.drawOval(mRectF, mPaint);
+        }
+
+        @Override
+        protected void onBoundsChange(Rect bounds) {
+            super.onBoundsChange(bounds);
+
+            mRectF.set(bounds);
+        }
+
+        @Override
+        public void setAlpha(int alpha) {
+            if (mPaint.getAlpha() != alpha) {
+                mPaint.setAlpha(alpha);
+                invalidateSelf();
+            }
+        }
+
+        @Override
+        public void setColorFilter(ColorFilter cf) {
+            mPaint.setColorFilter(cf);
+        }
+
+        @Override
+        public int getOpacity() {
+            return PixelFormat.TRANSLUCENT;
+        }
+
+        @Override
+        public int getIntrinsicWidth() {
+            return mBitmapWidth;
+        }
+
+        @Override
+        public int getIntrinsicHeight() {
+            return mBitmapHeight;
+        }
+
+        public void setAntiAlias(boolean aa) {
+            mPaint.setAntiAlias(aa);
+            invalidateSelf();
+        }
+
+        @Override
+        public void setFilterBitmap(boolean filter) {
+            mPaint.setFilterBitmap(filter);
+            invalidateSelf();
+        }
+
+        @Override
+        public void setDither(boolean dither) {
+            mPaint.setDither(dither);
+            invalidateSelf();
+        }
+
+        public Bitmap getBitmap() {
+            return mBitmap;
+        }
+
+    }
 
     /*
     // 이전 네비게이션 뷰 메소드

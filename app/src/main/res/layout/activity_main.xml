@@ -34,17 +34,18 @@
             android:background="#5ebbef">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/slider_profile_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/nav_header_vertical_spacing"
-                android:src="@android:drawable/sym_def_app_icon" />
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"/>
             <TextView
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="35dp"
-                android:layout_toRightOf="@+id/imageView"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@+id/slider_profile_img"
                 android:text="안민석"
                 android:textSize="20dp"
                 android:textColor="#ffffff"/>
