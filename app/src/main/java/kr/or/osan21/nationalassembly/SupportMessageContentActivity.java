@@ -117,13 +117,14 @@ public class SupportMessageContentActivity extends AppCompatActivity {
 
                 builder = new AlertDialog.Builder(context);
                 builder.setView(layout);
-                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                builder.setAdapter(adapter, null);
+                /*builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-                });
+                });*/
 
                 builder.setTitle("댓글을 작성하세요.");
                 builder.setPositiveButton("등록", new DialogInterface.OnClickListener() {

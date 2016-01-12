@@ -15,11 +15,11 @@
         <TextView
             android:id="@+id/reply_item_username"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="25dp"
             android:layout_alignParentLeft="true"
             android:maxLength="12"
             android:text="test"
-            android:textSize="10dp"
+            android:textSize="12dp"
             android:textColor="#3A5598"/>
 
         <TextView
@@ -31,20 +31,20 @@
             android:layout_toRightOf="@+id/reply_item_username"
             android:maxLength="30"
             android:text="test"
-            android:textSize="10dp" />
+            android:textSize="12dp" />
 
         <TextView
             android:id="@+id/reply_item_date"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_below="@+id/reply_item_username"
-            android:textSize="10dp"
-            android:textColor="#464646"
+            android:textSize="9dp"
+            android:textColor="#CCCCCC"
             android:text="123123123123" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="1dp"
         android:background="#ffffff"/>
 </LinearLayout>
