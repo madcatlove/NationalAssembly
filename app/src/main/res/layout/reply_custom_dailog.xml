@@ -9,7 +9,7 @@
     <ListView
         android:id="@+id/dialog_reply_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/dialog_username_label"
@@ -17,8 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="15dp"
-        android:text="작성자" />
+        android:layout_marginTop="5dp"
+        android:text="게시자" />
 
     <EditText
         android:id="@+id/dialog_username"
@@ -26,7 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
         android:background="@null"
         android:maxLength="10"
         android:singleLine="true"
@@ -54,7 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
         android:background="@null"
         android:maxLength="30"
         android:singleLine="true"

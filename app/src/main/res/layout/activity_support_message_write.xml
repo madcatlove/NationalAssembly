@@ -86,7 +86,7 @@
             android:id="@+id/support_message_write_username_label"
             android:layout_width="55dp"
             android:layout_height="30dp"
-            android:text="작성자:"
+            android:text="게시자:"
             android:textStyle="bold"
             android:textSize="15dp"
             android:gravity="center_vertical"
