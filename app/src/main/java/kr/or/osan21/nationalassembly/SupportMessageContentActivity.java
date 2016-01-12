@@ -49,7 +49,6 @@ public class SupportMessageContentActivity extends AppCompatActivity {
     private TextView regDate;
     private ImageButton goToReply;
     private List<SupportMessageReply> replies;
-    private ListView reply_list;
 
     private SupportMessageReply reply;
 
@@ -104,13 +103,17 @@ public class SupportMessageContentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //댓글 액티비티 호출
                 //startActivity(new Intent(getBaseContext(), SupportMessageReplyActivity.class).putExtra("reply_id", num));
-                AlertDialog dialog;
                 AlertDialog.Builder builder;
                 Context context = SupportMessageContentActivity.this;
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
                 View layout = inflater.inflate(R.layout.reply_custom_dailog, (ViewGroup) findViewById(R.id.reply_root));
                 final EditText new_username = (EditText) layout.findViewById(R.id.dialog_username);
                 final EditText new_content = (EditText) layout.findViewById(R.id.dialog_content);
+
+                TextView username_label = (TextView)layout.findViewById(R.id.dialog_username_label);
+                username_label.setTypeface(cjkM);
+                TextView content_label = (TextView)layout.findViewById(R.id.dialog_content_label);
+                content_label.setTypeface(cjkM);
 
                 builder = new AlertDialog.Builder(context);
                 builder.setView(layout);
@@ -126,49 +129,7 @@ public class SupportMessageContentActivity extends AppCompatActivity {
                 builder.setPositiveButton("등록", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //새로 등록된 댓글, 작성자
-                        String new_content_str = new_content.getText().toString();
-                        String new_username_str = new_username.getText().toString();
-                        //아무것도 입력되지 않았는데 확인버튼 눌렀을 때 다이얼로그 띄우기
-                        if (new_username_str.trim().length() == 0) {
-                            makeAlertDialog(" 작성자를 입력하지 않았습니다. ").show();
-
-                        } else if (new_content_str.trim().length() == 0) {
-                            makeAlertDialog(" 내용을 입력하지 않았습니다. ").show();
-                        }
-
-                        Log.d(LOG_TAG, "새로운 댓글 --> " + new_username_str + " / " + new_content_str);
-                        reply = new SupportMessageReply();
-                        reply.setContent(new_content_str);
-                        reply.setUsername(new_username_str);
-                        supportMessageAPI.writeMessageReply(num, reply, new Callback<Response>() {
-                            @Override
-                            public void success(Response response, Response response2) {
-
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
-
-                            }
-                        });
-                        supportMessageAPI.getMessage(num, new Callback<SupportMessage>() {
-                            @Override
-                            public void success(SupportMessage supportMessage, Response response) {
-                                replies = new ArrayList<SupportMessageReply>();
-                                replies.addAll(supportMessage.getReply());
-                                adapter.setReplyItems(replies);
-                                adapter.notifyDataSetInvalidated();
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
-
-                            }
-                        });
-                        setResult(RESULT_OK);
                     }
-
                 });
                 builder.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
                     @Override
@@ -176,7 +137,59 @@ public class SupportMessageContentActivity extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-                builder.show();
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+
+                // 등록버튼 눌렀을 때 창 안 닫히고 댓글이 바로 반영되도록
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                        .setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //새로 등록된 댓글, 작성자
+                                String new_content_str = new_content.getText().toString();
+                                String new_username_str = new_username.getText().toString();
+                                //아무것도 입력되지 않았는데 확인버튼 눌렀을 때 다이얼로그 띄우기
+                                if (new_username_str.trim().length() == 0) {
+                                    makeAlertDialog(" 작성자를 입력하지 않았습니다. ").show();
+
+                                } else if (new_content_str.trim().length() == 0) {
+                                    makeAlertDialog(" 내용을 입력하지 않았습니다. ").show();
+                                }
+
+                                Log.d(LOG_TAG, "새로운 댓글 --> " + new_username_str + " / " + new_content_str);
+                                reply = new SupportMessageReply();
+                                reply.setContent(new_content_str);
+                                reply.setUsername(new_username_str);
+                                supportMessageAPI.writeMessageReply(num, reply, new Callback<Response>() {
+                                    @Override
+                                    public void success(Response response, Response response2) {
+                                        supportMessageAPI.getMessage(num, new Callback<SupportMessage>() {
+                                            @Override
+                                            public void success(SupportMessage supportMessage, Response response) {
+                                                replies = new ArrayList<SupportMessageReply>();
+                                                replies.addAll(supportMessage.getReply());
+                                                adapter.setReplyItems(replies);
+                                                adapter.notifyDataSetInvalidated();
+                                                new_content.setText("");
+                                                new_username.setText("");
+                                                setResult(RESULT_OK);
+                                            }
+
+                                            @Override
+                                            public void failure(RetrofitError error) {
+
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+
+                                    }
+                                });
+                            }
+                        });
             }
         });
 
@@ -214,7 +227,7 @@ public class SupportMessageContentActivity extends AppCompatActivity {
 
         //다이얼로그에 사용할 리스트뷰 어댑터 가져오기.
         adapter = new CustomAdapter();
-        reply_list = (ListView) findViewById(R.id.message_reply_list);
+
         //reply_list.setAdapter(adapter);
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);
@@ -237,6 +250,7 @@ public class SupportMessageContentActivity extends AppCompatActivity {
         return ad;
     }
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -263,7 +277,7 @@ public class SupportMessageContentActivity extends AppCompatActivity {
                 }
             });
         }
-    }
+    }*/
 
     public void gotoback(View v) {
         finish();
@@ -335,6 +349,10 @@ public class SupportMessageContentActivity extends AppCompatActivity {
             holder.username.setText(replies.get(position).getUsername());
             holder.reply.setText(replies.get(position).getContent());
             holder.date.setText(replies.get(position).getRegdate());
+
+            holder.username.setTypeface(cjkM);
+            holder.date.setTypeface(cjkR);
+            holder.reply.setTypeface(cjkR);
 
             return convertView;
         }

@@ -1,63 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/reply_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/reply_root">
+    android:background="#ffffff"
+    android:orientation="vertical">
+
     <ListView
+        android:id="@+id/dialog_reply_list"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+    <TextView
+        android:id="@+id/dialog_username_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dialog_reply_list">
-    </ListView>
-<TextView
-    android:id="@+id/dialog_username_label"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="15dp"
-    android:text="작성자"/>
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:text="작성자" />
+
     <EditText
         android:id="@+id/dialog_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textCursorDrawable="@null"
-        android:background="@null"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@null"
+        android:maxLength="10"
         android:singleLine="true"
-        android:maxLength="10"/>
+        android:textCursorDrawable="@null" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="#5ebbef"/>
+        android:background="#5ebbef" />
+
     <TextView
         android:id="@+id/dialog_content_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:text="내용"/>
+        android:layout_marginTop="10dp"
+        android:text="내용" />
+
     <EditText
         android:id="@+id/dialog_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textCursorDrawable="@null"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:background="@null"
+        android:maxLength="30"
         android:singleLine="true"
-        android:maxLength="30"/>
+        android:textCursorDrawable="@null" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:background="#5ebbef"/>
+        android:background="#5ebbef" />
 </LinearLayout>
