@@ -29,6 +29,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="건의사항 및 격려메시지를 남겨주세요"
+            android:textSize="13dp"
             android:textColor="#ffffff" />
     </RelativeLayout>
         <LinearLayout

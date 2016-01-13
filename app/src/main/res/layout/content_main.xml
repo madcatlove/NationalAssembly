@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:text="오산을 위하여, 안민석"
             android:textColor="#ffffff"
+            android:textSize="13dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>

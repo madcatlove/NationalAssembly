@@ -30,6 +30,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="언론이 주목한 안민석"
+            android:textSize="13dp"
             android:textColor="#ffffff" />
     </RelativeLayout>
 

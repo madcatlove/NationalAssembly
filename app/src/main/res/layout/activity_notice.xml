@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
             android:layout_marginLeft="0dp"
-            android:onClick="gotoback"/> //이미지뷰 생성
+            android:onClick="gotoback"/>
 
         <TextView
             android:id="@+id/myImageViewText"
@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:text="언제 어디서든 함께 해요"
             android:textColor="#ffffff"
+            android:textSize="13dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>

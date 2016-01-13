@@ -59,6 +59,7 @@
             android:layout_height="135dp"
             android:layout_marginLeft="10dp"
             android:background="#ffffff"
+            android:textSize="14dp"
             android:maxLines="6"/>
 
     </LinearLayout>

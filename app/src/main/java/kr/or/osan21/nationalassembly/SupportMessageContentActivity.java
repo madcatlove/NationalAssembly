@@ -101,8 +101,6 @@ public class SupportMessageContentActivity extends AppCompatActivity {
         goToReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //댓글 액티비티 호출
-                //startActivity(new Intent(getBaseContext(), SupportMessageReplyActivity.class).putExtra("reply_id", num));
                 AlertDialog.Builder builder;
                 Context context = SupportMessageContentActivity.this;
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -118,13 +116,6 @@ public class SupportMessageContentActivity extends AppCompatActivity {
                 builder = new AlertDialog.Builder(context);
                 builder.setView(layout);
                 builder.setAdapter(adapter, null);
-                /*builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });*/
 
                 builder.setTitle("댓글을 작성하세요.");
                 builder.setPositiveButton("등록", new DialogInterface.OnClickListener() {
@@ -194,6 +185,7 @@ public class SupportMessageContentActivity extends AppCompatActivity {
             }
         });
 
+        adapter = new CustomAdapter();
         supportMessageAPI.getMessage(num, new Callback<SupportMessage>() {
             @Override
             public void success(SupportMessage supportMessage, Response response) {
@@ -216,6 +208,7 @@ public class SupportMessageContentActivity extends AppCompatActivity {
                 //댓글들 가져와서 adapter에 적용.
                 replies = new ArrayList<SupportMessageReply>();
                 replies.addAll(supportMessage.getReply());
+
                 adapter.setReplyItems(replies);
                 adapter.notifyDataSetInvalidated();
             }
@@ -225,9 +218,6 @@ public class SupportMessageContentActivity extends AppCompatActivity {
                 failureDialog(" 데이터를 가져올 수 없습니다. ").show();
             }
         });
-
-        //다이얼로그에 사용할 리스트뷰 어댑터 가져오기.
-        adapter = new CustomAdapter();
 
         //reply_list.setAdapter(adapter);
         if (Build.VERSION.SDK_INT >= 21) {

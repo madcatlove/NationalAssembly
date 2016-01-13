@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:text="안민석이 걸어온 길"
             android:textColor="#ffffff"
+            android:textSize="13dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
