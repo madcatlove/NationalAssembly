@@ -50,6 +50,8 @@ import com.kakao.KakaoLink;
 import com.kakao.KakaoParameterException;
 import com.kakao.KakaoTalkLinkMessageBuilder;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +61,7 @@ import kr.or.osan21.nationalassembly.Utils.CustomFont;
 public class MainActivity extends AppCompatActivity  {
 
     public static final String LOG_TAG = "MainActivity";
-    private Typeface tf;
+    private Typeface hans, cjkB;
     private ListView nav_list;
     private CustomAdapter custom_adapter;
     private LinearLayout main_menu_layout;
@@ -86,12 +88,29 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
         // 폰트 설정 모든 뷰그룹에 적용
-        tf = CustomFont.getCustomFont(this, "hans");
-        CustomFont.setGlobalFont(tf, (ViewGroup) findViewById(R.id.drawer_layout));
+        hans = CustomFont.getCustomFont(this, "hans");
+        cjkB = CustomFont.getCustomFont(this, "CJKB");
+        CustomFont.setGlobalFont(hans, (ViewGroup) findViewById(R.id.drawer_layout));
+
+
+        // 메뉴 타이틀 글씨체 적용
+        TextView profile_content = (TextView)findViewById(R.id.main_profile_content);
+        profile_content.setTypeface(cjkB);
+        TextView activities_content = (TextView)findViewById(R.id.main_activities_content);
+        activities_content.setTypeface(cjkB);
+        TextView vision_content = (TextView)findViewById(R.id.main_vision_content);
+        vision_content.setTypeface(cjkB);
+        TextView media_content = (TextView)findViewById(R.id.main_media_content);
+        media_content.setTypeface(cjkB);
+        TextView notice_content = (TextView)findViewById(R.id.main_notice_content);
+        notice_content.setTypeface(cjkB);
 
         //오산시 국회의원 글씨체 따로 적용.
         job = (TextView)findViewById(R.id.job);
-        job.setTypeface(CustomFont.getCustomFont(this, "CJKB"));
+        job.setTypeface(cjkB);
+
+        TextView profile_name = (TextView)findViewById(R.id.profile_name);
+        profile_name.setTypeface(cjkB);
 
         // drawerlayout
         mainDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -270,7 +289,7 @@ public class MainActivity extends AppCompatActivity  {
                 // TextView에 현재 position의 문자열 추가
                 TextView text = (TextView) convertView.findViewById(R.id.slider_item_title);
                 text.setText(m_List.get(position));
-                text.setTypeface(tf);
+                text.setTypeface(hans);
 
                 ImageView img = (ImageView)convertView.findViewById(R.id.slider_item_image);
 

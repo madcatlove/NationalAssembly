@@ -54,7 +54,7 @@
             android:paddingLeft="26dp"
             android:textSize="15dp"
             android:text="Profile"
-            android:textColor="#000000"/>
+            android:textColor="#464646"/>
 
         <TextView
             android:id="@+id/main_profile_content"
@@ -84,7 +84,7 @@
             android:paddingLeft="26dp"
             android:textSize="15dp"
             android:text="Activities"
-            android:textColor="#000000"/>
+            android:textColor="#464646"/>
 
         <TextView
             android:id="@+id/main_activities_content"
@@ -114,7 +114,7 @@
             android:paddingLeft="26dp"
             android:textSize="15dp"
             android:text="Vision"
-            android:textColor="#000000"/>
+            android:textColor="#464646"/>
 
         <TextView
             android:id="@+id/main_vision_content"
@@ -144,7 +144,7 @@
             android:paddingLeft="26dp"
             android:textSize="15dp"
             android:text="Media"
-            android:textColor="#000000"/>
+            android:textColor="#464646"/>
 
         <TextView
             android:id="@+id/main_media_content"
@@ -174,7 +174,7 @@
             android:paddingLeft="26dp"
             android:textSize="15dp"
             android:text="Notice"
-            android:textColor="#000000"/>
+            android:textColor="#464646"/>
 
         <TextView
             android:id="@+id/main_notice_content"
