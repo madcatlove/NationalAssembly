@@ -98,7 +98,7 @@
             android:layout_marginRight="10dp"
             android:text="내용"
             android:textColor="#464646"
-            android:textSize="16dp" />
+            android:textSize="13dp" />
     </LinearLayout>
 
     <View

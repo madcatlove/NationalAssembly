@@ -195,7 +195,7 @@ public class SupportMessageActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     startActivityForResult(new Intent(getBaseContext(), SupportMessageReplyActivity.class).putExtra("m_id", messageItems.get(pos).getNum()), 1);
-                    //overridePendingTransition(R.anim.animation1, R.anim.animation2);
+                    overridePendingTransition(R.anim.bottom_to_top, R.anim.hold);
                 }
             });
             return convertView;

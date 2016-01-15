@@ -6,8 +6,100 @@
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="kr.or.osan21.nationalassembly.SupportMessageReplyActivity"
-    android:background="#ffffff">
+    android:background="#000000">
 
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_reply_activity">
+
+        <LinearLayout
+            android:id="@+id/message_reply_count_layout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/message_reply_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="13dp" />
+            <TextView
+                android:id="@+id/message_reply_count_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:text="개의 댓글이 있습니다."
+                />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view1"
+            android:layout_below="@+id/message_reply_count_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#dadada" />
+
+        <ListView
+            android:layout_below="@+id/view1"
+            android:id="@+id/message_reply_list"
+            android:layout_width="match_parent"
+            android:layout_height="445dp" />
+
+        <View
+            android:layout_below="@+id/message_reply_list"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#dadada" />
+
+        <LinearLayout
+            android:layout_marginBottom="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <EditText
+                android:id="@+id/reply_username"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:background="@drawable/support_message_write_border"
+                android:layout_marginLeft="10dp"
+                android:textCursorDrawable="@null"
+                android:singleLine="true"
+                android:maxLength="10"
+                android:hint="게시자"
+                android:textSize="13dp"
+                android:layout_weight="0.2"/>
+            <EditText
+                android:id="@+id/reply_content"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:background="@drawable/support_message_write_border"
+                android:textSize="13dp"
+                android:textCursorDrawable="@null"
+                android:singleLine="true"
+                android:maxLength="30"
+                android:hint="댓글을 입력하세요..."
+                android:layout_weight="0.65"/>
+            <Button
+                android:id="@+id/reply_btn"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:background="@drawable/support_message_write_border"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="등록"
+                android:textColor="#000000"
+                android:textSize="13dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.15"/>
+        </LinearLayout>
+    </RelativeLayout>
     <!--<RelativeLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="35dp"-->
@@ -33,67 +125,4 @@
             <!--android:textColor="#ffffff" />-->
     <!--</RelativeLayout>-->
 
-    <TextView
-        android:id="@+id/message_reply_count"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="12dp"
-        android:text=""
-        android:textSize="13dp" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#dadada" />
-
-    <ListView
-        android:id="@+id/message_reply_list"
-        android:layout_width="match_parent"
-        android:layout_height="400dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginBottom="12dp"
-        android:background="#dadada" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal">
-        <EditText
-            android:id="@+id/reply_username"
-            android:layout_width="70dp"
-            android:layout_height="40dp"
-            android:background="@drawable/support_message_write_border"
-            android:layout_marginLeft="10dp"
-            android:textCursorDrawable="@null"
-            android:singleLine="true"
-            android:maxLength="10"
-            android:hint="게시자"
-            android:textSize="13dp"
-            android:layout_weight="0.5"/>
-        <EditText
-            android:id="@+id/reply_content"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            android:background="@drawable/support_message_write_border"
-            android:textSize="13dp"
-            android:textCursorDrawable="@null"
-            android:singleLine="true"
-            android:maxLength="30"
-            android:hint="댓글을 입력하세요..."
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/reply_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/support_message_write_border"
-            android:text="등록"
-            android:textColor="#000000"
-            android:textSize="13dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="0.3"/>
-    </LinearLayout>
 </LinearLayout>

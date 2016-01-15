@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +30,7 @@ import java.util.List;
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessage;
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessageAPI;
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessageReply;
+import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -44,22 +47,36 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
     private EditText username;
     private EditText content;
     private TextView reply_count;
+    private Typeface cjkR, cjkM, cjkB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support_message_reply);
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         i = getIntent();
         num = i.getIntExtra("m_id", -1);
+
+        //글씨체
+        cjkM = CustomFont.getCustomFont(this, "CJKM");
+        cjkR = CustomFont.getCustomFont(this, "CJKR");
+        cjkB = CustomFont.getCustomFont(this, "CJKB");
+
         reply_btn = (Button) findViewById(R.id.reply_btn);
+        reply_btn.setTypeface(cjkB);
 
         final CustomAdapter adapter = new CustomAdapter();
+
         listview = (ListView) findViewById(R.id.message_reply_list);
         username = (EditText) findViewById(R.id.reply_username);
+        username.setTypeface(cjkR);
         content = (EditText) findViewById(R.id.reply_content);
+        content.setTypeface(cjkR);
         reply_count = (TextView) findViewById(R.id.message_reply_count);
+        reply_count.setTypeface(cjkB);
+        TextView reply_count_txt = (TextView)findViewById(R.id.message_reply_count_txt);
+        reply_count_txt.setTypeface(cjkR);
 
         api = new SupportMessageAPI();
         api.getMessage(num, new Callback<SupportMessage>() {
@@ -67,7 +84,7 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
             public void success(SupportMessage supportMessage, Response response) {
                 replies = new ArrayList<SupportMessageReply>();
                 replies.addAll(supportMessage.getReply());
-                reply_count.setText("총 " + replies.size() + "개의 댓글이 있습니다.");
+                reply_count.setText(replies.size()+"");
                 adapter.setReplyItems(replies);
                 adapter.notifyDataSetInvalidated();
                 //setResult(RESULT_OK);
@@ -90,11 +107,12 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
                     //@TODO: username 비었을 때, 에러메시지 다이얼로그 부를 것.
                     username.requestFocus();
                     makeAlertDialog( "게시자를 입력하세요." ).show();
+                    return;
                 } else if (new_content_str.length() == 0) {
                     //@TODO: content 비었을 때, 에러메시지 다이얼로그 부를 것.
                     content.requestFocus();
                     makeAlertDialog( "댓글을 입력하세요." ).show();
-
+                    return;
                 }
 
                 Log.d(LOG_TAG, "새로운 댓글 --> " + new_username_str + " / " + new_content_str);
@@ -109,9 +127,13 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
                             public void success(SupportMessage supportMessage, Response response) {
                                 replies = new ArrayList<SupportMessageReply>();
                                 replies.addAll(supportMessage.getReply());
-                                reply_count.setText("총 " + replies.size() + "개의 댓글이 있습니다.");
+                                reply_count.setText(replies.size() + "");
                                 adapter.setReplyItems(replies);
                                 adapter.notifyDataSetInvalidated();
+                                username.setText("");
+                                content.setText("");
+                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(username.getWindowToken(), 0);
                                 setResult(RESULT_OK);
                             }
 
@@ -128,6 +150,7 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
                 });
             }
         });
+
 
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);
@@ -181,8 +204,9 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
                 holder = (ReplyViewHolder) convertView.getTag();
             }
 
-            //holder.date.setTypeface(tf);
-            //holder.title.setTypeface(tf2);
+            holder.date.setTypeface(cjkR);
+            holder.content.setTypeface(cjkR);
+            holder.username.setTypeface(cjkB);
             holder.date.setText(replyItems.get(position).getRegdate());
             holder.username.setText(replyItems.get(position).getUsername());
             holder.content.setText(replyItems.get(position).getContent());
@@ -218,4 +242,11 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
     public void gotoback(View v) {
         finish();
     }
+
+    public void finish()
+    {
+        super.finish();
+        overridePendingTransition(R.anim.hold, R.anim.top_to_bottom);
+    }
+
 }
