@@ -35,10 +35,10 @@
 
             <ImageView
                 android:id="@+id/slider_profile_img"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
+                android:layout_marginLeft="15dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
-                android:paddingLeft="15dp"/>
+                android:paddingTop="15dp"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -48,9 +48,10 @@
             android:background="#5ebbef">
             <TextView
                 android:id="@+id/profile_name"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:gravity="center_horizontal"
                 android:layout_marginLeft="15dp"
                 android:text="안민석"
                 android:textSize="15dp"
@@ -58,7 +59,7 @@
 
             <TextView
                 android:id="@+id/job"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="오산시 국회의원"
                 android:layout_alignParentLeft="true"
