@@ -28,6 +28,7 @@ import java.util.List;
 
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessage;
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessageAPI;
+import kr.or.osan21.nationalassembly.SupportMessage.SupportMessageReply;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -193,7 +194,8 @@ public class SupportMessageActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    startActivityForResult(new Intent(getBaseContext(), SupportMessageContentActivity.class).putExtra("m_id", messageItems.get(pos).getNum()), 1);
+                    startActivityForResult(new Intent(getBaseContext(), SupportMessageReplyActivity.class).putExtra("m_id", messageItems.get(pos).getNum()), 1);
+                    //overridePendingTransition(R.anim.animation1, R.anim.animation2);
                 }
             });
             return convertView;

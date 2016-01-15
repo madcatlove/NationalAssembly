@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,24 +35,31 @@ import retrofit.client.Response;
 public class SupportMessageReplyActivity extends AppCompatActivity {
     private final String LOG_TAG = "ReplyActivity";
     private List<SupportMessageReply> replies;
-    private Integer reply_count;
     private ListView listview;
     private SupportMessageAPI api;
     private SupportMessageReply reply;
     private Integer num;
     private Intent i;
     private Button reply_btn;
+    private EditText username;
+    private EditText content;
+    private TextView reply_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support_message_reply);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         i = getIntent();
-        num = i.getIntExtra("reply_id", -1);
+        num = i.getIntExtra("m_id", -1);
         reply_btn = (Button) findViewById(R.id.reply_btn);
 
         final CustomAdapter adapter = new CustomAdapter();
         listview = (ListView) findViewById(R.id.message_reply_list);
+        username = (EditText) findViewById(R.id.reply_username);
+        content = (EditText) findViewById(R.id.reply_content);
+        reply_count = (TextView) findViewById(R.id.message_reply_count);
 
         api = new SupportMessageAPI();
         api.getMessage(num, new Callback<SupportMessage>() {
@@ -59,10 +67,10 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
             public void success(SupportMessage supportMessage, Response response) {
                 replies = new ArrayList<SupportMessageReply>();
                 replies.addAll(supportMessage.getReply());
-
+                reply_count.setText("총 " + replies.size() + "개의 댓글이 있습니다.");
                 adapter.setReplyItems(replies);
                 adapter.notifyDataSetInvalidated();
-                setResult(RESULT_OK);
+                //setResult(RESULT_OK);
             }
 
             @Override
@@ -75,51 +83,33 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
         reply_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog dialog;
-                AlertDialog.Builder builder;
-                Context context = SupportMessageReplyActivity.this;
-                LayoutInflater inflater = (LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE);
-                View layout = inflater.inflate(R.layout.reply_custom_dailog, (ViewGroup)findViewById(R.id.reply_root));
-                final EditText new_username = (EditText)layout.findViewById(R.id.dialog_username);
-                final EditText new_content = (EditText)layout.findViewById(R.id.dialog_content);
 
-                builder = new AlertDialog.Builder(context);
-                builder.setView(layout);
-                builder.setTitle("댓글을 작성하세요.");
-                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                String new_username_str = username.getText().toString().trim();
+                String new_content_str = content.getText().toString().trim();
+                if (new_username_str.length() == 0) {
+                    //@TODO: username 비었을 때, 에러메시지 다이얼로그 부를 것.
+                    username.requestFocus();
+                    makeAlertDialog( "게시자를 입력하세요." ).show();
+                } else if (new_content_str.length() == 0) {
+                    //@TODO: content 비었을 때, 에러메시지 다이얼로그 부를 것.
+                    content.requestFocus();
+                    makeAlertDialog( "댓글을 입력하세요." ).show();
+
+                }
+
+                Log.d(LOG_TAG, "새로운 댓글 --> " + new_username_str + " / " + new_content_str);
+                reply = new SupportMessageReply();
+                reply.setContent(new_content_str);
+                reply.setUsername(new_username_str);
+                api.writeMessageReply(num, reply, new Callback<Response>() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //새로 등록된 댓글, 작성자
-                        String new_content_str = new_content.getText().toString();
-                        String new_username_str = new_username.getText().toString();
-                        //아무것도 입력되지 않았는데 확인버튼 눌렀을 때 다이얼로그 띄우기
-                        if (new_username_str.trim().length() == 0) {
-                            makeAlertDialog(" 작성자를 입력하지 않았습니다. ").show();
-
-                        } else if (new_content_str.trim().length() == 0) {
-                            makeAlertDialog(" 내용을 입력하지 않았습니다. ").show();
-                        }
-
-                        Log.d(LOG_TAG, "새로운 댓글 --> " + new_username_str + " / " + new_content_str);
-                        reply = new SupportMessageReply();
-                        reply.setContent(new_content_str);
-                        reply.setUsername(new_username_str);
-                        api.writeMessageReply(num, reply, new Callback<Response>() {
-                            @Override
-                            public void success(Response response, Response response2) {
-                                setResult(RESULT_OK);
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
-
-                            }
-                        });
+                    public void success(Response response, Response response2) {
                         api.getMessage(num, new Callback<SupportMessage>() {
                             @Override
                             public void success(SupportMessage supportMessage, Response response) {
                                 replies = new ArrayList<SupportMessageReply>();
                                 replies.addAll(supportMessage.getReply());
+                                reply_count.setText("총 " + replies.size() + "개의 댓글이 있습니다.");
                                 adapter.setReplyItems(replies);
                                 adapter.notifyDataSetInvalidated();
                                 setResult(RESULT_OK);
@@ -130,16 +120,12 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
 
                             }
                         });
-                        dialog.dismiss();
                     }
-                });
-                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                    public void failure(RetrofitError error) {
+
                     }
                 });
-                builder.show();
             }
         });
 
