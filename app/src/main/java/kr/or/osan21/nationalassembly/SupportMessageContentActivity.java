@@ -43,7 +43,7 @@ import retrofit.client.Response;
 public class SupportMessageContentActivity extends AppCompatActivity {
     private final String LOG_TAG = "MessageContentActivity";
     private SupportMessageAPI supportMessageAPI;
-    private TextView title, bar;
+    private TextView bar;
     private TextView username;
     private TextView content;
     private TextView regDate;
@@ -67,7 +67,6 @@ public class SupportMessageContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_support_message_content);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         bar = (TextView) findViewById(R.id.support_message_content_bar);
-        title = (TextView) findViewById(R.id.support_message_content_title);
         username = (TextView) findViewById(R.id.support_message_content_username);
         content = (TextView) findViewById(R.id.support_message_content_content);
         regDate = (TextView) findViewById(R.id.support_message_content_regDate);
@@ -79,7 +78,6 @@ public class SupportMessageContentActivity extends AppCompatActivity {
         cjkR = CustomFont.getCustomFont(this, "CJKR");
 
         bar.setTypeface(hans);
-        title.setTypeface(cjkM);
         regDate.setTypeface(cjkR);
         username.setTypeface(cjkR);
         content.setTypeface(cjkR);
@@ -200,7 +198,6 @@ public class SupportMessageContentActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, " content : " + message.getContent());
                 Log.d(LOG_TAG, " regDate : " + message.getRegdate());
 
-                title.setText(message.getTitle());
                 username.setText("게시자 : " + message.getUsername());
                 content.setText(message.getContent());
                 regDate.setText(message.getRegdate());

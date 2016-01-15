@@ -49,16 +49,6 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/support_message_content_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:maxLength="20"
-                android:textColor="#464646"
-                android:layout_gravity="left"
-                android:textSize="18dp" />
         </LinearLayout>
 
         <RelativeLayout

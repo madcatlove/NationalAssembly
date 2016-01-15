@@ -166,9 +166,10 @@ public class SupportMessageActivity extends AppCompatActivity {
 
                 holder = new SupportViewHolder();
 
-                holder.title = (TextView) convertView.findViewById(R.id.support_message_title);
+                holder.content = (TextView) convertView.findViewById(R.id.support_message_content);
                 holder.username = (TextView) convertView.findViewById(R.id.support_message_username);
                 holder.reply_count = (TextView) convertView.findViewById(R.id.support_message_reply);
+                holder.regDate = (TextView) convertView.findViewById(R.id.support_message_date);
 
                 convertView.setTag(holder);
             }
@@ -176,31 +177,16 @@ public class SupportMessageActivity extends AppCompatActivity {
                 holder = (SupportViewHolder)convertView.getTag();
             }
 
-
-            //리스트에서 타이틀 보여줄 때 15자리로 제한.
-            String str_temp = "";
-            if(messageItems.get(position).getTitle().length() > 12) {
-                str_temp = messageItems.get(position).getTitle();
-                str_temp = str_temp.substring(0, 13);
-                str_temp += "..";
-                holder.title.setText(str_temp);
-            } else {
-                holder.title.setText(messageItems.get(position).getTitle());
-            }
-            if(messageItems.get(position).getUsername().length() > 12) {
-                str_temp = messageItems.get(position).getUsername();
-                str_temp = str_temp.substring(0, 13);
-                str_temp += "..";
-                Log.d(LOG_TAG, "User name : " + str_temp);
-                holder.username.setText("게시자 : " + str_temp);
-            } else {
-                holder.username.setText("게시자 : " + messageItems.get(position).getUsername());
-            }
+            //holder.title.setText(messageItems.get(position).getTitle());
+            holder.content.setText(messageItems.get(position).getContent());
+            holder.username.setText("게시자 : " + messageItems.get(position).getUsername());
             holder.reply_count.setText("" + messageItems.get(position).getReply_count());
+            holder.regDate.setText(messageItems.get(position).getRegdate());
 
-            holder.title.setTypeface(cjkB); // 좀더 얇게 하려면 cjkM으로 해도 될듯함
+            holder.content.setTypeface(cjkM); // 좀더 얇게 하려면 cjkM으로 해도 될듯함
             holder.username.setTypeface(cjkR);
             holder.reply_count.setTypeface(cjkR);
+            holder.regDate.setTypeface(cjkR);
 
             // 리스트 아이템을 터치 했을 때 이벤트 발생
             convertView.setOnClickListener(new View.OnClickListener() {
@@ -213,9 +199,10 @@ public class SupportMessageActivity extends AppCompatActivity {
             return convertView;
         }
         class SupportViewHolder {
-            TextView title;
+            TextView content;
             TextView username;
             TextView reply_count;
+            TextView regDate;
         }
     }
     public void gotoback(View v) {

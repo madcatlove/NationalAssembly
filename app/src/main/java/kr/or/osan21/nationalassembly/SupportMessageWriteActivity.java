@@ -24,7 +24,7 @@ import retrofit.client.Response;
 
 public class SupportMessageWriteActivity extends AppCompatActivity {
     private static String LOG_TAG = "SupportMessageWriteActivity";
-    private TextView title, title_label;
+    //private TextView title, title_label;
     private TextView username, username_label;
     private TextView content, bar;
     private Button submit;
@@ -36,11 +36,9 @@ public class SupportMessageWriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support_message_write);
 
-        title = (TextView)findViewById(R.id.support_message_write_title);
         username = (TextView)findViewById(R.id.support_message_write_username);
         content = (TextView)findViewById(R.id.support_message_write_content);
         submit = (Button)findViewById(R.id.support_message_write_submit);
-        title_label = (TextView)findViewById(R.id.support_message_write_title_label);
         username_label = (TextView)findViewById(R.id.support_message_write_username_label);
         bar = (TextView)findViewById(R.id.support_message_write_bar);
 
@@ -48,7 +46,6 @@ public class SupportMessageWriteActivity extends AppCompatActivity {
         cjkM = CustomFont.getCustomFont(this, "cjkM");
         cjkR = CustomFont.getCustomFont(this, "cjkR");
 
-        title_label.setTypeface(cjkM);
         username_label.setTypeface(cjkM);
         submit.setTypeface(cjkM);
         bar.setTypeface(CustomFont.getCustomFont(this,"hans"));
@@ -65,24 +62,23 @@ public class SupportMessageWriteActivity extends AppCompatActivity {
                 dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm");
                 Log.d(LOG_TAG, "작성날짜: " + dateFormat.format(today));
 
-                final String str_title = title.getText().toString().trim();
                 final String str_content = content.getText().toString().trim();
                 final String str_username = username.getText().toString().trim();
                 final String str_regdate = dateFormat.format(today);
 
                 //작성버튼 눌렀는데 사용자 비었을 때 처리
                 if( str_username.length() == 0) {
-                    makeAlertDialog(" 작성자를 입력해주세요. ").show();
+                    makeAlertDialog(" 게시자를 입력해주세요. ").show();
                     username.requestFocus();
                     return;
                 }
 
-                //작성버튼 눌렀는데 제목 비었을 때 처리
-                else if( str_title.length() == 0) {
-                    makeAlertDialog(" 제목을 입력해주세요. ").show();
-                    title.requestFocus();
-                    return;
-                }
+//                //작성버튼 눌렀는데 제목 비었을 때 처리
+//                else if( str_title.length() == 0) {
+//                    makeAlertDialog(" 제목을 입력해주세요. ").show();
+//                    title.requestFocus();
+//                    return;
+//                }
 
                 //내용이 비었을 때 처리
                 else if( str_content.length() == 0) {
@@ -93,11 +89,11 @@ public class SupportMessageWriteActivity extends AppCompatActivity {
 
                 // 서버에 격려메세지 전송
                 SupportMessage message = new SupportMessage();
-                message.setTitle( str_title );
+                message.setTitle("제목");
                 message.setContent( str_content );
                 message.setUsername( str_username );
                 message.setRegdate( str_regdate );
-
+                Log.d(LOG_TAG, message.getContent().toString());
                 supportMessageAPI.writeMessage(message, new Callback<Response>() {
                     @Override
                     public void success(Response response, Response response2) {
