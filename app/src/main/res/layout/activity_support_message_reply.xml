@@ -91,38 +91,13 @@
                 android:id="@+id/reply_btn"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
-                android:background="@drawable/support_message_write_border"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="등록"
                 android:textColor="#000000"
                 android:textSize="13dp"
                 android:layout_marginRight="10dp"
+                android:background="@null"
                 android:layout_weight="0.15"/>
         </LinearLayout>
     </RelativeLayout>
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="35dp"-->
-        <!--android:background="#464646">-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/myImageView"-->
-            <!--android:layout_width="22dp"-->
-            <!--android:layout_height="22dp"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginLeft="0dp"-->
-            <!--android:onClick="gotoback"-->
-            <!--android:scaleType="centerInside"-->
-            <!--android:src="@drawable/common_backbtn" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/myImageViewText"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:text="댓글을 남겨주세요"-->
-            <!--android:textColor="#ffffff" />-->
-    <!--</RelativeLayout>-->
-
 </LinearLayout>
