@@ -33,9 +33,25 @@
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
-    <WebView
-        android:id="@+id/cu_webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="30dp">
+        <TextView
+            android:id="@+id/cheerup_title"
+            android:text="시민들의 응원 메시지"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="20dp"
+            android:textColor="#000000"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal|center_vertical"/>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/youtube_fragment_cheerup"
+            android:name="com.google.android.youtube.player.YouTubePlayerFragment" />
+    </LinearLayout>
 </LinearLayout>

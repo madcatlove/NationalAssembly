@@ -25,14 +25,14 @@ import kr.or.osan21.nationalassembly.Utils.CustomFont;
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "ProfileActivity";
-    private static final String ABOUT_MOVIE_URL = API.STATIC_URL + "/movie/profile.mp4";
-    private static final String PROFILE_YOUTUBE = "https://youtu.be/acrpXUhVOmQ";
-    private static final String YOUTUBE_API_KEY = "AIzaSyA1PhfQKbQKnriHu4fo4vZxnQkGBPDn8sE";
+    //private static final String ABOUT_MOVIE_URL = API.STATIC_URL + "/movie/profile.mp4";
+    //private static final String PROFILE_YOUTUBE = "https://youtu.be/acrpXUhVOmQ";
+    //private static final String YOUTUBE_API_KEY = "AIzaSyA1PhfQKbQKnriHu4fo4vZxnQkGBPDn8sE";
 
-    private VideoView profile_video;
-    private MediaController mediaController;
+    //private VideoView profile_video;
+    //private MediaController mediaController;
     private ScrollView scv;
-    private boolean videoReady = false;
+    //private boolean videoReady = false;
 
     private YouTubePlayerFragment videoFragment;
     private YouTubePlayer videoPlayer = null;
