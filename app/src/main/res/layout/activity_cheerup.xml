@@ -51,6 +51,9 @@
         <fragment
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
             android:id="@+id/youtube_fragment_cheerup"
             android:name="com.google.android.youtube.player.YouTubePlayerFragment" />
     </LinearLayout>

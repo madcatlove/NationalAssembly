@@ -75,7 +75,7 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
         content.setTypeface(cjkR);
         reply_count = (TextView) findViewById(R.id.message_reply_count);
         reply_count.setTypeface(cjkB);
-        TextView reply_count_txt = (TextView)findViewById(R.id.message_reply_count_txt);
+        final TextView reply_count_txt = (TextView)findViewById(R.id.message_reply_count_txt);
         reply_count_txt.setTypeface(cjkR);
 
         api = new SupportMessageAPI();
@@ -84,7 +84,8 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
             public void success(SupportMessage supportMessage, Response response) {
                 replies = new ArrayList<SupportMessageReply>();
                 replies.addAll(supportMessage.getReply());
-                reply_count.setText(replies.size()+"");
+                reply_count.setText(replies.size() + "");
+                reply_count_txt.setText("개의 댓글이 있습니다.");
                 adapter.setReplyItems(replies);
                 adapter.notifyDataSetInvalidated();
                 //setResult(RESULT_OK);
@@ -128,6 +129,7 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
                                 replies = new ArrayList<SupportMessageReply>();
                                 replies.addAll(supportMessage.getReply());
                                 reply_count.setText(replies.size() + "");
+                                reply_count_txt.setText("개의 댓글이 있습니다.");
                                 adapter.setReplyItems(replies);
                                 adapter.notifyDataSetInvalidated();
                                 username.setText("");
