@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="kr.or.osan21.nationalassembly.CheerupActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#464646">
+
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/common_backbtn"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="0dp"
+            android:onClick="gotoback"/>
+
+        <TextView
+            android:id="@+id/cheerup_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="응원메시지"
+            android:textSize="13dp"
+            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/cu_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

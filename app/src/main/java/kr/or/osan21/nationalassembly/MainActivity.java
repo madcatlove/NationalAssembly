@@ -175,6 +175,7 @@ public class MainActivity extends AppCompatActivity  {
         custom_adapter.add("푸시 알림받기");
         custom_adapter.add("건의사항 & 격려");
         custom_adapter.add("후원하기");
+        custom_adapter.add("응원메시지");
         custom_adapter.add("공유하기");
 
         // 이전 네비게이션 메뉴
@@ -319,8 +320,10 @@ public class MainActivity extends AppCompatActivity  {
                 } else if (position == 2) {
                     img.setBackgroundResource(R.drawable.slider_icon_support);
 
+                } else if (position == 3) {
+                    //@TODO: 응원메시지 이미지 넣기
                 }
-                else if(position == 3) {
+                else if(position == 4) {
                     img.setBackgroundResource(R.drawable.slider_icon_share);
                     View view = (View)convertView.findViewById(R.id.slider_item_under);
                     view.setBackgroundColor(Color.WHITE);
@@ -340,7 +343,8 @@ public class MainActivity extends AppCompatActivity  {
                         } else if (m_List.get(pos).equalsIgnoreCase("후원하기")) {
                             Log.d(LOG_TAG, "후원하기");
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-
+                        } else if(m_List.get(pos).equalsIgnoreCase("응원메시지")) {
+                            startActivity(new Intent(MainActivity.this, CheerupActivity.class));
                         } else if (m_List.get(pos).equalsIgnoreCase("공유하기")) {
                             Log.d(LOG_TAG, "공유하기");
                         }
