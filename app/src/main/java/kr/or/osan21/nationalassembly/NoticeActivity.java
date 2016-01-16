@@ -41,7 +41,7 @@ public class NoticeActivity extends AppCompatActivity {
 
         //모든 text에 글꼴 적용
         tf = CustomFont.getCustomFont(this, "hans");
-        tf2 = CustomFont.getCustomFont(this, "CJKM");
+        tf2 = CustomFont.getCustomFont(this, "CJKB");
         CustomFont.setGlobalFont(tf, (ViewGroup) findViewById(R.id.notice_layout));
 
         // 리스트뷰 가져오기 및 커스텀 어답터 할당

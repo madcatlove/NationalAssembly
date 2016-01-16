@@ -10,7 +10,7 @@
         android:paddingTop="24dp"
         android:paddingLeft="26dp"
         android:textSize="15dp"
-        android:textColor="#000000"/>
+        android:textColor="#464646"/>
 
     <TextView
         android:id="@+id/notice_item_title"

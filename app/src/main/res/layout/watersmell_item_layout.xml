@@ -12,7 +12,7 @@
         android:paddingLeft="26dp"
         android:textSize="15dp"
         android:text="Profile"
-        android:textColor="#000000"/>
+        android:textColor="#464646"/>
 
     <TextView
         android:id="@+id/water_smell_item_title"

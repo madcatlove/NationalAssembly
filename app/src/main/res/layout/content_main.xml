@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
             android:scaleType="centerInside"
-            android:layout_marginLeft="0dp"
+            android:layout_marginLeft="5dp"
             android:onClick="showSliding"/>
 
         <TextView

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/notice_layout"
     android:orientation="vertical"
+    android:background="#ffffff"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="kr.or.osan21.nationalassembly.NoticeActivity">
 

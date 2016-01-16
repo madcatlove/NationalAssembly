@@ -39,7 +39,7 @@ public class WatersmellActivity extends AppCompatActivity {
         setContentView(R.layout.activity_watersmell);
 
         tf = CustomFont.getCustomFont(this,"hans");
-        tf2 = CustomFont.getCustomFont(this, "CJKM");
+        tf2 = CustomFont.getCustomFont(this, "CJKB");
         CustomFont.setGlobalFont(tf, (ViewGroup) findViewById(R.id.water_smell_menu));
 
         // ListView가져오기 및 custom adapter 생성, 연결

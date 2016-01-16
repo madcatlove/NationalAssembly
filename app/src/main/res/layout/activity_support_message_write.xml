@@ -35,24 +35,18 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
+        android:layout_weight="9"
         android:background="#ffffff"
         android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:background="#c4c4c4" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:orientation="horizontal">
@@ -93,13 +87,14 @@
         <EditText
             android:id="@+id/support_message_write_content"
             android:layout_width="match_parent"
-            android:layout_height="390dp"
+            android:layout_height="0dp"
             android:layout_marginBottom="25dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:background="@drawable/support_message_write_border"
             android:gravity="top"
             android:hint="내용을 입력하세요."
+            android:layout_weight="9"
             android:textCursorDrawable="@null"
             android:textSize="12dp" />
     </LinearLayout>
@@ -107,11 +102,12 @@
     <Button
         android:id="@+id/support_message_write_submit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:layout_weight="1"
         android:background="@drawable/support_message_write_border"
         android:gravity="center_horizontal|center_vertical"
         android:text="등록"

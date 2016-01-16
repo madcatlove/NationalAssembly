@@ -8,7 +8,7 @@
     tools:context="kr.or.osan21.nationalassembly.SupportMessageReplyActivity"
     android:background="#000000">
 
-    <RelativeLayout
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,10 +18,10 @@
             android:id="@+id/message_reply_count_layout"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="12dp">
+            android:layout_marginTop="10dp">
             <TextView
                 android:id="@+id/message_reply_count"
                 android:layout_width="wrap_content"
@@ -48,7 +48,8 @@
             android:layout_below="@+id/view1"
             android:id="@+id/message_reply_list"
             android:layout_width="match_parent"
-            android:layout_height="445dp" />
+            android:layout_height="0dp"
+            android:layout_weight="8"/>
 
         <View
             android:layout_below="@+id/message_reply_list"
@@ -58,10 +59,11 @@
             android:background="#dadada" />
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="1">
             <EditText
@@ -99,5 +101,5 @@
                 android:background="@null"
                 android:layout_weight="0.15"/>
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
