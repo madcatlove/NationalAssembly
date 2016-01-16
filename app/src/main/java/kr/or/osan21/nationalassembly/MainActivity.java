@@ -52,6 +52,8 @@ import com.kakao.KakaoTalkLinkMessageBuilder;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity  {
 
     public static final String LOG_TAG = "MainActivity";
     private Typeface hans, cjkB;
+    private Context context;
     private ListView nav_list;
     private CustomAdapter custom_adapter;
     private LinearLayout main_menu_layout;
@@ -86,6 +89,8 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = this;
 
         // 폰트 설정 모든 뷰그룹에 적용
         hans = CustomFont.getCustomFont(this, "hans");
@@ -178,10 +183,6 @@ public class MainActivity extends AppCompatActivity  {
         custom_adapter.add("응원메시지");
         custom_adapter.add("공유하기");
 
-        // 이전 네비게이션 메뉴
-        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(this);
-
         bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_push_on_btn); // 비트맵 이미지를 만든다.
         width=(int)(getWindowManager().getDefaultDisplay().getWidth()*0.15); // 가로 사이즈 지정
         height=(int)(width*0.7); // 세로 사이즈 지정
@@ -191,14 +192,6 @@ public class MainActivity extends AppCompatActivity  {
 
         // shared preference
         sharedPreferences = getSharedPreferences(CONST_PUSH_MESSAGE.PUSH_SHARED_PREF_STR, MODE_PRIVATE);
-
-        // kakaolink initialization
-        try {
-            kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
-            kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
-        } catch (KakaoParameterException e) {
-            e.printStackTrace();
-        }
 
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);
@@ -321,7 +314,7 @@ public class MainActivity extends AppCompatActivity  {
                     img.setBackgroundResource(R.drawable.slider_icon_support);
 
                 } else if (position == 3) {
-                    //@TODO: 응원메시지 이미지 넣기
+                    img.setBackgroundResource(R.drawable.slider_icon_cheerup);
                 }
                 else if(position == 4) {
                     img.setBackgroundResource(R.drawable.slider_icon_share);
@@ -348,7 +341,6 @@ public class MainActivity extends AppCompatActivity  {
                         } else if (m_List.get(pos).equalsIgnoreCase("공유하기")) {
                             Log.d(LOG_TAG, "공유하기");
                         }
-                        //Toast.makeText(context, "리스트 클릭 : " + m_List.get(pos), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -375,14 +367,11 @@ public class MainActivity extends AppCompatActivity  {
         if (checked) {
             Log.d(LOG_TAG, "PushON");
             iv.setImageBitmap(onBmp); // 이미지뷰에 조정한 이미지 넣기
-            //
-            //iv.setImageResource(R.drawable.slider_push_on_btn);
             checked = false;
             setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_ON);
         } else {
             Log.d(LOG_TAG, "PushOff");
             iv.setImageBitmap(offBmp);
-            //iv.setImageResource(R.drawable.slider_push_off_btn);
             checked = true;
             setPushStatusInShrdPreference(CONST_PUSH_MESSAGE.PUSH_OFF);
         }
@@ -393,6 +382,8 @@ public class MainActivity extends AppCompatActivity  {
     public void shareKakao(View v)
     {
         try {
+            kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
+            kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
             kakaoTalkLinkMessageBuilder.addText("국회의원 안민석");
             kakaoTalkLinkMessageBuilder.addImage("https://www.google.co.kr/images/srpr/logo11w.png", 200, 200);
            /* kakaoTalkLinkMessageBuilder.addAppLink("앱 바로가기",
@@ -415,21 +406,27 @@ public class MainActivity extends AppCompatActivity  {
 
     public void shareBand(View v)
     {
-        try {
-            PackageManager manager = this.getPackageManager();
-            Intent i = manager.getLaunchIntentForPackage("com.nhn.android.band");
-        } catch (Exception e) {
+        PackageManager manager = context.getPackageManager();
+        Intent i = manager.getLaunchIntentForPackage("com.nhn.android.band");
+
+        if(i == null) {
             // 밴드앱 설치되지 않은 경우 구글 플레이 설치페이지로 이동
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.band"));
             startActivity(intent);
             return;
         }
 
-        String serviceDomain = "www.bloter.net"; //  연동 서비스 도메인
-        String encodedText = "%ED%85%8C%EC%8A%A4%ED%8A%B8+%EB%B3%B8%EB%AC%B8"; // 글 본문 (utf-8 urlencoded)
-        Uri uri = Uri.parse("bandapp://create/post?text=" + encodedText + "&route=" + serviceDomain);
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        try {
+            String serviceDomain = "www.naver.com"; //  연동 서비스 도메인
+            String encodedText = URLEncoder.encode("국회의원 안민석 앱 바로가기", "utf-8"); // 글 본문 // TODO: 마켓주소 추후에 넣기
+            Uri uri = Uri.parse("bandapp://create/post?text=" + encodedText + "&route=" + serviceDomain);
+            Intent newIntent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(newIntent);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void shareSMS(View v)
@@ -444,7 +441,7 @@ public class MainActivity extends AppCompatActivity  {
 
     public void shareFacebook(View v)
     {
-        String mySharedLink = "http://bspfp.pe.kr";
+        String mySharedLink = ""; // TODO: 추후 마켓 주소 넣을것
         String mySubject = "국회의원 안민석";
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
@@ -474,8 +471,8 @@ public class MainActivity extends AppCompatActivity  {
 
     public void shareTwitter(View v)
     {
-        String mySharedLink = "http://";
-        String mySubject = "국회의원 안민석";
+        String mySharedLink = "http://"; // TODO: 추후 마켓 주소 넣을것
+        String mySubject = "국회의원 안민석 앱 바로가기";
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("text/plain");
@@ -535,36 +532,6 @@ public class MainActivity extends AppCompatActivity  {
         } else {
             super.onBackPressed();
         }
-    }
-
-    /*
-    *
-        if(goSupport.canGoBack()) {
-            goSupport.goBack();
-        }
-        else {
-            super.onBackPressed();
-        }*/
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     //둥근이미지
@@ -652,32 +619,4 @@ public class MainActivity extends AppCompatActivity  {
         }
 
     }
-
-    /*
-    // 이전 네비게이션 뷰 메소드
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.push) {
-            // Handle the camera action
-        } else if (id == R.id.suggest) {
-
-        } else if (id == R.id.support) {
-
-        } else if (id == R.id.share) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-
-        return true;
-    }*/
 }
