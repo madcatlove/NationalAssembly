@@ -49,7 +49,8 @@ public class GCMListenerService extends GcmListenerService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, SplashActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder builder = new Notification.Builder(this);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.drawable.app_icon);
+
         builder.setTicker("공지사항이 도착했습니다.");
         builder.setWhen(System.currentTimeMillis());
         builder.setContentTitle(title);
