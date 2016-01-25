@@ -14,21 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessage;
 import kr.or.osan21.nationalassembly.SupportMessage.SupportMessageAPI;
-import kr.or.osan21.nationalassembly.SupportMessage.SupportMessageReply;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -40,7 +35,7 @@ public class SupportMessageActivity extends AppCompatActivity {
     private ListView support_message_list;
     private CustomAdapter adapter;
     private ImageButton write;
-    private Typeface hans, cjkB, cjkR, cjkM;
+    private Typeface hans, cjkR, cjkM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +69,6 @@ public class SupportMessageActivity extends AppCompatActivity {
         bar.setTypeface(hans);
 
         cjkM = CustomFont.getCustomFont(this, "CJKM");
-        cjkB = CustomFont.getCustomFont(this, "CJKB");
         cjkR = CustomFont.getCustomFont(this, "CJKR");
 
         //건의사항 및 격려 작성하러 가기
@@ -178,7 +172,6 @@ public class SupportMessageActivity extends AppCompatActivity {
                 holder = (SupportViewHolder)convertView.getTag();
             }
 
-            //holder.title.setText(messageItems.get(position).getTitle());
             holder.content.setText(messageItems.get(position).getContent());
             holder.username.setText("게시자 : " + messageItems.get(position).getUsername());
             holder.reply_count.setText("" + messageItems.get(position).getReply_count());

@@ -28,15 +28,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -49,8 +44,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.kakao.KakaoLink;
 import com.kakao.KakaoParameterException;
 import com.kakao.KakaoTalkLinkMessageBuilder;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URLEncoder;

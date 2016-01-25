@@ -24,7 +24,7 @@ import retrofit.client.Response;
 
 public class SupportMessageWriteActivity extends AppCompatActivity {
     private static String LOG_TAG = "SupportMessageWriteActivity";
-    //private TextView title, title_label;
+
     private TextView username, username_label;
     private TextView content, bar;
     private Button submit;
@@ -72,13 +72,6 @@ public class SupportMessageWriteActivity extends AppCompatActivity {
                     username.requestFocus();
                     return;
                 }
-
-//                //작성버튼 눌렀는데 제목 비었을 때 처리
-//                else if( str_title.length() == 0) {
-//                    makeAlertDialog(" 제목을 입력해주세요. ").show();
-//                    title.requestFocus();
-//                    return;
-//                }
 
                 //내용이 비었을 때 처리
                 else if( str_content.length() == 0) {

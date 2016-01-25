@@ -1,7 +1,6 @@
 package kr.or.osan21.nationalassembly;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,16 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -216,7 +209,6 @@ public class SupportMessageContentActivity extends AppCompatActivity {
             }
         });
 
-        //reply_list.setAdapter(adapter);
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);
         }
@@ -237,35 +229,6 @@ public class SupportMessageContentActivity extends AppCompatActivity {
 
         return ad;
     }
-
-    /*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            supportMessageAPI.getMessage(num, new Callback<SupportMessage>() {
-                @Override
-                public void success(SupportMessage supportMessage, Response response) {
-                    message = new SupportMessage();
-                    message.setTitle(supportMessage.getTitle());
-                    message.setUsername(supportMessage.getUsername());
-                    message.setContent(supportMessage.getContent());
-                    message.setRegdate(supportMessage.getRegdate());
-
-                    title.setText(message.getTitle());
-                    username.setText("게시자 : " + message.getUsername());
-                    content.setText(message.getContent());
-                    regDate.setText(message.getRegdate());
-                    setResult(RESULT_OK);
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-
-                }
-            });
-        }
-    }*/
 
     public void gotoback(View v) {
         finish();

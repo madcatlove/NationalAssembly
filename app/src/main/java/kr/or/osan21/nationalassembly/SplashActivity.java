@@ -33,12 +33,6 @@ public class SplashActivity extends AppCompatActivity {
 
         splashImg = (ImageView) findViewById(R.id.splash_img);
 
-        // 비트맵 옵션
-//        BitmapFactory.Options options = new BitmapFactory.Options();
-//        options.inSampleSize = 6;
-//        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.splash_img, options);
-//        splashImg.setImageBitmap(bitmap);
-
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
 
@@ -49,12 +43,8 @@ public class SplashActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(R.drawable.splash_img)
-//                .override(width, height)
                 .centerCrop()
                 .into(splashImg);
-
-
-
 
         //적용
         splashImg.setOnClickListener(new View.OnClickListener() {
@@ -74,44 +64,11 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-//        if(splashImg != null) {
-//            splashImg.setImageBitmap(null);
-//            splashImg = null;
-//
-//            if( bitmap != null) {
-//                bitmap.recycle();
-//                bitmap = null;
-//            }
-//        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_splash, menu);
         return true;
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
 
     // GCM 시작
     private void startGCMListen() {

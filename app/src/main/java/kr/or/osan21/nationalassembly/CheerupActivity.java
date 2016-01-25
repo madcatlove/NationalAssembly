@@ -1,15 +1,11 @@
 package kr.or.osan21.nationalassembly;
 
-import android.app.ProgressDialog;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -18,7 +14,6 @@ import com.google.android.youtube.player.YouTubePlayerFragment;
 
 import kr.or.osan21.nationalassembly.Utils.API;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
-import kr.or.osan21.nationalassembly.WaterSmell.WaterSmellAPI;
 
 public class CheerupActivity extends AppCompatActivity {
     private static final String LOG_TAG = "CheerupActivity";
@@ -36,8 +31,8 @@ public class CheerupActivity extends AppCompatActivity {
         bar_title = (TextView)findViewById(R.id.cheerup_text);
         bar_title.setTypeface(CustomFont.getCustomFont(this, "hans"));
 
-        cheerup_title = (TextView)findViewById(R.id.cheerup_title);
-        cheerup_title.setTypeface(CustomFont.getCustomFont(this, "CJKB"));
+        //cheerup_title = (TextView)findViewById(R.id.cheerup_title);
+        //cheerup_title.setTypeface(CustomFont.getCustomFont(this, "CJKB"));
 
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);

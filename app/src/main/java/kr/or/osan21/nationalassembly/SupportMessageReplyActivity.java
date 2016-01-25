@@ -1,7 +1,6 @@
 package kr.or.osan21.nationalassembly;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,8 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +85,6 @@ public class SupportMessageReplyActivity extends AppCompatActivity {
                 reply_count_txt.setText("개의 댓글이 있습니다.");
                 adapter.setReplyItems(replies);
                 adapter.notifyDataSetInvalidated();
-                //setResult(RESULT_OK);
             }
 
             @Override

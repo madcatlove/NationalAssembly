@@ -147,7 +147,20 @@ public class MediaActivity extends AppCompatActivity {
             holder.title.setTypeface(tf2);
             holder.content.setTypeface(tf);
 
-            holder.title.setText(medias.get(position).getTitle());
+            // 기사 제목 글자수제한
+            String str_temp = "";
+            if(medias.get(position).getTitle().length() > 23) {
+                str_temp = medias.get(position).getTitle();
+                if((str_temp.contains("'")&&str_temp.contains("'")) || (str_temp.contains("[")&&str_temp.contains("]")) || (str_temp.contains("(")&&str_temp.contains(")")))
+                    str_temp = str_temp.substring(0, 24);
+                else
+                    str_temp = str_temp.substring(0, 23);
+                str_temp += "..";
+                holder.title.setText(str_temp);
+            } else {
+                holder.title.setText(medias.get(position).getTitle());
+            }
+
             holder.content.setText(medias.get(position).getContent());
 
             if(medias.get(position).getMedia_image() != null) {
@@ -186,35 +199,10 @@ public class MediaActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, " image 사라짐");
             }
 
-            //@TODO: Title이랑 content길이 세어서 리스트에 알맞게 ...붙여서 보여주기
-            //리스트에서 타이틀 보여줄 때 15자리로 제한.
-            /*
-            String str_temp = "";
-            if(messageItems.get(position).getTitle().length() > 12) {
-                str_temp = messageItems.get(position).getTitle();
-                str_temp = str_temp.substring(0, 13);
-                str_temp += "..";
-                holder.title.setText(str_temp);
-            } else {
-                holder.title.setText(messageItems.get(position).getTitle());
-            }
-            if(messageItems.get(position).getUsername().length() > 12) {
-                str_temp = messageItems.get(position).getUsername();
-                str_temp = str_temp.substring(0, 13);
-                str_temp += "..";
-                Log.d(LOG_TAG, "User name : " + str_temp);
-                holder.username.setText(str_temp);
-            } else {
-                holder.username.setText(messageItems.get(position).getUsername());
-            }
-            holder.reply_count.setText("" + messageItems.get(position).getReply_count());
-            holder.content.setText(messageItems.get(position).getContent());
-            */
             // 리스트 아이템을 터치 했을 때 이벤트 발생
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Toast.makeText(getApplicationContext(), medias.get(position).getTitle().toString(), Toast.LENGTH_SHORT).show();
                     startActivityForResult(new Intent(getBaseContext(), MediaContentActivity.class).putExtra("m_id", medias.get(pos).getNum()), 1);
                 }
             });

@@ -94,6 +94,9 @@
             android:label="@string/title_activity_profile"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".CheerupActivity"
+            android:screenOrientation="landscape"></activity>
+
         <!-- GCM RECEIVER -->
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -136,7 +139,6 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".CheerupActivity"></activity>
     </application>
 
 </manifest>
