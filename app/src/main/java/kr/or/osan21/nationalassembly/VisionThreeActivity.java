@@ -14,53 +14,37 @@ import com.bumptech.glide.Glide;
 
 public class VisionThreeActivity extends AppCompatActivity {
 
-    ImageView title, icon;
-    ImageButton btn1, btn2, btn3;
+    ImageView title, btn1, btn2, btn3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vision_three);
 
-        icon = (ImageView)findViewById(R.id.gift_icon);
         title = (ImageView)findViewById(R.id.vision_three_title);
-        btn1 = (ImageButton)findViewById(R.id.vision_three_btn1);
-        btn2 = (ImageButton)findViewById(R.id.vision_three_btn2);
-        btn3 = (ImageButton)findViewById(R.id.vision_three_btn3);
-
-        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-
-        final int width = display.getWidth();
-        final int height = display.getHeight();
-
-        Glide.with(this)
-                .load(R.drawable.vision_gift_icon)
-                .override(100, 100)
-                .fitCenter()
-                .into(icon);
-
+        btn1 = (ImageView)findViewById(R.id.vision_three_btn1);
+        btn2 = (ImageView)findViewById(R.id.vision_three_btn2);
+        btn3 = (ImageView)findViewById(R.id.vision_three_btn3);
         
         Glide.with(this)
                 .load(R.drawable.vision_three_title)
-                .override(width, height)
-                .fitCenter()
+                .centerCrop()
                 .into(title);
 
 
         Glide.with(this)
                 .load(R.drawable.vision_three_btn1)
-                .fitCenter()
+                .centerCrop()
                 .into(btn1);
 
         Glide.with(this)
                 .load(R.drawable.vision_three_btn2)
-                .fitCenter()
+                .centerCrop()
                 .into(btn2);
 
         Glide.with(this)
                 .load(R.drawable.vision_three_btn3)
-                .fitCenter()
+                .centerCrop()
                 .into(btn3);
 
 

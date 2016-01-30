@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="언제 어디서든 함께 해요"
+            android:text="함께 만들어가는 오산"
             android:textSize="13dp"
             android:textColor="#ffffff" />
     </RelativeLayout>

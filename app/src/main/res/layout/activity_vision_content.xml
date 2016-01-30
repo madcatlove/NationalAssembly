@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="五産, 오산의 미래를 열다"
+            android:text="5産으로 오산의 미래를 열다"
             android:textSize="13dp"
             android:textColor="#ffffff" />
     </RelativeLayout>

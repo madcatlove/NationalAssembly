@@ -14,67 +14,51 @@ import com.bumptech.glide.Glide;
 
 public class VisionFiveActivity extends AppCompatActivity {
 
-    ImageView icon, title;
-    ImageButton btn1, btn2, btn3, btn4, btn5;
+    ImageView title, btn1, btn2, btn3, btn4, btn5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vision_five);
 
-        icon = (ImageView) findViewById(R.id.five_gift_icon);
         title = (ImageView) findViewById(R.id.vision_five_title);
-        btn1 = (ImageButton) findViewById(R.id.vision_five_btn1);
-        btn2 = (ImageButton) findViewById(R.id.vision_five_btn2);
-        btn3 = (ImageButton) findViewById(R.id.vision_five_btn3);
-        btn4 = (ImageButton) findViewById(R.id.vision_five_btn4);
-        btn5 = (ImageButton) findViewById(R.id.vision_five_btn5);
-
-        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-
-        final int width = display.getWidth();
-        final int height = display.getHeight();
-
-        Glide.with(this)
-                .load(R.drawable.vision_gift_icon)
-                .override(100, 100)
-                .fitCenter()
-                .into(icon);
+        btn1 = (ImageView) findViewById(R.id.vision_five_btn1);
+        btn2 = (ImageView) findViewById(R.id.vision_five_btn2);
+        btn3 = (ImageView) findViewById(R.id.vision_five_btn3);
+        btn4 = (ImageView) findViewById(R.id.vision_five_btn4);
+        btn5 = (ImageView) findViewById(R.id.vision_five_btn5);
 
         Glide.with(this)
                 .load(R.drawable.vision_five_title)
-                .fitCenter()
+                .centerCrop()
                 .into(title);
-
 
         /* 버튼 부분 */
 
         Glide.with(this)
                 .load(R.drawable.vision_five_btn1)
-                .fitCenter()
+                .centerCrop()
                 .into(btn1);
 
 
         Glide.with(this)
                 .load(R.drawable.vision_five_btn2)
-                .fitCenter()
+                .centerCrop()
                 .into(btn2);
 
         Glide.with(this)
                 .load(R.drawable.vision_five_btn3)
-                .fitCenter()
+                .centerCrop()
                 .into(btn3);
-
 
         Glide.with(this)
                 .load(R.drawable.vision_five_btn4)
-                .fitCenter()
+                .centerCrop()
                 .into(btn4);
 
         Glide.with(this)
                 .load(R.drawable.vision_five_btn5)
-                .fitCenter()
+                .centerCrop()
                 .into(btn5);
 
     }
