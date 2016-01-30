@@ -30,162 +30,201 @@
             android:id="@+id/main_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="오산을 위하여, 안민석"
+            android:text="五産으로 오산의 미래를 열다"
             android:textColor="#ffffff"
             android:textSize="13dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/main_profile"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/bg_main_profile"
-        android:onClick="selectMenu">
-
-        <TextView
-            android:id="@+id/main_profile_title"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:paddingTop="24dp"
-            android:paddingLeft="26dp"
-            android:textSize="15dp"
-            android:text="Profile"
-            android:textColor="#464646"/>
-
-        <TextView
-            android:id="@+id/main_profile_content"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:paddingLeft="26dp"
-            android:textSize="15dp"
-            android:text="안민석이 걸어온 길"
-            android:textColor="#000000"
-            />
-    </LinearLayout>
-
-    <LinearLayout
+<!--
+    <RelativeLayout
         android:id="@+id/main_activities"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#5ebbef"
+        android:background="#48c0c1"
         android:onClick="selectMenu">
 
         <TextView
             android:id="@+id/main_activities_title"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:paddingTop="24dp"
-            android:paddingLeft="26dp"
-            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:text="Activities"
-            android:textColor="#464646"/>
+            android:textColor="#ffffff"
+            android:textStyle="italic"
+            android:textSize="19dp"/>
 
         <TextView
             android:id="@+id/main_activities_content"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:paddingLeft="26dp"
-            android:textSize="15dp"
-            android:text="안민석의 물향기 편지"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:textColor="#000000"
-            />
-    </LinearLayout>
+            android:textSize="16dp"
+            android:text="물향기편지\u0026이모저모"/>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/main_vision"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#D4EFFF"
+        android:background="#e9c58b"
         android:onClick="selectMenu">
 
         <TextView
             android:id="@+id/main_vision_title"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:paddingTop="24dp"
-            android:paddingLeft="26dp"
-            android:textSize="15dp"
-            android:text="Vision"
-            android:textColor="#464646"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Vision 2020"
+            android:textColor="#ffffff"
+            android:textStyle="italic"
+            android:textSize="19dp"/>
 
         <TextView
             android:id="@+id/main_vision_content"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:paddingLeft="26dp"
-            android:textSize="15dp"
-            android:text="五産, 오산의 미래를 열다"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:textColor="#000000"
-            />
-    </LinearLayout>
+            android:textSize="16dp"
+            android:text="五産으로 오산의 미래를 열다"/>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/main_media"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#5ebbef"
+        android:background="#e29ac2"
         android:onClick="selectMenu">
 
         <TextView
             android:id="@+id/main_media_title"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:paddingTop="24dp"
-            android:paddingLeft="26dp"
-            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:text="Media"
-            android:textColor="#464646"/>
+            android:textColor="#ffffff"
+            android:textStyle="italic"
+            android:textSize="19dp"/>
 
         <TextView
             android:id="@+id/main_media_content"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:paddingLeft="26dp"
-            android:textSize="15dp"
-            android:text="언론이 주목한 안민석"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:textColor="#000000"
-            />
-    </LinearLayout>
+            android:textSize="16dp"
+            android:text="언론이 주목한 안민석"/>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/main_notice"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#D4EFFF"
+        android:background="#8dca8e"
         android:onClick="selectMenu">
 
         <TextView
             android:id="@+id/main_notice_title"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:paddingTop="24dp"
-            android:paddingLeft="26dp"
-            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:text="Notice"
-            android:textColor="#464646"/>
+            android:textColor="#ffffff"
+            android:textStyle="italic"
+            android:textSize="19dp"/>
 
         <TextView
             android:id="@+id/main_notice_content"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:paddingLeft="26dp"
-            android:textSize="15dp"
-            android:text="언제 어디서든 함께 해요"
-            android:textColor="#000000" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            android:text="함께 만들어가는 오산"/>
+    </RelativeLayout>
 
-    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/main_profile"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#3193b6"
+        android:onClick="selectMenu">
 
+        <TextView
+            android:id="@+id/main_profile_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Profile"
+            android:textColor="#ffffff"
+            android:textStyle="italic"
+            android:textSize="19dp"/>
+
+        <TextView
+            android:id="@+id/main_profile_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            android:text="안민석이 걸어온 길"/>
+    </RelativeLayout>
+-->
+    <ImageView
+        android:id="@+id/main_activities"
+        android:onClick="selectMenu"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <ImageView
+        android:id="@+id/main_vision"
+        android:onClick="selectMenu"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <ImageView
+        android:id="@+id/main_media"
+        android:onClick="selectMenu"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <ImageView
+        android:id="@+id/main_notice"
+        android:onClick="selectMenu"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <ImageView
+        android:id="@+id/main_profile"
+        android:onClick="selectMenu"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
 </LinearLayout>
 

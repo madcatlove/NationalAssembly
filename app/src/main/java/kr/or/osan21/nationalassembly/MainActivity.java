@@ -56,7 +56,7 @@ import kr.or.osan21.nationalassembly.Utils.CustomFont;
 public class MainActivity extends AppCompatActivity  {
 
     public static final String LOG_TAG = "MainActivity";
-    private Typeface hans, cjkB;
+    private Typeface hans, cjkB, GoM, GoB;
     private Context context;
     private ListView nav_list;
     private CustomAdapter custom_adapter;
@@ -88,20 +88,105 @@ public class MainActivity extends AppCompatActivity  {
         // 폰트 설정 모든 뷰그룹에 적용
         hans = CustomFont.getCustomFont(this, "hans");
         cjkB = CustomFont.getCustomFont(this, "CJKB");
+        GoB = CustomFont.getCustomFont(this, "GoB");
+        GoM = CustomFont.getCustomFont(this, "GoM");
         CustomFont.setGlobalFont(hans, (ViewGroup) findViewById(R.id.drawer_layout));
 
+        /*
+        // 메뉴 타이틀 및 내용 글씨체 적용
+        TextView profile_title = (TextView)findViewById(R.id.main_profile_title);
+        profile_title.setTypeface(GoB);
+        TextView activities_title = (TextView)findViewById(R.id.main_activities_title);
+        activities_title.setTypeface(GoB);
+        TextView media_title = (TextView)findViewById(R.id.main_media_title);
+        media_title.setTypeface(GoB);
+        TextView notice_title = (TextView)findViewById(R.id.main_notice_title);
+        notice_title.setTypeface(GoB);
+        TextView vision_title = (TextView)findViewById(R.id.main_vision_title);
+        vision_title.setTypeface(GoB);
 
-        // 메뉴 타이틀 글씨체 적용
         TextView profile_content = (TextView)findViewById(R.id.main_profile_content);
-        profile_content.setTypeface(cjkB);
+        profile_content.setTypeface(GoM);
         TextView activities_content = (TextView)findViewById(R.id.main_activities_content);
-        activities_content.setTypeface(cjkB);
+        activities_content.setTypeface(GoM);
         TextView vision_content = (TextView)findViewById(R.id.main_vision_content);
-        vision_content.setTypeface(cjkB);
+        vision_content.setTypeface(GoM);
         TextView media_content = (TextView)findViewById(R.id.main_media_content);
-        media_content.setTypeface(cjkB);
+        media_content.setTypeface(GoM);
         TextView notice_content = (TextView)findViewById(R.id.main_notice_content);
-        notice_content.setTypeface(cjkB);
+        notice_content.setTypeface(GoM);
+        */
+
+        final ImageView activities = (ImageView)findViewById(R.id.main_activities);
+        final ImageView vision = (ImageView)findViewById(R.id.main_vision);
+        final ImageView media = (ImageView)findViewById(R.id.main_media);
+        final ImageView notice = (ImageView)findViewById(R.id.main_notice);
+        final ImageView profile = (ImageView)findViewById(R.id.main_profile);
+
+        Glide.with(this)
+                .load(R.drawable.main_activities)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        Log.e(LOG_TAG, " bitmapid : " + resource);
+                        BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                        activities.setBackground(bd);
+                    }
+                });
+
+        Glide.with(this)
+                .load(R.drawable.main_vision)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        Log.e(LOG_TAG, " bitmapid : " + resource);
+                        BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                        vision.setBackground(bd);
+                    }
+                });
+
+        Glide.with(this)
+                .load(R.drawable.main_media)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        Log.e(LOG_TAG, " bitmapid : " + resource);
+                        BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                        media.setBackground(bd);
+                    }
+                });
+
+        Glide.with(this)
+                .load(R.drawable.main_notice)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        Log.e(LOG_TAG, " bitmapid : " + resource);
+                        BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                        notice.setBackground(bd);
+                    }
+                });
+
+        Glide.with(this)
+                .load(R.drawable.main_profile)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        Log.e(LOG_TAG, " bitmapid : " + resource);
+                        BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                        profile.setBackground(bd);
+                    }
+                });
 
         //오산시 국회의원 글씨체 따로 적용.
         job = (TextView)findViewById(R.id.job);
@@ -139,7 +224,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
         // 배경 이미지 설정
-        main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);
+       /* main_menu_layout = (LinearLayout)findViewById(R.id.main_menu);
         Glide.with(this)
                 .load(R.drawable.main_person_img02)
                 .asBitmap()
@@ -152,7 +237,7 @@ public class MainActivity extends AppCompatActivity  {
                               main_menu_layout.setBackground(bd);
                           }
                 });
-
+        */
         //슬라이딩메뉴 프로필 이미지 적용
         profile_img_view = (ImageView)findViewById(R.id.slider_profile_img);
         Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.slider_profile_img); // 비트맵 이미지를 만든다.

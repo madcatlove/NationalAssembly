@@ -34,6 +34,18 @@ public class CustomFont {
         {
             fontName="NotoSansCJKkr-Bold.otf";
         }
+        else if(name.equalsIgnoreCase("GoB"))
+        {
+            fontName="RixGoB.ttf";
+        }
+        else if(name.equalsIgnoreCase("GoL"))
+        {
+            fontName="RixGoL.ttf";
+        }
+        else if(name.equalsIgnoreCase("GoM"))
+        {
+            fontName="RixGoM.ttf";
+        }
 
         Typeface tf = Typeface.createFromAsset(ctx.getAssets(), fontName);
         return tf;
