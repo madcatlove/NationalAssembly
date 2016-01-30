@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
     tools:context=".SplashActivity">
-
+ 
     <ImageView
         android:id="@+id/splash_img"
         android:layout_width="match_parent"
