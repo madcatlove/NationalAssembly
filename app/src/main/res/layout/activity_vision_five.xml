@@ -6,12 +6,28 @@
     android:orientation="vertical"
     tools:context="kr.or.osan21.nationalassembly.VisionFiveActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:background="#e4c18b"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/vision_five_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="오산(五産)만들기를 위한 국비확보!\n비전2020으로 잘 사는 새 오산을\n만들겠습니다"
+            android:textSize="20dp"
+            android:textColor="#ffffff"/>
+    </RelativeLayout>
+    <!--
     <ImageView
         android:id="@+id/vision_five_title"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5"/>
-
+-->
     <ImageView
         android:id="@+id/vision_five_btn1"
         android:layout_width="match_parent"

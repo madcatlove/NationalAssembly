@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5ebbef"
+    android:background="#e29ac2"
     android:orientation="vertical"
     tools:context="kr.or.osan21.nationalassembly.MediaActivity">
 
@@ -30,19 +30,19 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="언론이 주목한 안민석"
-            android:textSize="13dp"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:textSize="13dp" />
     </RelativeLayout>
 
-<ListView
-    android:id="@+id/media_list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="15dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    android:layout_marginBottom="15dp">
+    <ListView
+        android:id="@+id/media_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp">
 
-</ListView>
+    </ListView>
 
 </LinearLayout>

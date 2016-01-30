@@ -31,7 +31,6 @@ public class NoticeActivity extends AppCompatActivity {
     ListView notice_list;
     CustomAdapter customAdapter;
     Typeface tf, tf2;
-    private int cnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +47,6 @@ public class NoticeActivity extends AppCompatActivity {
         notice_list.setDivider(null);
         customAdapter = new CustomAdapter();
         notice_list.setAdapter(customAdapter);
-
-        // 배경색 정하기 위한 count 초기화
-        cnt = 0;
 
         // 공지사항 API 요청
         NoticeAPI api = new NoticeAPI();
@@ -131,9 +127,9 @@ public class NoticeActivity extends AppCompatActivity {
             }
 
             if (position % 2 == 0)
-                convertView.setBackgroundColor(0xffd4efff);
+                convertView.setBackgroundColor(0xff8dca8e);
             else
-                convertView.setBackgroundColor(0xff5ebbef);
+                convertView.setBackgroundColor(0xffeff4dd);
 
             holder.date.setTypeface(tf);
             holder.title.setTypeface(tf2);

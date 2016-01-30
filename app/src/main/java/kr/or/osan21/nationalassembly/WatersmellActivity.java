@@ -128,9 +128,9 @@ public class WatersmellActivity extends AppCompatActivity {
             }
 
             if (position % 2 == 0)
-                convertView.setBackgroundColor(0xffd4efff);
+                convertView.setBackgroundColor(0xff48c0c1);
             else
-                convertView.setBackgroundColor(0xff5ebbef);
+                convertView.setBackgroundColor(0xffe3f0f9);
 
             holder.date.setTypeface(tf);
             holder.title.setTypeface(tf2);

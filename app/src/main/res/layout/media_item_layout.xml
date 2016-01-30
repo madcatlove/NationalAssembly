@@ -25,7 +25,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="3dp"
                 android:gravity="center_vertical"
-                android:textColor="#5ebbef"
+                android:textColor="#000000"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:maxLines="1"/>
@@ -66,5 +66,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:background="#5ebbef" />
+        android:background="#e29ac2" />
 </LinearLayout>
