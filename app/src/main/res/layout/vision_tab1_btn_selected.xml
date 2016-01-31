@@ -3,6 +3,5 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background ="@drawable/tab1_background_selector"
-    android:gravity="center">
+    android:background ="@drawable/tab1_background_selector">
 </LinearLayout>

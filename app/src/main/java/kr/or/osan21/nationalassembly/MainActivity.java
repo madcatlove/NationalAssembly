@@ -463,7 +463,6 @@ public class MainActivity extends AppCompatActivity  {
             kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
             kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
             kakaoTalkLinkMessageBuilder.addText("국회의원 안민석");
-            kakaoTalkLinkMessageBuilder.addImage("https://www.google.co.kr/images/srpr/logo11w.png", 200, 200);
            /* kakaoTalkLinkMessageBuilder.addAppLink("앱 바로가기",
                     new AppActionBuilder()
                             .addActionInfo(AppActionInfoBuilder

@@ -17,28 +17,22 @@ import kr.or.osan21.nationalassembly.Utils.CustomFont;
 
 public class VisionFiveActivity extends AppCompatActivity {
 
-    ImageView title, btn1, btn2, btn3, btn4, btn5;
-
+    ImageView btn1, btn2, btn3, btn4, btn5;
+    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vision_five);
 
-        title = (ImageView) findViewById(R.id.vision_five_title);
-        //title = (TextView)findViewById(R.id.vision_five_title);
+        title = (TextView)findViewById(R.id.vision_five_title);
         btn1 = (ImageView) findViewById(R.id.vision_five_btn1);
         btn2 = (ImageView) findViewById(R.id.vision_five_btn2);
         btn3 = (ImageView) findViewById(R.id.vision_five_btn3);
         btn4 = (ImageView) findViewById(R.id.vision_five_btn4);
         btn5 = (ImageView) findViewById(R.id.vision_five_btn5);
 
-
-        //title.setTypeface(CustomFont.getCustomFont(this, "GoB"));
-       Glide.with(this)
-                .load(R.drawable.vision_five_title)
-                .centerCrop()
-                .into(title);
+        title.setTypeface(CustomFont.getCustomFont(this, "GoB"));
 
         /* 버튼 부분 */
 

@@ -29,7 +29,7 @@
             android:id="@+id/myImageViewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="언제 어디서든 함께 해요"
+            android:text="함께 만들어가는 오산"
             android:textColor="#ffffff"
             android:textSize="13dp"
             android:layout_centerVertical="true"

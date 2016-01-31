@@ -26,7 +26,7 @@
             android:id="@+id/myImageViewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="안민석의 물향기 편지"
+            android:text="물향기편지\u0026이모저모"
             android:textSize="13dp"
             android:textColor="#ffffff"
             android:layout_centerVertical="true"
