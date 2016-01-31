@@ -5,5 +5,4 @@
     android:layout_height="match_parent"
     android:background ="@drawable/tab1_background_selector"
     android:gravity="center">
-
 </LinearLayout>
