@@ -13,7 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="#464646">
+        android:background="@drawable/main_bar">
 
         <ImageView
             android:id="@+id/slider_toggle"
@@ -26,15 +26,6 @@
             android:layout_marginLeft="5dp"
             android:onClick="showSliding"/>
 
-        <TextView
-            android:id="@+id/main_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="五産으로 오산의 미래를 열다"
-            android:textColor="#ffffff"
-            android:textSize="13dp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 <!--
     <RelativeLayout
