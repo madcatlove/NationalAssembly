@@ -1,5 +1,6 @@
 package kr.or.osan21.nationalassembly.CloudMessage;
 
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,8 +12,12 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
+import java.util.List;
+
+import kr.or.osan21.nationalassembly.MainActivity;
+import kr.or.osan21.nationalassembly.NoticeActivity;
+import kr.or.osan21.nationalassembly.NoticeContentActivity;
 import kr.or.osan21.nationalassembly.R;
-import kr.or.osan21.nationalassembly.SplashActivity;
 
 /**
  * Created by madcat on 12/27/15.
@@ -24,16 +29,19 @@ public class GCMListenerService extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        Log.d(LOG_TAG, " Message Arrived " + from);
 
+
+        final String notice_id = data.getString("notice_id", "0");
         final String title = data.getString("title", "");
         final String content = data.getString("content", "");
 
-        noti(title, content);
+        Log.d(LOG_TAG, " Message Arrived " + from + " / " + String.format("%s,%s,%s", notice_id, title, content));
+
+        noti(notice_id, title, content);
 
     }
 
-    private void noti(String title, String content) {
+    private void noti(String notice_id, String title, String content) {
 
         SharedPreferences sharedPreferences = getSharedPreferences(CONST_PUSH_MESSAGE.PUSH_SHARED_PREF_STR, MODE_PRIVATE);
 
@@ -46,7 +54,34 @@ public class GCMListenerService extends GcmListenerService {
 
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, SplashActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = null;
+
+        // 메인엑티비티 -> 노티스리스트 액티비티 -> 노티스 컨텐츠
+        if( !isActivityRunning() ) {
+            Log.i(LOG_TAG, " ACTIVITY IS NOT RUNNING!! ");
+            Intent mainActivity = new Intent(this, MainActivity.class);
+            mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            Intent noticeListActivity = new Intent(this, NoticeActivity.class);
+            noticeListActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            Intent noticeContentActivity = new Intent(this, NoticeContentActivity.class);
+            noticeContentActivity.putExtra("n_id", Integer.valueOf(notice_id));
+            noticeContentActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            pendingIntent = PendingIntent.getActivities(this, 0x88, new Intent[] {
+                    mainActivity, noticeListActivity, noticeContentActivity
+            }, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+        else {
+            Log.i(LOG_TAG, " ACTIVITY IS RUNNING!! ");
+            Intent noticeContentActivity = new Intent(this, NoticeContentActivity.class);
+            noticeContentActivity.putExtra("n_id", Integer.valueOf(notice_id));
+            noticeContentActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            pendingIntent = PendingIntent.getActivity(this, 0x88, noticeContentActivity, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+
 
         Notification.Builder builder = new Notification.Builder(this);
         builder.setSmallIcon(R.drawable.app_icon);
@@ -62,5 +97,23 @@ public class GCMListenerService extends GcmListenerService {
 
 
         nm.notify(NOTIFY_ID, builder.build());
+    }
+
+
+    // 내 앱이 실행중인가
+    private boolean isActivityRunning() {
+        ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+
+        List<ActivityManager.RunningAppProcessInfo> taskInfo = am.getRunningAppProcesses();
+
+        for(ActivityManager.RunningAppProcessInfo info : taskInfo) {
+            if( info.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND ) {
+                if( info.processName.equals(getPackageName())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

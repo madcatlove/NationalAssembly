@@ -49,9 +49,14 @@ public class NoticeContentActivity extends AppCompatActivity {
         api.getNotice(n_id, new Callback<Notice>() {
             @Override
             public void success(Notice notice, Response response) {
-                content_title.setText(notice.getTitle());
-                content_username.setText(notice.getName() + " / " + notice.getRegdate());
-                content_contents.setText(notice.getContent());
+
+                if( notice == null) {
+                    Log.e(LOG_TAG, " notice null !! ");
+                }
+
+                content_title.setText("" + notice.getTitle());
+                content_username.setText("" + notice.getName() + " / " + notice.getRegdate());
+                content_contents.setText("" + notice.getContent());
             }
 
             @Override
