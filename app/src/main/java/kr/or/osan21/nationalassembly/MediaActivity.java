@@ -124,6 +124,7 @@ public class MediaActivity extends AppCompatActivity {
             final int pos = position;
             final Context context = parent.getContext();
             MediaViewHolder holder;
+            Media mediaItem = (Media) getItem(position);
 
             // 리스트가 길어지면서 현재 화면에 보이지 않는 아이템은 converView가 null인 상태로 들어 옴
             if (convertView == null) {
@@ -135,7 +136,7 @@ public class MediaActivity extends AppCompatActivity {
 
                 holder.title = (TextView) convertView.findViewById(R.id.media_title);
                 holder.content = (TextView) convertView.findViewById(R.id.media_content);
-                holder.image = (ImageView)convertView.findViewById(R.id.media_image);
+                holder.image = (ImageView) convertView.findViewById(R.id.media_image);
 
                 convertView.setTag(holder);
             }
@@ -163,22 +164,43 @@ public class MediaActivity extends AppCompatActivity {
 
             holder.content.setText(medias.get(position).getContent());
 
-            if(medias.get(position).getMedia_image() != null) {
+            Log.w(LOG_TAG, "getMediaImage :: " + mediaItem.getMedia_image());
+            Log.w(LOG_TAG, "getMediaTitle :: " + mediaItem.getTitle());
+            Log.w(LOG_TAG, "getMediaContent :: " + mediaItem.getContent());
 
+            if( mediaItem.getMedia_image() != null) {
+                Log.i(LOG_TAG, "--- IMAGE IS NOT NULL ");
 
+                final String URL= API.UPLOAD_URL + mediaItem.getMedia_image();
                 // 방법1 ) 카드뷰 크기 유동적, 이미지 세로크기 유동적 가로크기는 고정
-                Glide.with(MediaActivity.this)
-                        .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
-                        .asBitmap()
-                        .into(new SImageTarget(holder.image));
+                ((MediaImageView) holder.image).setViewReady(new MediaImageView.ViewReady() {
+                    @Override
+                    public void onViewReady(View v, int width, int height) {
+                        Log.d(LOG_TAG, " URL :: " + URL);
+                        Glide.with(MediaActivity.this)
+                                .load(URL)
+                                .asBitmap()
+                                .into(new SImageTarget((ImageView) v));
+                    }
+                });
+
+                /* 이미지뷰 재탕가능성이 있기 때문에 인벨리데이트 호출 */
+                holder.image.invalidate();
+
+
+//                Glide.with(MediaActivity.this)
+//                        .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
+//                        .asBitmap()
+//                        .transform(new MediaImageTransformation(MediaActivity.this))
+//                        .into(holder.image);
 
 
                 // 방법2 ) 카드뷰 크기는 동일, 이미지 가로, 세로 크기 동일 (이미지 잘리는 현상)
-                /*Glide.with(MediaActivity.this)
-                        .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
-                        .centerCrop()
-                        .into(holder.image);
-                */
+//                Glide.with(MediaActivity.this)
+//                        .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
+//                        .centerCrop()
+//                        .into(holder.image);
+
                 // 방법3 ) 카드뷰 크기는 동일, 이미지가 크기 가로,세로 모두 유동적
                 /*Glide.with(MediaActivity.this)
                         .load(API.UPLOAD_URL + medias.get(position).getMedia_image())
@@ -190,13 +212,11 @@ public class MediaActivity extends AppCompatActivity {
             if(medias.get(position).getMedia_image() != null) {
                 holder.content.setVisibility(View.GONE);
                 holder.image.setVisibility(View.VISIBLE);
-                Log.d(LOG_TAG, " content 사라짐");
                 //Uri.parse(medias.get(position).getMedia_image())
             }
             else {
                 holder.image.setVisibility(View.GONE);
                 holder.content.setVisibility(View.VISIBLE);
-                Log.d(LOG_TAG, " image 사라짐");
             }
 
             // 리스트 아이템을 터치 했을 때 이벤트 발생
@@ -219,19 +239,22 @@ public class MediaActivity extends AppCompatActivity {
     class SImageTarget extends SimpleTarget<Bitmap> {
 
         MediaImageView imageView = null;
+        private Bitmap sBitmap;
 
         public SImageTarget(ImageView v) {
             if(v instanceof MediaImageView) {
                 imageView = (MediaImageView) v;
             }
-        }
 
+        }
         @Override
         public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+            Log.d(LOG_TAG, ">>>> sImage onResourceReady");
             int width = imageView.getViewWidth();
             int height = imageView.getViewHeight();
             int drawableWidth = resource.getWidth();
             int drawableHeight = resource.getHeight();
+
 
             Log.i(LOG_TAG, String.format("ImageView:%d,%d  BitmapDrawable:%d,%d", width, height, drawableWidth, drawableHeight));
 
@@ -243,8 +266,12 @@ public class MediaActivity extends AppCompatActivity {
             int nHeight = (int) ((drawableHeight * nWidth ) / (double) drawableWidth);
 
             Log.d(LOG_TAG, "nWidth : " + nWidth + " nHeight " + nHeight);
+            if( !( nWidth > 0 && nHeight > 0 ) ) {
+                Log.e(LOG_TAG, "sImage Error");
+                return;
+            }
 
-            Bitmap sBitmap = Bitmap.createScaledBitmap(resource, nWidth, nHeight, false);
+            sBitmap = Bitmap.createScaledBitmap(resource, nWidth, nHeight, false);
 
             imageView.setMaxWidth(nWidth);
             imageView.setMaxHeight(nHeight);
@@ -253,6 +280,20 @@ public class MediaActivity extends AppCompatActivity {
             imageView.setImageBitmap(sBitmap);
 
         }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+
+            Log.w(LOG_TAG, "SImageTarget>>> RELEASE BITMAP ");
+            if( sBitmap != null) {
+                sBitmap.recycle();
+                sBitmap = null;
+            }
+        }
+
     }
+
+
 
 }

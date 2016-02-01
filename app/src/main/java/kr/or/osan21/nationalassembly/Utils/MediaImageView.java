@@ -1,8 +1,10 @@
 package kr.or.osan21.nationalassembly.Utils;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 /**
@@ -13,6 +15,12 @@ public class MediaImageView extends ImageView {
     private static final String LOG_TAG ="MediaImageView";
     private int width = 0;
     private int height = 0;
+    private ViewReady viewReady;
+    private boolean done = false;
+
+    public interface ViewReady {
+        public void onViewReady(View v, int width, int height);
+    }
 
     public MediaImageView(Context context) {
         super(context);
@@ -31,13 +39,25 @@ public class MediaImageView extends ImageView {
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        Log.d(LOG_TAG, "onMeasure");
-
         width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
+        Log.d(LOG_TAG, "onMeasure " + String.format("w:%d, h:%d", width, height));
+
 
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        Log.v(LOG_TAG, "onDraw()");
+        super.onDraw(canvas);
+
+        if( !done) {
+            if( viewReady != null) {
+                viewReady.onViewReady(this, width, height);
+                done = true;
+            }
+        }
+    }
 
     public int getViewWidth() {
         return width;
@@ -46,6 +66,11 @@ public class MediaImageView extends ImageView {
 
     public int getViewHeight() {
         return height;
+    }
+
+    public void setViewReady(ViewReady vr) {
+        viewReady = vr;
+        done = false;
     }
 
 
