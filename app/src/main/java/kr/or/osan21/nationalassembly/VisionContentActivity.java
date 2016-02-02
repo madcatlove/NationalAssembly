@@ -2,6 +2,7 @@ package kr.or.osan21.nationalassembly;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -22,7 +23,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 
 public class VisionContentActivity extends AppCompatActivity {
-
+    Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +67,9 @@ public class VisionContentActivity extends AppCompatActivity {
         final int width = display.getWidth();
         final int height = display.getHeight() / 3;
 
-        Integer imgResource = R.drawable.vision_three_one;
-
+        Integer imgResource = null;
+        if(id == 31)
+            imgResource = R.drawable.vision_three_one;
         if(id == 32)
             imgResource = R.drawable.vision_three_two;
         else if(id == 33)
@@ -103,22 +105,39 @@ public class VisionContentActivity extends AppCompatActivity {
                 .centerCrop()
                 .into(img);
         */
-        imgResource = R.drawable.vision_three_content_01;
 
+        if(id == 31)
+            //imgResource = R.drawable.vision_three_content_01;
+            //imgResource = R.drawable.t_01;
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.t_01);
         if(id == 32)
-            imgResource = R.drawable.vision_three_content_02;
+            //imgResource = R.drawable.vision_three_content_02;
+            //imgResource = R.drawable.t_02;
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.t_02);
         else if(id == 33)
-            imgResource = R.drawable.vision_three_content_03;
+            //imgResource = R.drawable.vision_three_content_03;
+            //imgResource = R.drawable.t_03;
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.t_03);
         else if(id == 51)
-            imgResource = R.drawable.vision_five_content_01;
+            //imgResource = R.drawable.vision_five_content_01;
+            //imgResource = R.drawable.f_01;
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.f_01);
         else if(id == 52)
-            imgResource = R.drawable.vision_five_content_02;
+            //imgResource = R.drawable.vision_five_content_02;
+            //imgResource = R.drawable.f_02;
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.f_02);
         else if(id == 53)
-            imgResource = R.drawable.vision_five_content_03;
+            //imgResource = R.drawable.vision_five_content_03;
+            //imgResource = R.drawable.f_03;
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.f_03);
         else if(id == 54)
-            imgResource = R.drawable.vision_five_content_04;
+            //imgResource = R.drawable.vision_five_content_04;
+            //imgResource = R.drawable.f_04;
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.f_04);
         else if(id == 55)
-            imgResource = R.drawable.vision_five_content_05;
+            //imgResource = R.drawable.vision_five_content_05;
+            //imgResource = R.drawable.f_05;
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.f_05);
 
         /*Glide.with(this)
                 .load(imgResource)
@@ -132,10 +151,11 @@ public class VisionContentActivity extends AppCompatActivity {
                     }
                 });*/
 
-        Glide.with(this)
-                .load(imgResource)
-                .fitCenter()
-                .into(content);
+        content.setImageBitmap(bitmap);
+//        Glide.with(this)
+//                .load(imgResource)
+//                .fitCenter()
+//                .into(content);
 
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.BLACK);
@@ -144,5 +164,12 @@ public class VisionContentActivity extends AppCompatActivity {
 
     public void gotoback(View v) {
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        bitmap.recycle();
+        bitmap = null;
+        super.onDestroy();
     }
 }
