@@ -1,6 +1,8 @@
 package kr.or.osan21.nationalassembly;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 
@@ -30,6 +35,45 @@ public class VisionThreeActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(R.drawable.vision_three_btn1)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                        btn1.setBackground(bd);
+                    }
+                });
+
+        Glide.with(this)
+                .load(R.drawable.vision_three_btn2)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                        btn2.setBackground(bd);
+                    }
+                });
+
+        Glide.with(this)
+                .load(R.drawable.vision_three_btn3)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                        btn3.setBackground(bd);
+                    }
+                });
+        /*
+        Glide.with(this)
+                .load(R.drawable.vision_three_btn1)
                 .centerCrop()
                 .into(btn1);
 
@@ -42,6 +86,7 @@ public class VisionThreeActivity extends AppCompatActivity {
                 .load(R.drawable.vision_three_btn3)
                 .centerCrop()
                 .into(btn3);
+        */
     }
 
     public void btnClicked(View v)

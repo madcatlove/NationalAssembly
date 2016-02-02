@@ -188,6 +188,8 @@ public class MainActivity extends AppCompatActivity  {
                     }
                 });
 
+
+
         //오산시 국회의원 글씨체 따로 적용.
         job = (TextView)findViewById(R.id.job);
         job.setTypeface(cjkB);
@@ -363,7 +365,7 @@ public class MainActivity extends AppCompatActivity  {
                 text.setText(m_List.get(position));
                 text.setTypeface(hans);
 
-                ImageView img = (ImageView)convertView.findViewById(R.id.slider_item_image);
+                final ImageView img = (ImageView)convertView.findViewById(R.id.slider_item_image);
 
 
                 // 푸쉬 이미지뷰를 다 가린다
@@ -372,7 +374,19 @@ public class MainActivity extends AppCompatActivity  {
                 pushBtn.setVisibility(View.INVISIBLE); //공간만 차지하도록 숨김
 
                 if(position == 0) {
-                    img.setBackgroundResource(R.drawable.slider_icon_push);
+                    Glide.with(context)
+                            .load(R.drawable.slider_icon_push)
+                            .asBitmap()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(new SimpleTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                    Log.e(LOG_TAG, " bitmapid : " + resource);
+                                    BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                                    img.setBackground(bd);
+                                }
+                            });
+                    //img.setBackgroundResource(R.drawable.slider_icon_push);
                     pushBtn.setVisibility(View.VISIBLE);
 
                     /* PUSH_STATUS */
@@ -386,19 +400,64 @@ public class MainActivity extends AppCompatActivity  {
                     }
                 }
                 else if(position == 1) {
-                    img.setBackgroundResource(R.drawable.slider_icon_suggest);
-
+                    //img.setBackgroundResource(R.drawable.slider_icon_suggest);
+                    Glide.with(context)
+                            .load(R.drawable.slider_icon_suggest)
+                            .asBitmap()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(new SimpleTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                    Log.e(LOG_TAG, " bitmapid : " + resource);
+                                    BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                                    img.setBackground(bd);
+                                }
+                            });
                 } else if (position == 2) {
-                    img.setBackgroundResource(R.drawable.slider_icon_support);
-
+                    //img.setBackgroundResource(R.drawable.slider_icon_support);
+                    Glide.with(context)
+                            .load(R.drawable.slider_icon_support)
+                            .asBitmap()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(new SimpleTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                    Log.e(LOG_TAG, " bitmapid : " + resource);
+                                    BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                                    img.setBackground(bd);
+                                }
+                            });
                 } else if (position == 3) {
-                    img.setBackgroundResource(R.drawable.slider_icon_cheerup);
+                    Glide.with(context)
+                            .load(R.drawable.slider_icon_cheerup)
+                            .asBitmap()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(new SimpleTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                    Log.e(LOG_TAG, " bitmapid : " + resource);
+                                    BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                                    img.setBackground(bd);
+                                }
+                            });
+                    //img.setBackgroundResource(R.drawable.slider_icon_cheerup);
                 }
                 else if(position == 4) {
-                    img.setBackgroundResource(R.drawable.slider_icon_share);
+                    Glide.with(context)
+                            .load(R.drawable.slider_icon_share)
+                            .asBitmap()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(new SimpleTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                    Log.e(LOG_TAG, " bitmapid : " + resource);
+                                    BitmapDrawable bd = new BitmapDrawable(getResources(), resource);
+                                    img.setBackground(bd);
+                                }
+                            });
+                    //img.setBackgroundResource(R.drawable.slider_icon_share);
                     View view = (View)convertView.findViewById(R.id.slider_item_under);
                     view.setBackgroundColor(Color.WHITE);
-
                 }
 
                 // 리스트 아이템을 터치 했을 때 이벤트 발생
@@ -462,7 +521,7 @@ public class MainActivity extends AppCompatActivity  {
         try {
             kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
             kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
-            kakaoTalkLinkMessageBuilder.addText("국회의원 안민석");
+            kakaoTalkLinkMessageBuilder.addText("더불어 민주당 국회의원 안민석 소개 어플리케이션\n");
            /* kakaoTalkLinkMessageBuilder.addAppLink("앱 바로가기",
                     new AppActionBuilder()
                             .addActionInfo(AppActionInfoBuilder
@@ -471,7 +530,7 @@ public class MainActivity extends AppCompatActivity  {
                                     .setMarketParam("referrer=kakaotalklink")
                                     .build())
                             .build());*/
-            kakaoTalkLinkMessageBuilder.addAppLink("앱으로 이동");
+            kakaoTalkLinkMessageBuilder.addAppButton("앱 바로가기");
             final String msg = kakaoTalkLinkMessageBuilder.build();
             kakaoLink.sendMessage(msg, this);
         }
@@ -495,7 +554,7 @@ public class MainActivity extends AppCompatActivity  {
 
         try {
             String serviceDomain = "www.naver.com"; //  연동 서비스 도메인
-            String encodedText = URLEncoder.encode("국회의원 안민석 앱 바로가기", "utf-8"); // 글 본문 // TODO: 마켓주소 추후에 넣기
+            String encodedText = URLEncoder.encode("국회의원 안민석 앱 바로가기\nhttps://play.google.com/store/apps/details?id=kr.or.osan21.nationalassembly", "utf-8"); // 글 본문 // TODO: 마켓주소 추후에 넣기
             Uri uri = Uri.parse("bandapp://create/post?text=" + encodedText + "&route=" + serviceDomain);
             Intent newIntent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(newIntent);
@@ -510,7 +569,7 @@ public class MainActivity extends AppCompatActivity  {
     {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         // 앱 url
-        String url = "market://details?id=kr.or.osan21.nationalassembly";
+        String url = "https://play.google.com/store/apps/details?id=kr.or.osan21.nationalassembly";
         intent.putExtra("sms_body", "국회의원 안민석 앱 바로가기 : \n" + url);
         intent.setType("vnd.android-dir/mms-sms");
         startActivity(intent);
@@ -518,8 +577,8 @@ public class MainActivity extends AppCompatActivity  {
 
     public void shareFacebook(View v)
     {
-        String mySharedLink = ""; // TODO: 추후 마켓 주소 넣을것
-        String mySubject = "국회의원 안민석";
+        String mySharedLink = "https://play.google.com/store/apps/details?id=kr.or.osan21.nationalassembly"; // TODO: 추후 마켓 주소 넣을것
+        String mySubject = "국회의원 안민석 앱";
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("text/plain");
@@ -548,7 +607,7 @@ public class MainActivity extends AppCompatActivity  {
 
     public void shareTwitter(View v)
     {
-        String mySharedLink = "http://"; // TODO: 추후 마켓 주소 넣을것
+        String mySharedLink = "https://play.google.com/store/apps/details?id=kr.or.osan21.nationalassembly"; // TODO: 추후 마켓 주소 넣을것
         String mySubject = "국회의원 안민석 앱 바로가기";
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
