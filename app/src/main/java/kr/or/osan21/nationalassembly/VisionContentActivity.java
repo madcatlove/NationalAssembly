@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -189,8 +190,16 @@ public class VisionContentActivity extends AppCompatActivity {
                                 scaled = Bitmap.createScaledBitmap(resource, viewWidth, newHeight, false);
 
                                 LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(viewWidth, newHeight);
-                                param.setMargins(16, 16, 16, 0);
+                                param.gravity = Gravity.CENTER_HORIZONTAL;
+                                float d = VisionContentActivity.this.getResources().getDisplayMetrics().density;
+                                param.setMargins((int)(16*d),
+                                                    (int)(16*d),
+                                                    (int)(16*d),
+                                                    0);
+
+
                                 content.setLayoutParams(param);
+
 
                                 content.setImageBitmap(scaled);
                             }
