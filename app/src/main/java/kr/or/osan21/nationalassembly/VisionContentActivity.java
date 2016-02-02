@@ -42,21 +42,21 @@ public class VisionContentActivity extends AppCompatActivity {
         //타이틀 적용
         String titleTxt="";
         if(id == 31)
-            titleTxt = "오산 시민회관 재건축,\n복합문화체육센터로";
+            titleTxt = "오산 시민회관,\n복합문화체육센터로 재탄생!";
         else if(id == 32)
             titleTxt = "경기 남부 광역 교통의 중심,\n오산역 환승센터";
         else if(id == 33)
-            titleTxt = "동탄(KTX역) ~ 세교\n복선 전철 예비타당성 확정";
+            titleTxt = "동탄(KTX역)~세교 전철,\n예비타당성 대상 확정";
         else if(id == 51)
-            titleTxt = "독산성 복원으로 유네스코\n세계문화유산 확대";
+            titleTxt = "독산성 복원으로\n유네스코 세계문화유산 확대지정";
         else if(id == 52)
-            titleTxt = "UN초전 평화공원,\n전 세계인이 찾는\n평화의 상징으로";
+            titleTxt = "UN초전 평화공원,\n전 세계인이 찾는 평화의 상징으로";
         else if(id == 53)
-            titleTxt = "미니어처 테마파크\n아시아 최대 소인국 테마파크";
+            titleTxt = "미니어처 테마파크\n대한민국의 관광명소로";
         else if(id == 54)
-            titleTxt = "아이들이 멱감고,\n야생화 피는 오산천";
+            titleTxt = "아이들이 멱감고\n야생화 피는 오산천";
         else if(id == 55)
-            titleTxt = "오색시장, 오매장터\n문화관광지구로 변신";
+            titleTxt = "오색시장, 오매장터\n전국명물로 문화관광지구 변신";
 
         title.setText(titleTxt);
 
@@ -73,7 +73,7 @@ public class VisionContentActivity extends AppCompatActivity {
         Integer imgResource = null;
         if(id == 31)
             imgResource = R.drawable.vision_three_one;
-        if(id == 32)
+        else if(id == 32)
             imgResource = R.drawable.vision_three_two;
         else if(id == 33)
             imgResource = R.drawable.vision_three_three;
@@ -116,7 +116,7 @@ public class VisionContentActivity extends AppCompatActivity {
 //            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.t_01);
             imageId = R.drawable.t_01;
         }
-        if(id == 32) {
+        else if(id == 32) {
             //imgResource = R.drawable.vision_three_content_02;
             //imgResource = R.drawable.t_02;
 //            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.t_02);
