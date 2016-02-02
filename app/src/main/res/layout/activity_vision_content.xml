@@ -60,13 +60,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <ImageView
+
+            <!-- scaleType -->
+            <kr.or.osan21.nationalassembly.Utils.VisionContentImageView
                 android:id="@+id/vision_content_text"
-                android:layout_weight="1"
-                android:scaleType="fitXY"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="0dp" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </ScrollView>
