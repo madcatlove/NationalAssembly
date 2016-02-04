@@ -88,7 +88,6 @@
                 android:textSize="13dp"
                 android:textCursorDrawable="@null"
                 android:singleLine="true"
-                android:maxLength="30"
                 android:hint="댓글을 입력하세요..."
                 android:layout_weight="0.65"/>
             <Button
