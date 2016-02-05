@@ -9,11 +9,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -189,19 +188,17 @@ public class VisionContentActivity extends AppCompatActivity {
 
                                 scaled = Bitmap.createScaledBitmap(resource, viewWidth, newHeight, false);
 
-                                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(viewWidth, newHeight);
-                                param.gravity = Gravity.CENTER_HORIZONTAL;
-                                float d = VisionContentActivity.this.getResources().getDisplayMetrics().density;
-                                param.setMargins((int)(16*d),
-                                                    (int)(16*d),
-                                                    (int)(16*d),
-                                                    0);
 
+                                float d = VisionContentActivity.this.getResources().getDisplayMetrics().density;
+
+
+                                ViewGroup.LayoutParams param = content.getLayoutParams();
+                                param.width = viewWidth;
+                                param.height = newHeight;
 
                                 content.setLayoutParams(param);
-
-
                                 content.setImageBitmap(scaled);
+                                content.invalidate();
                             }
 
                             @Override
@@ -209,6 +206,10 @@ public class VisionContentActivity extends AppCompatActivity {
                                 if( scaled != null) {
                                     scaled.recycle();
                                     scaled = null;
+                                }
+
+                                if( content != null) {
+                                    content.setImageBitmap(null);
                                 }
                                 super.onDestroy();
                             }
