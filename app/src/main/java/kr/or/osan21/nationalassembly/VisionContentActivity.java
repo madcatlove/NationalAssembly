@@ -159,7 +159,7 @@ public class VisionContentActivity extends AppCompatActivity {
         }
 
         Log.i(LOG_TAG, " Display width : " + wm.getDefaultDisplay().getWidth());
-
+        Log.d(LOG_TAG, " Image ID : " + imageId);
         content.setViewReady(new VisionContentImageView.ViewReady() {
             @Override
             public void onViewReady(View v, int width, int height) {
