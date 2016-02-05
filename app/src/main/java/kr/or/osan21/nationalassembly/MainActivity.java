@@ -521,7 +521,7 @@ public class MainActivity extends AppCompatActivity  {
         try {
             kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
             kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
-            kakaoTalkLinkMessageBuilder.addText("더불어 민주당 국회의원 안민석 소개 어플리케이션\n");
+            kakaoTalkLinkMessageBuilder.addText("국회의원 안민석 앱 바로가기\nhttps://play.google.com/store/apps/details?id=kr.or.osan21.nationalassembly");
            /* kakaoTalkLinkMessageBuilder.addAppLink("앱 바로가기",
                     new AppActionBuilder()
                             .addActionInfo(AppActionInfoBuilder
