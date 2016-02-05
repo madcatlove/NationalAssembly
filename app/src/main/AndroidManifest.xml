@@ -82,7 +82,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".VisionContentActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="false"/>
         <activity
             android:name=".SupportMessageContentActivity"
             android:screenOrientation="portrait" />
