@@ -3,22 +3,18 @@ package kr.or.osan21.nationalassembly;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import java.util.HashMap;
 
 import kr.or.osan21.nationalassembly.Utils.CustomFont;
 import kr.or.osan21.nationalassembly.Utils.VisionContentImageView;
@@ -30,6 +26,8 @@ public class VisionContentActivity extends AppCompatActivity {
     Bitmap bitmap;
     private VisionContentImageView content;
     private int imageId;
+    private WebView visionWebView;
+    private Integer id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +40,7 @@ public class VisionContentActivity extends AppCompatActivity {
         TextView bar_title = (TextView) findViewById(R.id.vision_content_bar);
         bar_title.setTypeface(CustomFont.getCustomFont(this, "hans"));
 
-        Integer id = getIntent().getIntExtra("v_id", 1);
+        id = getIntent().getIntExtra("v_id", 1);
         //타이틀 적용
         String titleTxt="";
         if(id == 31)
@@ -65,8 +63,8 @@ public class VisionContentActivity extends AppCompatActivity {
         title.setText(titleTxt);
 
         //이미지 적용 (본문내용+이미지)
-        final ImageView img = (ImageView) findViewById(R.id.vision_content_img);
-        content = (VisionContentImageView) findViewById(R.id.vision_content_text);
+//        final ImageView img = (ImageView) findViewById(R.id.vision_content_img);
+//        content = (VisionContentImageView) findViewById(R.id.vision_content_text);
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -74,6 +72,8 @@ public class VisionContentActivity extends AppCompatActivity {
         final int width = display.getWidth();
         final int height = display.getHeight() / 3;
 
+
+        /**
         Integer imgResource = null;
         if (id == 31)
             imgResource = R.drawable.vision_three_one;
@@ -105,6 +105,10 @@ public class VisionContentActivity extends AppCompatActivity {
                         img.setBackground(bd);
                     }
                 });
+
+         */
+
+
         /*
         Glide.with(this)
                 .load(imgResource)
@@ -113,6 +117,8 @@ public class VisionContentActivity extends AppCompatActivity {
                 .into(img);
         */
 
+
+        /**
         imageId = 0;
         if (id == 31) {
             //imgResource = R.drawable.vision_three_content_01;
@@ -218,6 +224,29 @@ public class VisionContentActivity extends AppCompatActivity {
         });
 
         content.invalidate();
+         */
+
+
+        /**
+         * 웹뷰 컨텐츠
+         */
+        visionWebView = (WebView) findViewById(R.id.vision_webview);
+        visionWebView.getSettings().setJavaScriptEnabled(true);
+        visionWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+
+                String jsFuncCall = String.format("webViewController('%s', '%s');", getTopImageName(id), getContentImageName(id));
+
+                view.loadUrl("javascript:" + jsFuncCall);
+
+                Log.d(LOG_TAG, "onPageFinished : " + jsFuncCall);
+
+                super.onPageFinished(view, url);
+            }
+        });
+        visionWebView.loadUrl("file:///android_asset/test.html");
+
 
 
 //        content.setImageBitmap(bitmap);
@@ -249,5 +278,62 @@ public class VisionContentActivity extends AppCompatActivity {
 
 
         super.onDestroy();
+    }
+
+    private String getTopImageName(Integer id) {
+        String p = "";
+
+
+        switch(id) {
+            case  31:
+                p = "vision_three_one.jpg";
+                break;
+
+            case 32:
+                p = "vision_three_two.jpg";
+                break;
+
+            case 33:
+                p = "vision_three_three.jpg";
+                break;
+
+            case 51:
+                p = "vision_five_one.jpg";
+                break;
+
+            case 52:
+                p = "vision_five_two.jpg";
+                break;
+
+            case 53:
+                p = "vision_five_three.jpg";
+                break;
+
+            case 54:
+                p = "vision_five_four.jpg";
+                break;
+
+            case 55:
+                p = "vision_five_five.jpg";
+                break;
+        }
+
+        return p;
+    }
+
+
+    private String getContentImageName(Integer id) {
+        String p = "";
+
+        int ids[] = {31,32,33,51,52,53,54,55};
+        String imageName[] = new String[]{ "t_01.jpg", "t_02.jpg", "t_03.jpg", "f_01.jpg", "f_02.jpg", "f_03.jpg", "f_04.jpg", "f_05.jpg"};
+        HashMap<Integer, String> mapped = new HashMap<Integer, String>();
+
+        for(int i = 0; i < ids.length; i++) {
+            mapped.put( ids[i], imageName[i]);
+        }
+
+
+        return mapped.get(id);
     }
 }

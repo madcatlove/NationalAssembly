@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VISION CONTENT VIEWER</title>
+
+    <style type="text/css">
+        body,html {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .container {
+        }
+
+        .image_area {
+
+        }
+
+        .image_area img {
+            border: 0px;
+            width: 100%;
+        }
+
+        .text_area {
+            padding: 10px;
+        }
+
+        .text_area img {
+            width: 100%;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        function webViewController(topImageName, contentImageName) {
+            topImage = document.getElementById('topImage');
+            contentImage = document.getElementById('contentImage');
+
+            topImageURI = 'file:///android_res/drawable/' + topImageName;
+            contentImageURI = 'file:///android_res/drawable/' + contentImageName;
+
+            topImage.src = topImageURI;
+            contentImage.src = contentImageURI;
+        }
+
+    </script>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 이미지 영역 -->
+    <div class="image_area">
+        <img id="topImage" src="" />
+    </div>
+
+
+    <!-- 글 영역 양쪽 패딩 -->
+    <div class="text_area">
+        <img id="contentImage" src="" />
+    </div>
+
+</div>
+
+</body>
+</html>
